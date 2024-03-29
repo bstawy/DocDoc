@@ -9,29 +9,23 @@ environment:
   sdk: '>=3.3.2 <4.0.0'
 
 dependencies:
+  cupertino_icons: ^1.0.6
+  dio: ^5.4.2+1
+  easy_localization: ^3.0.5
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.6
-  # Splash screen
-  flutter_native_splash: ^2.4.0
-  # State management
   flutter_bloc: ^8.1.5
-  # Code generator (mainly used with Cubit & retrofit)
+  flutter_native_splash: ^2.4.0
+  flutter_screenutil: ^5.9.0
+  flutter_svg: ^2.0.10+1
   freezed: ^2.4.7
   freezed_annotation: ^2.4.1
-  # For dependency injection
   get_it: ^7.6.7
-  # Code generator to convert from JSON by annotation
+  intl: ^0.18.1
   json_annotation: ^4.8.1
   json_serializable: ^6.7.1
-  # Networking
-  dio: ^5.4.2+1
   pretty_dio_logger: ^1.3.1
   retrofit: ^4.1.0
-  # Localization
-  easy_localization: ^3.0.5  
-  intl: ^0.18.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
