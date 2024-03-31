@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../main.dart';
+import '../../../doc_doc_app.dart';
 
 class AppConstants {
   static var theme = Theme.of(navigatorKey.currentState!.context);
