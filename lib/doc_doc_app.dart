@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/config/routing/app_router.dart';
+import 'core/config/routing/routes.dart';
 import 'core/config/theme/theme_data/app_theme.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -25,6 +26,7 @@ class DocDocApp extends StatelessWidget {
         theme: AppTheme.lightThemeData,
         navigatorKey: navigatorKey,
         onGenerateRoute: appRouter.generateRoute,
+        initialRoute: Routes.onBoardingScreen,
       ),
     );
   }
