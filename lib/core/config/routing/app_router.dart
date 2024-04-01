@@ -13,12 +13,12 @@ class AppRouter {
           builder: (_) => const OnBoardingScreen(),
         );
 
-      case Routes.login:
+      case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
         );
 
-      case Routes.register:
+      case Routes.registerScreen:
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
