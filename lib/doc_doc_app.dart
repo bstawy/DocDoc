@@ -26,7 +26,7 @@ class DocDocApp extends StatelessWidget {
         theme: AppTheme.lightThemeData,
         navigatorKey: navigatorKey,
         onGenerateRoute: appRouter.generateRoute,
-        initialRoute: Routes.onBoardingScreen,
+        initialRoute: Routes.splashScreen,
       ),
     );
   }
