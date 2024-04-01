@@ -3,6 +3,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../colors/light_color_scheme.dart';
 
+class TextStyles {
+  static TextStyle font32Blue700w = TextStyle(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primary,
+  );
+
+  static TextStyle font24Blue700w = TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primary,
+  );
+
+  static TextStyle font16White600w = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.background,
+  );
+
+  static TextStyle font12Grey400w = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.onBackground,
+  );
+}
+/*
 TextTheme getTextTheme() {
   return TextTheme(
     displayLarge: TextStyle(
@@ -31,4 +57,4 @@ TextTheme getTextTheme() {
       fontWeight: FontWeight.w400,
     ),
   );
-}
+}*/
