@@ -2,59 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../colors/light_color_scheme.dart';
+import 'font_weight_helper.dart';
 
 class TextStyles {
-  static TextStyle font32Blue700w = TextStyle(
+  static TextStyle font32BlueBold = TextStyle(
     fontSize: 32.sp,
-    fontWeight: FontWeight.w700,
-    color: AppColors.primary,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.mainBlue,
   );
 
-  static TextStyle font24Blue700w = TextStyle(
+  static TextStyle font24BlueBold = TextStyle(
     fontSize: 24.sp,
-    fontWeight: FontWeight.w700,
-    color: AppColors.primary,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.mainBlue,
   );
 
-  static TextStyle font16White600w = TextStyle(
+  static TextStyle font16WhiteSemiBold = TextStyle(
     fontSize: 16.sp,
-    fontWeight: FontWeight.w600,
-    color: AppColors.background,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorsManager.white,
   );
 
-  static TextStyle font12Grey400w = TextStyle(
+  static TextStyle font14DarkBlueMedium = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.darkBlue,
+  );
+
+  static TextStyle font14GreyRegular = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.grey,
+  );
+
+  static TextStyle font14LightGreyRegular = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.lightGrey,
+  );
+
+  static TextStyle font12DarkBlueMedium = TextStyle(
     fontSize: 12.sp,
-    fontWeight: FontWeight.w400,
-    color: AppColors.onBackground,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.darkBlue,
+  );
+
+  static TextStyle font12BlueRegular = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.mainBlue,
+  );
+
+  static TextStyle font12GreyRegular = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorsManager.grey,
   );
 }
-/*
-TextTheme getTextTheme() {
-  return TextTheme(
-    displayLarge: TextStyle(
-      color: AppColors.primary,
-      fontSize: 24.sp,
-      fontWeight: FontWeight.w700,
-    ),
-    titleSmall: TextStyle(
-      color: AppColors.secondary,
-      fontSize: 14.sp,
-      fontWeight: FontWeight.w500,
-    ),
-    bodyLarge: TextStyle(
-      color: AppColors.background,
-      fontSize: 16.sp,
-      fontWeight: FontWeight.w600,
-    ),
-    bodyMedium: TextStyle(
-      color: AppColors.onBackground,
-      fontSize: 14.sp,
-      fontWeight: FontWeight.w400,
-    ),
-    bodySmall: TextStyle(
-      color: AppColors.secondary,
-      fontSize: 12.sp,
-      fontWeight: FontWeight.w400,
-    ),
-  );
-}*/
