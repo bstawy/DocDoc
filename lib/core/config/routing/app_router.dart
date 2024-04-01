@@ -1,3 +1,4 @@
+import 'package:docdoc/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../features/login/ui/login_screen.dart';
@@ -8,6 +9,10 @@ import 'routes.dart';
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.splashScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SplashScreen(),
+        );
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const OnBoardingScreen(),
