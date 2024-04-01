@@ -16,7 +16,7 @@ class HeaderLogoAndName extends StatelessWidget {
         SizedBox(width: 8.w),
         Text(
           "Docdoc",
-          style: TextStyles.font24Blue700w.copyWith(
+          style: TextStyles.font24BlueBold.copyWith(
             color: Colors.black,
           ),
         ),
