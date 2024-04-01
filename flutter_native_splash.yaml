@@ -1,0 +1,11 @@
+flutter_native_splash:
+  # IOS and Android 11 and below
+  color: "#FFFFFF"
+  image: assets/images/splash_screen.png
+
+  android_12:
+    color: "#FFFFFF"
+    image: assets/images/splash_logo.png
+
+  # To hide the notification bar.
+  fullscreen: true
