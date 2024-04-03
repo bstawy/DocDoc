@@ -12,10 +12,15 @@ class LoginCubit extends Cubit<LoginState> {
     emit(const LoginState.loading());
     final response = await _loginRepo.login(loginRequestBody);
 
-    response.when(success: (loginResponse) {
-      emit(LoginState.success(loginResponse));
-    }, failure: (error) {
-      emit(LoginState.failure(error: error.apiErrorModel.message ?? ""));
-    });
+    response.when(
+      success: (loginResponse) {
+        emit(LoginState.success(loginResponse));
+      },
+      failure: (error) {
+        emit(
+          LoginState.failure(error: error.apiErrorModel.message ?? ""),
+        );
+      },
+    );
   }
 }
