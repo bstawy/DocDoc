@@ -131,6 +131,7 @@ class _RegisterFormState extends State<RegisterForm> {
             CustomTextFormField(
               controller: _passwordController,
               hint: "Password",
+              scrollPaddingValue: 300.h,
               isPassword: true,
               validator: (value) {
                 return Validators.validatePassword(value);
