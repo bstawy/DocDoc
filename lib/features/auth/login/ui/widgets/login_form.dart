@@ -97,6 +97,7 @@ class _LoginFormState extends State<LoginForm> {
             CustomTextFormField(
               controller: _passwordController,
               hint: "Password",
+              scrollPaddingValue: 300.h,
               isPassword: true,
               action: TextInputAction.done,
               validator: (value) {
