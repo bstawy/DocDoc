@@ -4,8 +4,8 @@ part 'login_request_body.g.dart';
 
 @JsonSerializable()
 class LoginRequestBody {
-  String? email;
-  String? password;
+  final String email;
+  final String password;
 
   LoginRequestBody({
     required this.email,
