@@ -7,8 +7,8 @@ import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/widgets/custom_text_button.dart';
 
-class AlreadyHaveAnAccount extends StatelessWidget {
-  const AlreadyHaveAnAccount({super.key});
+class DontHaveAnAccount extends StatelessWidget {
+  const DontHaveAnAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
