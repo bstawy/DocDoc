@@ -1,17 +1,17 @@
-import 'package:docdoc/core/config/theme/colors/light_color_scheme.dart';
-import 'package:docdoc/core/config/theme/texts/text_styles.dart';
-import 'package:docdoc/features/auth/login/data/models/login_request_body.dart';
-import 'package:docdoc/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/config/theme/colors/light_color_scheme.dart';
+import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/validators.dart';
 import '../../../../../core/widgets/custom_material_button.dart';
 import '../../../../../core/widgets/custom_text_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../data/models/login_request_body.dart';
 import '../../logic/cubit/login_state.dart';
+import '../../logic/login_cubit.dart';
 import 'password_validations.dart';
 
 class LoginForm extends StatefulWidget {
