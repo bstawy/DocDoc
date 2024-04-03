@@ -1,7 +1,7 @@
 class Validators {
   static String? validateEmail(String? value) {
     if (_isEmpty(value)) {
-      return ("You must enter your email");
+      return ("Email is required");
     }
 
     var regex = RegExp(
@@ -15,7 +15,7 @@ class Validators {
 
   static String? validatePassword(String? value) {
     if (_isEmpty(value)) {
-      return 'You must enter your password';
+      return 'Password is required';
     }
 
     var regex = RegExp(
@@ -31,7 +31,7 @@ class Validators {
 
   static String? validatePhoneNumber(String? value) {
     if (_isEmpty(value)) {
-      return 'You must enter your phone';
+      return 'Phone Number is required';
     }
 
     var regex = RegExp(
@@ -46,12 +46,12 @@ Prefix is 10, 11, 12 or 15 only""";
     return null;
   }
 
+  // static bool isPhoneNumberValid(String phoneNumber) {
+  //   return RegExp(r'^(010|011|012|015)[0-9]{8}$').hasMatch(phoneNumber);
+  // }
+
   static bool _isEmpty(String? value) {
     return value == null || value.trim().isEmpty;
-  }
-
-  static bool isPhoneNumberValid(String phoneNumber) {
-    return RegExp(r'^(010|011|012|015)[0-9]{8}$').hasMatch(phoneNumber);
   }
 
   static bool hasLowerCase(String password) {

@@ -8,22 +8,11 @@ part of 'login_response.dart';
 
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
-      message: json['message'] as String?,
-      userData: json['data'] == null
-          ? null
-          : UserData.fromJson(json['data'] as Map<String, dynamic>),
-      status: json['status'] as bool?,
-      code: json['code'] as int?,
+      message: json['message'] as String,
+      userData: UserData.fromJson(json['data'] as Map<String, dynamic>),
+      status: json['status'] as bool,
+      code: json['code'] as int,
     );
-
-// ignore: unused_element
-Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'data': instance.userData,
-      'status': instance.status,
-      'code': instance.code,
-    };
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       token: json['token'] as String?,
