@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/config/theme/colors/light_color_scheme.dart';
-import '../../../../../core/config/theme/texts/font_weight_helper.dart';
-import '../../../../../core/config/theme/texts/text_styles.dart';
-import '../../../../../core/helpers/extensions/extensions.dart';
+import '../../../core/config/theme/colors/light_color_scheme.dart';
+import '../../../core/config/theme/texts/font_weight_helper.dart';
+import '../../../core/config/theme/texts/text_styles.dart';
+import '../../../core/helpers/extensions/extensions.dart';
 
 class PasswordValidations extends StatelessWidget {
   final bool hasLowerCase;
@@ -42,19 +42,19 @@ class PasswordValidations extends StatelessWidget {
   Widget buildValidationRow(String text, bool hasValidated) {
     return Row(
       children: [
-        const CircleAvatar(
+        CircleAvatar(
           radius: 2.5,
-          backgroundColor: ColorsManager.grey,
+          backgroundColor: hasValidated ? Colors.green : ColorsManager.red,
         ),
         horizontalSpace(6),
         Text(
           text,
           style: TextStyles.font12DarkBlueMedium.copyWith(
             fontWeight: FontWeightHelper.regular,
-            decoration: hasValidated ? TextDecoration.lineThrough : null,
-            decorationColor: Colors.green,
-            decorationThickness: 2,
-            color: hasValidated ? ColorsManager.grey : ColorsManager.darkBlue,
+            // decoration: hasValidated ? TextDecoration.lineThrough : null,
+            // decorationColor: Colors.green,
+            // decorationThickness: 2,
+            color: hasValidated ? Colors.green : ColorsManager.red,
           ),
         )
       ],

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/config/theme/texts/text_styles.dart';
-import '../../../../../core/helpers/extensions/extensions.dart';
+import '../../../core/config/theme/texts/text_styles.dart';
+import '../../../core/helpers/extensions/extensions.dart';
 
 class WelcomeHeader extends StatelessWidget {
-  const WelcomeHeader({super.key});
+  final String title;
+  final String description;
+
+  const WelcomeHeader({
+    super.key,
+    required this.title,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +20,12 @@ class WelcomeHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Welcome Back",
+          title,
           style: TextStyles.font24BlueBold,
         ),
         verticalSpace(8.h),
         Text(
-          "We're excited to have you back, can't wait to see what you've been up to since you last logged in.",
+          description,
           style: TextStyles.font14GreyRegular,
         ),
       ],
