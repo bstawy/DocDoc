@@ -11,9 +11,13 @@ class CustomTextFormField extends StatefulWidget {
   final String? initialTextValue, obscuringCharacter;
   final int? maxLength, maxLines, minLines, errorMaxLines;
   final bool? enabled, isPassword, isFilled;
-  final TextStyle? style, hintStyle, errorStyle;
+  final TextStyle? inputTextStyle, hintStyle, errorStyle;
   final Color? backgroundColor, suffixIconColor;
-  final InputBorder? border, enabledBorder, focusedBorder, errorBorder;
+  final InputBorder? border,
+      enabledBorder,
+      focusedBorder,
+      errorBorder,
+      focusedErrorBorder;
   final EdgeInsetsGeometry? contentPadding;
   final TextInputType? keyboardType;
   final TextInputAction? action;
@@ -41,6 +45,7 @@ class CustomTextFormField extends StatefulWidget {
     this.backgroundColor,
     this.focusNode,
     this.focusedBorder,
+    this.focusedErrorBorder,
     this.hintStyle,
     this.icon,
     this.initialTextValue,
@@ -59,7 +64,7 @@ class CustomTextFormField extends StatefulWidget {
     this.onTap,
     this.contentPadding,
     this.prefixIcon,
-    this.style,
+    this.inputTextStyle,
     this.suffixIcon,
     this.suffixIconColor,
     this.validator,
@@ -90,8 +95,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       controller: widget.controller,
       initialValue: widget.initialTextValue,
-      autovalidateMode:
-          widget.autovalidateMode ?? AutovalidateMode.onUserInteraction,
+      autovalidateMode: widget.autovalidateMode,
       validator: widget.validator,
       onChanged: widget.onChanged,
       onEditingComplete: widget.onEditingComplete,
@@ -108,7 +112,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       textInputAction: widget.action ?? TextInputAction.next,
       focusNode: widget.focusNode,
       enabled: widget.enabled,
-      style: widget.style ?? TextStyles.font14DarkBlueMedium,
+      style: widget.inputTextStyle ?? TextStyles.font14DarkBlueMedium,
       decoration: InputDecoration(
         // Used to have full control on padding
         isDense: true,
@@ -162,6 +166,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             widget.errorStyle ?? const TextStyle(color: ColorsManager.red),
         errorMaxLines: widget.errorMaxLines ?? 4,
         errorBorder: widget.errorBorder ??
+            OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: const BorderSide(
+                color: ColorsManager.red,
+                width: 1.3,
+              ),
+            ),
+        focusedErrorBorder: widget.focusedErrorBorder ??
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(16.r),
               borderSide: const BorderSide(
