@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../features/login/ui/login_screen.dart';
+import '../../../features/auth/login/ui/login_screen.dart';
 import '../../../features/on_boarding/on_boarding_screen.dart';
-import '../../../features/register/ui/register_screen.dart';
+import '../../../features/auth/register/ui/register_screen.dart';
 import '../../../features/splash/splash_screen.dart';
 import 'routes.dart';
 

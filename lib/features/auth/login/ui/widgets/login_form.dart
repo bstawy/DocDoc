@@ -1,16 +1,16 @@
 import 'package:docdoc/core/config/theme/colors/light_color_scheme.dart';
 import 'package:docdoc/core/config/theme/texts/text_styles.dart';
-import 'package:docdoc/features/login/data/models/login_request_body.dart';
-import 'package:docdoc/features/login/logic/cubit/login_cubit.dart';
+import 'package:docdoc/features/auth/login/data/models/login_request_body.dart';
+import 'package:docdoc/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/helpers/extensions/extensions.dart';
-import '../../../../core/helpers/validators.dart';
-import '../../../../core/widgets/custom_material_button.dart';
-import '../../../../core/widgets/custom_text_button.dart';
-import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../core/helpers/extensions/extensions.dart';
+import '../../../../../core/helpers/validators.dart';
+import '../../../../../core/widgets/custom_material_button.dart';
+import '../../../../../core/widgets/custom_text_button.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../logic/cubit/login_state.dart';
 import 'password_validations.dart';
 

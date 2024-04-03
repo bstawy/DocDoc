@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/config/routing/routes.dart';
-import '../../../../core/config/theme/texts/font_weight_helper.dart';
-import '../../../../core/config/theme/texts/text_styles.dart';
-import '../../../../core/helpers/extensions/extensions.dart';
-import '../../../../core/widgets/custom_text_button.dart';
+import '../../../../../core/config/routing/routes.dart';
+import '../../../../../core/config/theme/texts/font_weight_helper.dart';
+import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../core/helpers/extensions/extensions.dart';
+import '../../../../../core/widgets/custom_text_button.dart';
 
 class AlreadyHaveAnAccount extends StatelessWidget {
   const AlreadyHaveAnAccount({super.key});

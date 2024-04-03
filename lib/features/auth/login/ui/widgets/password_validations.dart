@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/config/theme/colors/light_color_scheme.dart';
-import '../../../../core/config/theme/texts/font_weight_helper.dart';
-import '../../../../core/config/theme/texts/text_styles.dart';
-import '../../../../core/helpers/extensions/extensions.dart';
+import '../../../../../core/config/theme/colors/light_color_scheme.dart';
+import '../../../../../core/config/theme/texts/font_weight_helper.dart';
+import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../core/helpers/extensions/extensions.dart';
 
 class PasswordValidations extends StatelessWidget {
   final bool hasLowerCase;
