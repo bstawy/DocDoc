@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/di/dependency_injection.dart';
 import '../../../core/helpers/extensions/extensions.dart';
+import '../logic/cubit/login_cubit.dart';
 import 'widgets/already_have_an_account.dart';
 import 'widgets/login_form.dart';
 import 'widgets/terms_and_conditions_text.dart';
@@ -20,7 +23,10 @@ class LoginScreen extends StatelessWidget {
               verticalSpace(32.h),
               const WelcomeHeader(),
               verticalSpace(32.h),
-              const LoginForm(),
+              BlocProvider(
+                create: (context) => getIt<LoginCubit>(),
+                child: const LoginForm(),
+              ),
               verticalSpace(32.h),
               const TermsAndConditionsText(),
               verticalSpace(24.h),
