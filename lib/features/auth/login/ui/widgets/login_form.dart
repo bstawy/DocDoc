@@ -10,8 +10,8 @@ import '../../../../../core/widgets/custom_material_button.dart';
 import '../../../../../core/widgets/custom_text_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../data/models/login_request_body.dart';
-import '../../logic/cubit/login_state.dart';
 import '../../logic/login_cubit.dart';
+import '../../logic/login_state.dart';
 import 'password_validations.dart';
 
 class LoginForm extends StatefulWidget {
