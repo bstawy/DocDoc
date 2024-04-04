@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,6 +28,7 @@ class DocDocApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         onGenerateRoute: appRouter.generateRoute,
         initialRoute: Routes.splashScreen,
+        builder: BotToastInit(),
       ),
     );
   }
