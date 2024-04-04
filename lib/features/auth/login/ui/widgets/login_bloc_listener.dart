@@ -34,8 +34,8 @@ class LoginBlocListener extends StatelessWidget {
             );
           },
           success: (loginResponse) {
-            CustomSnackBar.showSuccessMessage(
-                context, "Welcome Back ${loginResponse.user.name}");
+            // TODO: login response doesn't have a message & snackbar is not showed
+            CustomSnackBar.showSuccessMessage(context, "Welcome Back");
             // TODO: navigate to home screen
           },
           failure: (errorMsg) {
