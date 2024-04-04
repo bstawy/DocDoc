@@ -68,8 +68,13 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<RegisterCubit, RegisterState>(
-      listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Failure,
+      listenWhen: (previous, current) {
+        if (previous is Loading && current is Success ||
+            previous is Loading && current is Failure) {
+          context.pop();
+        }
+        return true;
+      },
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
@@ -85,10 +90,12 @@ class _RegisterFormState extends State<RegisterForm> {
             );
           },
           success: (loginResponse) {
-            context.popUntil(Routes.loginScreen);
+            // TODO: Show snackbar to displasy success message
+            // TODO: Navigate to login screen
+            //context.popUntil(Routes.loginScreen);
+            context.pop();
           },
           failure: (errorMsg) {
-            context.pop();
             buildErrorWidget(context, errorMsg);
           },
         );
