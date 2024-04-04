@@ -12,7 +12,7 @@ import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../widgets/password_validations.dart';
 import '../../data/models/login_request_body.dart';
 import '../../logic/login_cubit.dart';
-import '../../logic/login_state.dart';
+import 'login_bloc_listener.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -55,85 +55,58 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
-      listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Failure,
-      listener: (context, state) {
-        state.whenOrNull(
-          loading: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: context.theme.primaryColor,
-                  ),
-                );
+    return Form(
+      key: loginFormKey,
+      child: Column(
+        children: [
+          const LoginBlocListener(),
+          CustomTextFormField(
+            controller: _emailController,
+            validator: (value) {
+              return Validators.validateEmail(value);
+            },
+            hint: "Email",
+          ),
+          verticalSpace(16.h),
+          CustomTextFormField(
+            controller: _passwordController,
+            hint: "Password",
+            scrollPaddingValue: 300.h,
+            isPassword: true,
+            action: TextInputAction.done,
+            validator: (value) {
+              return Validators.validatePassword(value);
+            },
+          ),
+          verticalSpace(16.h),
+          PasswordValidations(
+            hasLowerCase: hasLowerCase,
+            hasUpperCase: hasUpperCase,
+            hasSpecialCharacters: hasSpecialCharacter,
+            hasNumber: hasNumber,
+            hasMinLength: hasMinLength,
+          ),
+          verticalSpace(8.h),
+          Align(
+            alignment: Alignment.centerRight,
+            child: CustomTextButton(
+              onPressed: () {
+                // TODO: navigate to forgot password screen
               },
-            );
-          },
-          success: (loginResponse) {
-            context.pop();
-            // TODO: Navigate to home screen
-          },
-          failure: (errorMsg) {
-            context.pop();
-            buildErrorWidget(context, errorMsg);
-          },
-        );
-      },
-      child: Form(
-        key: loginFormKey,
-        child: Column(
-          children: [
-            CustomTextFormField(
-              controller: _emailController,
-              validator: (value) {
-                return Validators.validateEmail(value);
-              },
-              hint: "Email",
+              horizontalPadding: 4.w,
+              verticalPadding: 4.h,
+              text: "Forgot password?",
             ),
-            verticalSpace(16.h),
-            CustomTextFormField(
-              controller: _passwordController,
-              hint: "Password",
-              scrollPaddingValue: 300.h,
-              isPassword: true,
-              action: TextInputAction.done,
-              validator: (value) {
-                return Validators.validatePassword(value);
-              },
-            ),
-            verticalSpace(16.h),
-            PasswordValidations(
-              hasLowerCase: hasLowerCase,
-              hasUpperCase: hasUpperCase,
-              hasSpecialCharacters: hasSpecialCharacter,
-              hasNumber: hasNumber,
-              hasMinLength: hasMinLength,
-            ),
-            verticalSpace(8.h),
-            Align(
-              alignment: Alignment.centerRight,
-              child: CustomTextButton(
-                onPressed: () {
-                  // TODO: navigate to forgot password screen
-                },
-                horizontalPadding: 4.w,
-                verticalPadding: 4.h,
-                text: "Forgot password?",
-              ),
-            ),
-            verticalSpace(24.h),
-            CustomMaterialButton(
-              onClicked: () {
-                validateAndLogin(context);
-              },
-              title: "Login",
-            ),
-          ],
-        ).setHorizontalPadding(24.w),
-      ),
+          ),
+          verticalSpace(24.h),
+          CustomMaterialButton(
+            onClicked: () {
+              validateAndLogin(context);
+            },
+            title: "Login",
+          ),
+        ],
+      ).setHorizontalPadding(24.w),
     );
   }
 
