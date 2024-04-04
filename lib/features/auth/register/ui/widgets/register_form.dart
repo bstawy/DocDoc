@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/config/routing/routes.dart';
-import '../../../../../core/config/theme/colors/light_color_scheme.dart';
-import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/validators.dart';
 import '../../../../../core/widgets/custom_material_button.dart';
@@ -12,7 +9,7 @@ import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../widgets/password_validations.dart';
 import '../../data/models/register_request_body.dart';
 import '../../logic/register_cubit.dart';
-import '../../logic/register_state.dart';
+import 'register_bloc_listener.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -67,145 +64,83 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RegisterCubit, RegisterState>(
-      listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Failure,
-      listener: (context, state) {
-        state.whenOrNull(
-          loading: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: context.theme.primaryColor,
-                  ),
-                );
-              },
-            );
-          },
-          success: (loginResponse) {
-            context.popUntil(Routes.loginScreen);
-          },
-          failure: (errorMsg) {
-            context.pop();
-            buildErrorWidget(context, errorMsg);
-          },
-        );
-      },
-      child: Form(
-        key: registerFormKey,
-        child: Column(
-          children: [
-            CustomTextFormField(
-              controller: _usernameController,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return "Username is required";
-                }
-                return null;
-              },
-              hint: "username",
-            ),
-            verticalSpace(16.h),
-            CustomTextFormField(
-              controller: _emailController,
-              validator: (value) {
-                return Validators.validateEmail(value);
-              },
-              hint: "Email",
-            ),
-            verticalSpace(16.h),
-            CustomTextFormField(
-              controller: _phoneController,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return "Phone Number is required";
-                }
-                return null;
-                //return Validators.validatePhoneNumber(value);
-              },
-              hint: "Phone Number",
-            ),
-            verticalSpace(16.h),
-            CustomTextFormField(
-              controller: _passwordController,
-              hint: "Password",
-              scrollPaddingValue: 300.h,
-              isPassword: true,
-              validator: (value) {
-                return Validators.validatePassword(value);
-              },
-            ),
-            verticalSpace(16.h),
-            CustomTextFormField(
-              controller: _passwordConfirmationController,
-              hint: "Password Confirmation",
-              isPassword: true,
-              enabled: enablePasswordConfirmation,
-              action: TextInputAction.done,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value != _passwordController.text) {
-                  return "Passwords do not match";
-                }
-                return null;
-              },
-            ),
-            verticalSpace(16.h),
-            PasswordValidations(
-              hasLowerCase: hasLowerCase,
-              hasUpperCase: hasUpperCase,
-              hasSpecialCharacters: hasSpecialCharacter,
-              hasNumber: hasNumber,
-              hasMinLength: hasMinLength,
-            ),
-            verticalSpace(24.h),
-            CustomMaterialButton(
-              onClicked: () {
-                validateAndRegister(context);
-              },
-              title: "Register",
-            ),
-          ],
-        ).setHorizontalPadding(24.w),
-      ),
-    );
-  }
-
-  Future<dynamic> buildErrorWidget(BuildContext context, String errorMsg) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          icon: Icon(
-            Icons.error_rounded,
-            color: context.theme.colorScheme.error,
-            size: 35,
+    return Form(
+      key: registerFormKey,
+      child: Column(
+        children: [
+          const RegisterBlocListener(),
+          CustomTextFormField(
+            controller: _usernameController,
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return "Username is required";
+              }
+              return null;
+            },
+            hint: "username",
           ),
-          content: Text(
-            errorMsg,
-            textAlign: TextAlign.center,
-            style: TextStyles.font14DarkBlueMedium,
+          verticalSpace(16.h),
+          CustomTextFormField(
+            controller: _emailController,
+            validator: (value) {
+              return Validators.validateEmail(value);
+            },
+            hint: "Email",
           ),
-          backgroundColor: context.theme.colorScheme.background,
-          actionsAlignment: MainAxisAlignment.center,
-          actions: [
-            CustomMaterialButton(
-              onClicked: () {
-                context.pop();
-              },
-              title: "Got it",
-              titleStyle: TextStyles.font12DarkBlueMedium.copyWith(
-                color: ColorsManager.white,
-              ),
-              height: 35.h,
-              width: 100.w,
-              padding: EdgeInsets.all(4.r),
-            ),
-          ],
-        );
-      },
+          verticalSpace(16.h),
+          CustomTextFormField(
+            controller: _phoneController,
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return "Phone Number is required";
+              }
+              return null;
+              //return Validators.validatePhoneNumber(value);
+            },
+            hint: "Phone Number",
+          ),
+          verticalSpace(16.h),
+          CustomTextFormField(
+            controller: _passwordController,
+            hint: "Password",
+            scrollPaddingValue: 300.h,
+            isPassword: true,
+            validator: (value) {
+              return Validators.validatePassword(value);
+            },
+          ),
+          verticalSpace(16.h),
+          CustomTextFormField(
+            controller: _passwordConfirmationController,
+            hint: "Password Confirmation",
+            isPassword: true,
+            enabled: enablePasswordConfirmation,
+            action: TextInputAction.done,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (value) {
+              if (value != _passwordController.text) {
+                return "Passwords do not match";
+              }
+              return null;
+            },
+          ),
+          verticalSpace(16.h),
+          PasswordValidations(
+            hasLowerCase: hasLowerCase,
+            hasUpperCase: hasUpperCase,
+            hasSpecialCharacters: hasSpecialCharacter,
+            hasNumber: hasNumber,
+            hasMinLength: hasMinLength,
+          ),
+          verticalSpace(24.h),
+          CustomMaterialButton(
+            onClicked: () {
+              validateAndRegister(context);
+            },
+            title: "Register",
+          ),
+        ],
+      ).setHorizontalPadding(24.w),
     );
   }
 
