@@ -23,7 +23,8 @@ class _SplashScreenState extends State<SplashScreen>
     _controller = AnimationController(
       duration: const Duration(milliseconds: 3000),
       vsync: this,
-    )..forward().then((value) => context.pushNamed(Routes.onBoardingScreen));
+    )..forward()
+        .then((value) => context.pushReplacementNamed(Routes.onBoardingScreen));
   }
 
   @override
