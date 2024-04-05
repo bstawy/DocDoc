@@ -14,6 +14,7 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(DocDocApp(
+      // TODO: Change this to false to test production flavor
       isDevFlavor: true,
       appRouter: AppRouter(),
     ));
