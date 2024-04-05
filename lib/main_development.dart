@@ -9,5 +9,20 @@ import 'doc_doc_app.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   initGetIt();
-  runApp(DocDocApp(appRouter: AppRouter()));
+  runApp(DocDocApp(
+    isDevFlavor: true,
+    appRouter: AppRouter(),
+  ));
 }
+
+/*
+Directionality(
+      textDirection: TextDirection.ltr,
+      child: Banner(
+          message: "    dev",
+          location: BannerLocation.topEnd,
+          color: Colors.green,
+          layoutDirection: TextDirection.ltr,
+          child: DocDocApp(appRouter: AppRouter())),
+    ),
+*/
