@@ -25,7 +25,7 @@ if (flutterVersionName == null) {
 android {
     namespace "com.example.docdoc"
     compileSdk flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    ndkVersion "25.1.8937393"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -49,6 +49,22 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+    }
+
+    // Defines two product flavors, "production" and "development" 
+    // Each flavor has its own application ID suffix and resource value for the app name.
+    flavorDimensions "default"
+    productFlavors {
+        production {
+            dimension "default"
+            resValue "string", "app_name", "DocDoc Prod"
+            applicationIdSuffix ""
+        }
+        development {
+            dimension "default"
+            resValue "string", "app_name", "DocDoc Dev"
+            applicationIdSuffix ".dev"
+        }
     }
 
     buildTypes {
