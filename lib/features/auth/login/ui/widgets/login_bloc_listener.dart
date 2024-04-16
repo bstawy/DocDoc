@@ -1,3 +1,4 @@
+import 'package:docdoc/core/config/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +37,8 @@ class LoginBlocListener extends StatelessWidget {
           success: (loginResponse) {
             // TODO: login response doesn't have a message & snackbar is not showed
             CustomSnackBar.showSuccessMessage(context, "Welcome Back");
-            // TODO: navigate to home screen
+            context.pushNamedAndRemoveUntil(Routes.layoutScreen,
+                predicate: ModalRoute.withName(Routes.splashScreen));
           },
           failure: (errorMsg) {
             CustomSnackBar.showErrorMessage(context, errorMsg);
