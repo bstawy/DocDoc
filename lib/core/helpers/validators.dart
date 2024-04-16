@@ -46,10 +46,6 @@ Prefix is 10, 11, 12 or 15 only""";
     return null;
   }
 
-  // static bool isPhoneNumberValid(String phoneNumber) {
-  //   return RegExp(r'^(010|011|012|015)[0-9]{8}$').hasMatch(phoneNumber);
-  // }
-
   static bool _isEmpty(String? value) {
     return value == null || value.trim().isEmpty;
   }
