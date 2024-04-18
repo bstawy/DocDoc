@@ -23,39 +23,37 @@ class BottomNavIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LayoutCubit, LayoutState>(
       bloc: context.read<LayoutCubit>(),
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        return state is Success
-            ? IconButton(
-                onPressed: () {
-                  if (context.read<LayoutCubit>().currentPageIndex != index) {
-                    context.read<LayoutCubit>().changeLayoutState(index);
-                  }
-                },
-                icon: index < 4
-                    ? SvgPicture.asset(
-                        context.read<LayoutCubit>().currentPageIndex == index
-                            ? selectedIconPath
-                            : unSelectedIconPath,
-                        width: 26.w,
-                        height: 26.h,
-                      )
-                    : Container(
-                        padding: EdgeInsets.all(4.r),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: context.read<LayoutCubit>().currentPageIndex ==
-                                  index
+        return IconButton(
+            onPressed: () {
+              if (context.read<LayoutCubit>().currentPageIndex != index) {
+                context.read<LayoutCubit>().changeLayoutState(index);
+              }
+            },
+            icon: index < 4
+                ? SvgPicture.asset(
+                    context.read<LayoutCubit>().currentPageIndex == index
+                        ? selectedIconPath
+                        : unSelectedIconPath,
+                    width: 26.w,
+                    height: 26.h,
+                  )
+                : Container(
+                    padding: EdgeInsets.all(4.r),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color:
+                          context.read<LayoutCubit>().currentPageIndex == index
                               ? ColorsManager.mainBlue
                               : Colors.transparent,
-                        ),
-                        child: CircleAvatar(
-                          radius: 20.r,
-                          backgroundColor: ColorsManager.white,
-                          child: const Icon(Icons.person),
-                        ),
-                      ),
-              )
-            : const SizedBox();
+                    ),
+                    child: CircleAvatar(
+                      radius: 20.r,
+                      backgroundColor: ColorsManager.white,
+                      child: const Icon(Icons.person),
+                    ),
+                  ));
       },
     );
   }
