@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../features/auth/login/ui/login_screen.dart';
 import '../../../features/auth/register/ui/register_screen.dart';
 import '../../../features/layout/logic/layout_cubit.dart';
-import '../../../features/layout/logic/layout_state.dart';
+import '../../../features/layout/ui/layout_screen.dart';
 import '../../../features/on_boarding/on_boarding_screen.dart';
 import '../../../features/splash/splash_screen.dart';
 import 'routes.dart';
@@ -33,11 +33,9 @@ class AppRouter {
 
       case Routes.layoutScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocBuilder<LayoutCubit, LayoutState>(
-            bloc: LayoutCubit(),
-            builder: (context, state) {
-              return const RegisterScreen();
-            },
+          builder: (_) => BlocProvider(
+            create: (_) => LayoutCubit(),
+            child: const LayoutScreen(),
           ),
         );
 
