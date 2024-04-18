@@ -13,7 +13,6 @@ class LayoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LayoutCubit, LayoutState>(
       bloc: context.read<LayoutCubit>(),
-      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         debugPrint(state.toString());
         debugPrint(context.read<LayoutCubit>().currentPageIndex.toString());
@@ -23,15 +22,18 @@ class LayoutScreen extends StatelessWidget {
             initial: () {
               return context.read<LayoutCubit>().pages[0];
             },
-            success: (page) {
-              return page;
+            success: (index) {
+              return context.read<LayoutCubit>().pages[index];
             },
           ),
           floatingActionButton: const FloatingActionButtonWidget(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniCenterDocked,
           extendBody: true,
-          bottomNavigationBar: const BottomNavBarWidget(),
+          bottomNavigationBar: BlocProvider.value(
+            value: context.read<LayoutCubit>(),
+            child: const BottomNavBarWidget(),
+          ),
         );
       },
     );
