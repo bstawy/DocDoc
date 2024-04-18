@@ -22,6 +22,6 @@ class LayoutCubit extends Cubit<LayoutState> {
 
   void changeLayoutState(int newIndex) {
     currentPageIndex = newIndex;
-    emit(LayoutState.success(pages[currentPageIndex]));
+    emit(LayoutState.success(currentPageIndex));
   }
 }
