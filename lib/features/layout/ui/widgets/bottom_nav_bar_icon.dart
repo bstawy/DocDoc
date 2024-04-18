@@ -55,7 +55,7 @@ class BottomNavIconWidget extends StatelessWidget {
             : Colors.transparent,
       ),
       child: CircleAvatar(
-        radius: 20.r,
+        radius: 15.r,
         backgroundColor: ColorsManager.white,
         child: const Icon(Icons.person),
       ),
