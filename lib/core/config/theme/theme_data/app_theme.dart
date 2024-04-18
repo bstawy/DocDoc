@@ -7,5 +7,22 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: getLightColorScheme(),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      titleTextStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      selectedItemColor: ColorsManager.mainBlue,
+      unselectedItemColor: ColorsManager.darkBlue,
+    ),
   );
 }
