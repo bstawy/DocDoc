@@ -21,73 +21,44 @@ class BottomNavIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutCubit layoutCubit = context.read<LayoutCubit>();
+
     return BlocBuilder<LayoutCubit, LayoutState>(
-      bloc: context.read<LayoutCubit>(),
-      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return IconButton(
-            onPressed: () {
-              if (context.read<LayoutCubit>().currentPageIndex != index) {
-                context.read<LayoutCubit>().changeLayoutState(index);
-              }
-            },
-            icon: index < 4
-                ? SvgPicture.asset(
-                    context.read<LayoutCubit>().currentPageIndex == index
-                        ? selectedIconPath
-                        : unSelectedIconPath,
-                    width: 26.w,
-                    height: 26.h,
-                  )
-                : Container(
-                    padding: EdgeInsets.all(4.r),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color:
-                          context.read<LayoutCubit>().currentPageIndex == index
-                              ? ColorsManager.mainBlue
-                              : Colors.transparent,
-                    ),
-                    child: CircleAvatar(
-                      radius: 20.r,
-                      backgroundColor: ColorsManager.white,
-                      child: const Icon(Icons.person),
-                    ),
-                  ));
+          onPressed: () {
+            if (layoutCubit.currentPageIndex != index) {
+              layoutCubit.changeLayoutState(index);
+            }
+          },
+          icon: index < 4
+              ? SvgPicture.asset(
+                  layoutCubit.currentPageIndex == index
+                      ? selectedIconPath
+                      : unSelectedIconPath,
+                  width: 26.w,
+                  height: 26.h,
+                )
+              : profileIcon(layoutCubit),
+        );
       },
     );
   }
-}
 
-/*
-return IconButton(
-              onPressed: () {
-                if (context.read<LayoutCubit>().currentPageIndex != index) {
-                  context.read<LayoutCubit>().changeLayoutState(index);
-                }
-              },
-              icon: index < 4
-                  ? SvgPicture.asset(
-                      context.read<LayoutCubit>().currentPageIndex == index
-                          ? selectedIconPath
-                          : unSelectedIconPath,
-                      width: 26.w,
-                      height: 26.h,
-                    )
-                  : Container(
-                      padding: EdgeInsets.all(4.r),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: context.read<LayoutCubit>().currentPageIndex ==
-                                index
-                            ? ColorsManager.mainBlue
-                            : Colors.transparent,
-                      ),
-                      child: CircleAvatar(
-                        radius: 20.r,
-                        backgroundColor: ColorsManager.white,
-                        child: const Icon(Icons.person),
-                      ),
-                    ),
-            );
-            */
+  Container profileIcon(LayoutCubit layoutCubit) {
+    return Container(
+      padding: EdgeInsets.all(4.r),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: layoutCubit.currentPageIndex == index
+            ? ColorsManager.mainBlue
+            : Colors.transparent,
+      ),
+      child: CircleAvatar(
+        radius: 20.r,
+        backgroundColor: ColorsManager.white,
+        child: const Icon(Icons.person),
+      ),
+    );
+  }
+}

@@ -11,29 +11,24 @@ class LayoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LayoutCubit layoutCubit = context.read<LayoutCubit>();
     return BlocBuilder<LayoutCubit, LayoutState>(
       bloc: context.read<LayoutCubit>(),
       builder: (context, state) {
-        debugPrint(state.toString());
-        debugPrint(context.read<LayoutCubit>().currentPageIndex.toString());
-
         return Scaffold(
           body: state.whenOrNull(
             initial: () {
-              return context.read<LayoutCubit>().pages[0];
+              return layoutCubit.pages[0];
             },
             success: (index) {
-              return context.read<LayoutCubit>().pages[index];
+              return layoutCubit.pages[index];
             },
           ),
           floatingActionButton: const FloatingActionButtonWidget(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniCenterDocked,
           extendBody: true,
-          bottomNavigationBar: BlocProvider.value(
-            value: context.read<LayoutCubit>(),
-            child: const BottomNavBarWidget(),
-          ),
+          bottomNavigationBar: const BottomNavBarWidget(),
         );
       },
     );
