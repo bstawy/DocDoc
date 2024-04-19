@@ -19,10 +19,10 @@ class LayoutScreen extends StatelessWidget {
           child: Scaffold(
             body: state.whenOrNull(
               initial: () {
-                return SingleChildScrollView(child: layoutCubit.pages[0]);
+                return layoutCubit.pages[0];
               },
               success: (index) {
-                return SingleChildScrollView(child: layoutCubit.pages[index]);
+                return layoutCubit.pages[index];
               },
             ),
             floatingActionButton: const FloatingActionButtonWidget(),
