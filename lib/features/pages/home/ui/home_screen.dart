@@ -12,14 +12,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Header(),
-        const NearbyDoctor(),
-        verticalSpace(24.h),
-        const DoctorSpeciality(),
-        verticalSpace(24.h),
-        const RecommendedDoctor(),
+    return CustomScrollView(
+      scrollDirection: Axis.vertical,
+      slivers: [
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              const Header(),
+              const NearbyDoctor(),
+              verticalSpace(24.h),
+              const DoctorSpeciality(),
+              verticalSpace(24.h),
+              const RecommendedDoctor(),
+            ],
+          ),
+        ),
       ],
     ).setHorizontalPadding(16.w);
   }
