@@ -1,7 +1,7 @@
-import 'package:docdoc/core/config/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/helpers/custom_snackbar.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../logic/login_cubit.dart';
