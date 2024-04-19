@@ -30,53 +30,49 @@ class RecommendedDoctor extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 0.7.sh,
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            padding: EdgeInsets.only(top: 16.h, left: 8.w),
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  Container(
-                    width: 110.w,
-                    height: 110.h,
-                    decoration: BoxDecoration(
-                      color: ColorsManager.lighterGrey,
-                      borderRadius: BorderRadius.circular(12.r),
+        Column(
+          children: List.generate(
+            5,
+            (index) => Row(
+              children: [
+                Container(
+                  width: 110.w,
+                  height: 110.h,
+                  decoration: BoxDecoration(
+                    color: ColorsManager.lighterGrey,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                ),
+                horizontalSpace(16.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Dr. x",
+                      style: TextStyles.font14DarkBlueMedium,
                     ),
-                  ),
-                  horizontalSpace(16.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Dr. x",
-                        style: TextStyles.font14DarkBlueMedium,
-                      ),
-                      verticalSpace(4.h),
-                      Text(
-                        "Speciality",
-                        style: TextStyles.font12DarkBlueMedium,
-                      ),
-                      verticalSpace(4.h),
-                      Text(
-                        "Hospital",
-                        style: TextStyles.font12DarkBlueMedium,
-                      ),
-                      verticalSpace(4.h),
-                      Text(
-                        "Rating",
-                        style: TextStyles.font12DarkBlueMedium,
-                      ),
-                    ],
-                  ),
-                ],
-              ).setOnlyPadding(0, 32.h, 0, 0);
-            },
+                    verticalSpace(4.h),
+                    Text(
+                      "Speciality",
+                      style: TextStyles.font12DarkBlueMedium,
+                    ),
+                    verticalSpace(4.h),
+                    Text(
+                      "Hospital",
+                      style: TextStyles.font12DarkBlueMedium,
+                    ),
+                    verticalSpace(4.h),
+                    Text(
+                      "Rating",
+                      style: TextStyles.font12DarkBlueMedium,
+                    ),
+                  ],
+                ),
+              ],
+            ).setOnlyPadding(0, 16.h, 0, 0),
           ),
-        ),
+        ).setHorizontalPadding(8.w),
+        verticalSpace(16.h),
       ],
     );
   }
