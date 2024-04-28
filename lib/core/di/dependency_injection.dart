@@ -6,7 +6,7 @@ import '../../features/auth/login/logic/login_cubit.dart';
 import '../../features/auth/register/data/repos/register_repo.dart';
 import '../../features/auth/register/logic/register_cubit.dart';
 import '../../features/pages/home/data/repos/home_repo.dart';
-import '../../features/pages/home/logic/cubit/home_cubit.dart';
+import '../../features/pages/home/logic/home_cubit.dart';
 import '../networking/api_service/api_service.dart';
 import '../networking/dio/dio_factory.dart';
 

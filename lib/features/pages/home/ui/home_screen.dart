@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/extensions/extensions.dart';
-import '../logic/cubit/home_cubit.dart';
-import '../logic/cubit/home_state.dart';
+import '../logic/home_cubit.dart';
+import '../logic/home_state.dart';
 import 'widgets/doctor_speciality_widget.dart';
 import 'widgets/header_widget.dart';
 import 'widgets/nearby_doctor_widget.dart';

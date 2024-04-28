@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/dependency_injection.dart';
 import '../../pages/appointment/ui/appointment_screen.dart';
 import '../../pages/chat/ui/inbox_screen.dart';
-import '../../pages/home/logic/cubit/home_cubit.dart';
+import '../../pages/home/logic/home_cubit.dart';
 import '../../pages/home/ui/home_screen.dart';
 import '../../pages/profile/ui/profile_screen.dart';
 import '../../pages/search/ui/search_screen.dart';

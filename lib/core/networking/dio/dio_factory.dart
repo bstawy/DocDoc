@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:docdoc/core/networking/dio/token_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import 'token_interceptor.dart';
 
 class DioFactory {
   // Create Singletone
