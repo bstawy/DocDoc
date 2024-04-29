@@ -8,14 +8,31 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit(this._homeRepo) : super(const HomeState.initial());
 
-  void getHomeData() async {
+  void getDoctorSpecialityData() async {
     emit(const HomeState.loading());
 
-    final response = await _homeRepo.getHomeData();
+    final response = await _homeRepo.getDoctorSpecialityData();
 
     response.when(
-      success: (homeResponse) {
-        emit(HomeState.success(homeResponse));
+      success: (response) {
+        emit(HomeState.success(response));
+      },
+      failure: (error) {
+        emit(
+          HomeState.failure(error: error.apiErrorModel.message ?? ""),
+        );
+      },
+    );
+  }
+
+  void getAllDoctorsData() async {
+    emit(const HomeState.loading());
+
+    final response = await _homeRepo.getAllDoctorsData();
+
+    response.when(
+      success: (response) {
+        emit(HomeState.success(response));
       },
       failure: (error) {
         emit(
