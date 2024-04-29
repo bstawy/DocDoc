@@ -7,6 +7,7 @@ import '../../features/auth/register/data/repos/register_repo.dart';
 import '../../features/auth/register/logic/register_cubit.dart';
 import '../../features/pages/home/data/repos/home_repo.dart';
 import '../../features/pages/home/logic/home_cubit.dart';
+import '../caching/hive_manager.dart';
 import '../networking/api_service/api_service.dart';
 import '../networking/dio/dio_factory.dart';
 
@@ -17,6 +18,9 @@ Future<void> initGetIt() async {
   Dio freeDio = DioFactory.getFreeDio();
   getIt.registerLazySingleton<ApiService>(() => ApiService(freeDio));
 
+  // Hive
+  getIt.registerLazySingleton<HiveManager>(() => HiveManager.getInstance());
+
   // Login
   getIt.registerFactory<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
@@ -26,6 +30,6 @@ Future<void> initGetIt() async {
   getIt.registerFactory<RegisterCubit>(() => RegisterCubit(getIt()));
 
   // Home
-  getIt.registerFactory<HomeRepo>(() => HomeRepo(getIt()));
+  getIt.registerFactory<HomeRepo>(() => HomeRepo(getIt(), getIt()));
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
 }
