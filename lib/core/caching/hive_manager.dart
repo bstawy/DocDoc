@@ -1,7 +1,10 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../features/pages/home/data/models/city_model.dart';
 import '../../features/pages/home/data/models/doctor_model.dart';
-import '../../features/pages/home/data/models/home_response_model.dart';
+import '../../features/pages/home/data/models/doctor_speciality_model.dart';
+import '../../features/pages/home/data/models/governrate_model.dart';
+import '../../features/pages/home/data/models/specialization_model.dart';
 import '../config/Constants/app_constants.dart';
 
 class HiveManager {
@@ -21,7 +24,7 @@ class HiveManager {
   }
 
   void _registerAdapters() {
-    Hive.registerAdapter(HomeDataAdapter());
+    Hive.registerAdapter(DoctorSpecialityModelAdapter());
     Hive.registerAdapter(DoctorModelAdapter());
     Hive.registerAdapter(SpecializationModelAdapter());
     Hive.registerAdapter(CityModelAdapter());
@@ -29,7 +32,7 @@ class HiveManager {
   }
 
   Future<void> _openHiveBoxes() async {
-    await Hive.openBox<HomeData>(HiveBoxKeys.homeData);
+    await Hive.openBox<DoctorSpecialityModel>(HiveBoxKeys.homeData);
   }
 
   void cacheData<T>(
