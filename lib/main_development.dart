@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'core/caching/hive_manager.dart';
 import 'core/config/routing/app_router.dart';
 import 'core/di/dependency_injection.dart';
 import 'doc_doc_app.dart';
@@ -13,7 +14,6 @@ import 'doc_doc_app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  initGetIt();
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -22,8 +22,15 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
-  runApp(DocDocApp(
-    isDevFlavor: true,
-    appRouter: AppRouter(),
-  ));
+
+  initGetIt();
+
+  Future.wait([
+    getIt<HiveManager>().init(),
+  ]).then((_) {
+    runApp(DocDocApp(
+      isDevFlavor: true,
+      appRouter: AppRouter(),
+    ));
+  });
 }
