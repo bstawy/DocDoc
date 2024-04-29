@@ -6,3 +6,7 @@ class AppConstants {
   static var theme = Theme.of(navigatorKey.currentState!.context);
   static var mediaQuery = MediaQuery.of(navigatorKey.currentState!.context);
 }
+
+class HiveBoxKeys {
+  static const String homeData = "home_Data_box";
+}
