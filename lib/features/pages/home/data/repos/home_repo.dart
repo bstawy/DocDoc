@@ -5,7 +5,7 @@ import '../../../../../core/config/Constants/app_constants.dart';
 import '../../../../../core/networking/api_error/api_error_handler.dart';
 import '../../../../../core/networking/api_result/api_result.dart';
 import '../../../../../core/networking/api_service/api_service.dart';
-import '../models/home_response_model.dart';
+import '../models/doctor_speciality_model.dart';
 
 class HomeRepo {
   final ApiService _apiService;
@@ -13,10 +13,10 @@ class HomeRepo {
 
   HomeRepo(this._apiService, this._hiveManager);
 
-  Future<ApiResult<List<HomeData>>> getHomeData() async {
+  Future<ApiResult<List<DoctorSpecialityModel>>> getHomeData() async {
     try {
-      List<HomeData> cachedData =
-          _hiveManager.retrieveData<HomeData>(HiveBoxKeys.homeData);
+      List<DoctorSpecialityModel> cachedData = _hiveManager
+          .retrieveData<DoctorSpecialityModel>(HiveBoxKeys.homeData);
 
       if (cachedData.isNotEmpty && cachedData.length == 10) {
         debugPrint("Home data retrieved from cache");
@@ -25,7 +25,7 @@ class HomeRepo {
 
       final response = await _apiService.getHomeData();
 
-      _hiveManager.cacheData<HomeData>(
+      _hiveManager.cacheData<DoctorSpecialityModel>(
         boxKey: HiveBoxKeys.homeData,
         dataList: response.homeData,
       );
