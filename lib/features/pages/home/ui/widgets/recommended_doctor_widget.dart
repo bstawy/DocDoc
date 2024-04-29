@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/config/theme/colors/light_color_scheme.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
+import '../../data/models/doctor_model.dart';
+import '../../logic/home_cubit.dart';
+import '../../logic/home_state.dart';
+import 'doctor_widget.dart';
 
 class RecommendedDoctor extends StatelessWidget {
   const RecommendedDoctor({super.key});
@@ -21,7 +25,7 @@ class RecommendedDoctor extends StatelessWidget {
             const Spacer(),
             TextButton(
               onPressed: () {
-                // TODO: see all doctor speciality
+                // TODO: see all doctors
               },
               child: Text(
                 "See all",
@@ -30,70 +34,34 @@ class RecommendedDoctor extends StatelessWidget {
             ),
           ],
         ),
-        Column(
-          children: List.generate(
-            5,
-            (index) => Row(
-              children: [
-                Container(
-                  width: 110.w,
-                  height: 110.h,
-                  decoration: BoxDecoration(
-                    color: ColorsManager.lighterGrey,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-                horizontalSpace(16.w),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Dr. x",
-                      style: TextStyles.font14DarkBlueMedium,
-                    ),
-                    verticalSpace(4.h),
-                    Text(
-                      "Speciality",
-                      style: TextStyles.font12DarkBlueMedium,
-                    ),
-                    verticalSpace(4.h),
-                    Text(
-                      "Hospital",
-                      style: TextStyles.font12DarkBlueMedium,
-                    ),
-                    verticalSpace(4.h),
-                    Text(
-                      "Rating",
-                      style: TextStyles.font12DarkBlueMedium,
-                    ),
-                  ],
-                ),
-              ],
-            ).setOnlyPadding(0, 16.h, 0, 0),
-          ),
+        verticalSpace(8.h),
+        BlocBuilder<HomeCubit, HomeState>(
+          bloc: context.read<HomeCubit>()..getAllDoctorsData(),
+          builder: (context, state) {
+            return state.whenOrNull(
+                  loading: () {
+                    return const CircularProgressIndicator();
+                  },
+                  success: (data) {
+                    final List<DoctorModel> doctors = data;
+
+                    return SizedBox(
+                      height: 130.h,
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return DoctorWidget(doctor: doctors[index]);
+                        },
+                      ),
+                    );
+                  },
+                ) ??
+                const SizedBox(); // Add null check and return a default widget if state is null
+          },
         ).setHorizontalPadding(8.w),
         verticalSpace(16.h),
       ],
     );
   }
 }
-
-/*
-Column(
-                children: [
-                  CircleAvatar(
-                    radius: 40.r,
-                    backgroundColor: ColorsManager.lighterGrey,
-                    child: const Icon(
-                      Icons.medical_services,
-                      color: ColorsManager.darkBlue,
-                    ),
-                  ),
-                  verticalSpace(12.h),
-                  Text(
-                    "x",
-                    style: TextStyles.font14DarkBlueMedium,
-                  ),
-                ],
-              ).setHorizontalPadding(16.w);
-*/
