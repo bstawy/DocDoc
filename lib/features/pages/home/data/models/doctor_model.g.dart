@@ -3,6 +3,197 @@
 part of 'doctor_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class DoctorModelAdapter extends TypeAdapter<DoctorModel> {
+  @override
+  final int typeId = 1;
+
+  @override
+  DoctorModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return DoctorModel(
+      id: fields[0] as int,
+      name: fields[1] as String,
+      email: fields[2] as String,
+      phone: fields[3] as String,
+      photoUrl: fields[4] as String,
+      gender: fields[5] as String,
+      address: fields[6] as String,
+      description: fields[7] as String,
+      degree: fields[8] as String,
+      specialization: fields[9] as SpecializationModel,
+      city: fields[10] as CityModel,
+      price: fields[11] as int,
+      startTime: fields[12] as String,
+      endTime: fields[13] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, DoctorModel obj) {
+    writer
+      ..writeByte(14)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.email)
+      ..writeByte(3)
+      ..write(obj.phone)
+      ..writeByte(4)
+      ..write(obj.photoUrl)
+      ..writeByte(5)
+      ..write(obj.gender)
+      ..writeByte(6)
+      ..write(obj.address)
+      ..writeByte(7)
+      ..write(obj.description)
+      ..writeByte(8)
+      ..write(obj.degree)
+      ..writeByte(9)
+      ..write(obj.specialization)
+      ..writeByte(10)
+      ..write(obj.city)
+      ..writeByte(11)
+      ..write(obj.price)
+      ..writeByte(12)
+      ..write(obj.startTime)
+      ..writeByte(13)
+      ..write(obj.endTime);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DoctorModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class SpecializationModelAdapter extends TypeAdapter<SpecializationModel> {
+  @override
+  final int typeId = 2;
+
+  @override
+  SpecializationModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return SpecializationModel(
+      id: fields[0] as int,
+      name: fields[1] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, SpecializationModel obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SpecializationModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class CityModelAdapter extends TypeAdapter<CityModel> {
+  @override
+  final int typeId = 3;
+
+  @override
+  CityModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return CityModel(
+      id: fields[0] as int,
+      name: fields[1] as String,
+      governrate: fields[2] as GovernrateModel,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CityModel obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.governrate);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CityModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class GovernrateModelAdapter extends TypeAdapter<GovernrateModel> {
+  @override
+  final int typeId = 4;
+
+  @override
+  GovernrateModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return GovernrateModel(
+      id: fields[0] as int,
+      name: fields[1] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, GovernrateModel obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GovernrateModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
