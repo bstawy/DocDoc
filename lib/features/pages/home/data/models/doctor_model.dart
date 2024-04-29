@@ -1,6 +1,9 @@
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'city_model.dart';
+import 'specialization_model.dart';
+
 part 'doctor_model.g.dart';
 
 @HiveType(typeId: 1)
@@ -58,58 +61,4 @@ class DoctorModel {
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) =>
       _$DoctorModelFromJson(json);
-}
-
-@HiveType(typeId: 2)
-@JsonSerializable()
-class SpecializationModel {
-  @HiveField(0)
-  final int id;
-  @HiveField(1)
-  final String name;
-
-  SpecializationModel({
-    required this.id,
-    required this.name,
-  });
-
-  factory SpecializationModel.fromJson(Map<String, dynamic> json) =>
-      _$SpecializationModelFromJson(json);
-}
-
-@HiveType(typeId: 3)
-@JsonSerializable()
-class CityModel {
-  @HiveField(0)
-  final int id;
-  @HiveField(1)
-  final String name;
-  @HiveField(2)
-  final GovernrateModel governrate;
-
-  CityModel({
-    required this.id,
-    required this.name,
-    required this.governrate,
-  });
-
-  factory CityModel.fromJson(Map<String, dynamic> json) =>
-      _$CityModelFromJson(json);
-}
-
-@HiveType(typeId: 4)
-@JsonSerializable()
-class GovernrateModel {
-  @HiveField(0)
-  final int id;
-  @HiveField(1)
-  final String name;
-
-  GovernrateModel({
-    required this.id,
-    required this.name,
-  });
-
-  factory GovernrateModel.fromJson(Map<String, dynamic> json) =>
-      _$GovernrateModelFromJson(json);
 }

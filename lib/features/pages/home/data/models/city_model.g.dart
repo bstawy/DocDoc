@@ -1,30 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_response_model.dart';
+part of 'city_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class HomeDataAdapter extends TypeAdapter<HomeData> {
+class CityModelAdapter extends TypeAdapter<CityModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 3;
 
   @override
-  HomeData read(BinaryReader reader) {
+  CityModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return HomeData(
+    return CityModel(
       id: fields[0] as int,
       name: fields[1] as String,
-      doctors: (fields[2] as List).cast<DoctorModel>(),
+      governrate: fields[2] as GovernrateModel,
     );
   }
 
   @override
-  void write(BinaryWriter writer, HomeData obj) {
+  void write(BinaryWriter writer, CityModel obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -32,7 +32,7 @@ class HomeDataAdapter extends TypeAdapter<HomeData> {
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.doctors);
+      ..write(obj.governrate);
   }
 
   @override
@@ -41,7 +41,7 @@ class HomeDataAdapter extends TypeAdapter<HomeData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is HomeDataAdapter &&
+      other is CityModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -50,19 +50,9 @@ class HomeDataAdapter extends TypeAdapter<HomeData> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeResponse _$HomeResponseFromJson(Map<String, dynamic> json) => HomeResponse(
-      message: json['message'] as String,
-      homeData: (json['data'] as List<dynamic>)
-          .map((e) => HomeData.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      status: json['status'] as bool,
-      code: json['code'] as int,
-    );
-
-HomeData _$HomeDataFromJson(Map<String, dynamic> json) => HomeData(
+CityModel _$CityModelFromJson(Map<String, dynamic> json) => CityModel(
       id: json['id'] as int,
       name: json['name'] as String,
-      doctors: (json['doctors'] as List<dynamic>)
-          .map((e) => DoctorModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      governrate:
+          GovernrateModel.fromJson(json['governrate'] as Map<String, dynamic>),
     );
