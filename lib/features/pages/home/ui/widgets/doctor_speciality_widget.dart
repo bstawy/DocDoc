@@ -1,11 +1,11 @@
-import 'package:docdoc/features/pages/home/logic/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
-import '../../data/models/home_response_model.dart';
+import '../../data/models/doctor_speciality_model.dart';
+import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
 import 'specialist_widget.dart';
 
@@ -14,7 +14,6 @@ class DoctorSpeciality extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<HomeData> specialities = [];
     return Column(
       children: [
         Row(
@@ -37,15 +36,15 @@ class DoctorSpeciality extends StatelessWidget {
         ),
         verticalSpace(8.h),
         BlocBuilder<HomeCubit, HomeState>(
-          bloc: context.read<HomeCubit>(),
+          bloc: context.read<HomeCubit>()..getHomeData(),
           builder: (context, state) {
             return state.whenOrNull(
                   loading: () {
                     return const CircularProgressIndicator();
                   },
                   success: (data) {
-                    specialities = data;
-                    debugPrint("Data length = ${specialities.length}");
+                    final List<DoctorSpecialityModel> specialities = data;
+
                     return SizedBox(
                       height: 130.h,
                       child: ListView.builder(
