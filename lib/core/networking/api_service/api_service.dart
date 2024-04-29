@@ -5,7 +5,7 @@ import '../../../features/auth/login/data/models/login_request_body.dart';
 import '../../../features/auth/login/data/models/login_response.dart';
 import '../../../features/auth/register/data/models/register_request_body.dart';
 import '../../../features/auth/register/data/models/register_response.dart';
-import '../../../features/pages/home/data/models/home_response_model.dart';
+import '../../../features/pages/home/data/models/doctor_speciality_response_model.dart';
 import '../api_constants.dart';
 
 part 'api_service.g.dart';
@@ -25,5 +25,5 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.homeEndPoint)
-  Future<HomeResponse> getHomeData();
+  Future<DoctorSpecialityResponseModel> getHomeData();
 }

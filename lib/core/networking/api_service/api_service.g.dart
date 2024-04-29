@@ -78,13 +78,13 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HomeResponse> getHomeData() async {
+  Future<DoctorSpecialityResponseModel> getHomeData() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<HomeResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DoctorSpecialityResponseModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -100,7 +100,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = HomeResponse.fromJson(_result.data!);
+    final value = DoctorSpecialityResponseModel.fromJson(_result.data!);
     return value;
   }
 
