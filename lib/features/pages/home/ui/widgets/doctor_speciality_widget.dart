@@ -7,7 +7,7 @@ import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../data/models/doctor_speciality_model.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
-import 'specialist_widget.dart';
+import 'specialty_widget.dart';
 
 class DoctorSpeciality extends StatelessWidget {
   const DoctorSpeciality({super.key});
@@ -36,7 +36,7 @@ class DoctorSpeciality extends StatelessWidget {
         ),
         verticalSpace(8.h),
         BlocBuilder<HomeCubit, HomeState>(
-          bloc: context.read<HomeCubit>()..getHomeData(),
+          bloc: context.read<HomeCubit>()..getDoctorSpecialityData(),
           builder: (context, state) {
             return state.whenOrNull(
                   loading: () {
