@@ -37,32 +37,41 @@ class DoctorSpeciality extends StatelessWidget {
         verticalSpace(8.h),
         BlocBuilder<HomeCubit, HomeState>(
           bloc: context.read<HomeCubit>()..getDoctorSpecialityData(),
+          buildWhen: (previous, current) {
+            if (current is DoctorSpecialityLoading ||
+                current is DoctorSpecialitySuccess) {
+              return true;
+            }
+            return false;
+          },
           builder: (context, state) {
             return state.whenOrNull(
-                  loading: () {
-                    return const CircularProgressIndicator();
-                  },
-                  success: (data) {
-                    final List<DoctorSpecialityModel> specialities = data;
-
-                    return SizedBox(
-                      height: 130.h,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return SpecialistWidget(
-                            title: specialities[index].name,
-                          );
-                        },
-                      ),
-                    );
+                  doctorSpecialityLoading: () =>
+                      const CircularProgressIndicator(),
+                  doctorSpecialitySuccess: (data) {
+                    return buildDoctorSpecialitySuccessWidget(data);
                   },
                 ) ??
                 const SizedBox(); // Add null check and return a default widget if state is null
           },
         ),
       ],
+    );
+  }
+
+  SizedBox buildDoctorSpecialitySuccessWidget(
+      List<DoctorSpecialityModel> specialities) {
+    return SizedBox(
+      height: 130.h,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return SpecialistWidget(
+            title: specialities[index].name,
+          );
+        },
+      ),
     );
   }
 }
