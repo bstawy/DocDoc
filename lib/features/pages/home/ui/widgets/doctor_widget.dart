@@ -24,6 +24,11 @@ class DoctorWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: ColorsManager.lighterGrey,
             borderRadius: BorderRadius.circular(12.r),
+            image: const DecorationImage(
+              image: AssetImage("assets/images/home_find_nearby_doctor.png"),
+              alignment: Alignment.topCenter,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         horizontalSpace(16.w),
