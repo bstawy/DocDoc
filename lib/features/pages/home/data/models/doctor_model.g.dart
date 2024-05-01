@@ -84,7 +84,7 @@ class DoctorModelAdapter extends TypeAdapter<DoctorModel> {
 // **************************************************************************
 
 DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => DoctorModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       email: json['email'] as String,
       phone: json['phone'] as String,
@@ -96,7 +96,7 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => DoctorModel(
       specialization: SpecializationModel.fromJson(
           json['specialization'] as Map<String, dynamic>),
       city: CityModel.fromJson(json['city'] as Map<String, dynamic>),
-      price: json['appoint_price'] as int,
+      price: (json['appoint_price'] as num).toInt(),
       startTime: json['start_time'] as String,
       endTime: json['end_time'] as String,
     );
