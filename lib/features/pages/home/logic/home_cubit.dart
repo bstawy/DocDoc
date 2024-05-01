@@ -9,13 +9,13 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(const HomeState.initial());
 
   void getDoctorSpecialityData() async {
-    emit(const HomeState.loading());
+    emit(const HomeState.doctorSpecialityLoading());
 
     final response = await _homeRepo.getDoctorSpecialityData();
 
     response.when(
       success: (response) {
-        emit(HomeState.success(response));
+        emit(HomeState.doctorSpecialitySuccess(response));
       },
       failure: (error) {
         emit(
@@ -26,13 +26,13 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void getAllDoctorsData() async {
-    emit(const HomeState.loading());
+    emit(const HomeState.doctorListLoading());
 
     final response = await _homeRepo.getAllDoctorsData();
 
     response.when(
       success: (response) {
-        emit(HomeState.success(response));
+        emit(HomeState.doctorListSuccess(response));
       },
       failure: (error) {
         emit(
