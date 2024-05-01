@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:rive/rive.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../core/caching/secure_storage_factory.dart';
 import '../../core/config/routing/routes.dart';
 import '../../core/helpers/extensions/extensions.dart';
 
@@ -13,28 +12,48 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with TickerProviderStateMixin {
+  late final AnimationController _controller;
+  bool isAnimationDone = false;
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      context.pushReplacementNamed(Routes.onBoardingScreen);
-    });
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 3000),
+      vsync: this,
+    )..forward().then(
+        (value) async {
+          String mytoken =
+              await SecureStorage.getInstance().read(key: "mytoken") ?? "";
+
+          if (mytoken.isNotEmpty) {
+            if (mounted) {
+              Navigator.pushReplacementNamed(context, Routes.layoutScreen);
+            }
+          } else {
+            if (mounted) {
+              context.pushReplacementNamed(Routes.onBoardingScreen);
+            }
+          }
+        },
+      );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/splash_background.png"),
-        ),
-      ),
-      child: const Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(
-          child: RiveAnimation.asset(
-              "assets/animation/splash_screen_animated.riv"),
+    return Scaffold(
+      body: Center(
+        child: Lottie.asset(
+          "assets/animation/docdoc_animated_splash_logo.json",
         ),
       ),
     );
