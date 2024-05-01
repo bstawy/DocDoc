@@ -28,10 +28,13 @@ class _SplashScreenState extends State<SplashScreen>
         (value) async {
           String mytoken =
               await SecureStorage.getInstance().read(key: "mytoken") ?? "";
-          if (context.mounted) {
-            if (mytoken.isNotEmpty) {
-              context.pushReplacementNamed(Routes.layoutScreen);
-            } else {
+
+          if (mytoken.isNotEmpty) {
+            if (mounted) {
+              Navigator.pushReplacementNamed(context, Routes.layoutScreen);
+            }
+          } else {
+            if (mounted) {
               context.pushReplacementNamed(Routes.onBoardingScreen);
             }
           }
