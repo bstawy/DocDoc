@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/caching/secure_storage_factory.dart';
 import '../data/models/login_request_body.dart';
 import '../data/repos/login_repo.dart';
 import 'login_state.dart';
@@ -14,6 +15,8 @@ class LoginCubit extends Cubit<LoginState> {
 
     response.when(
       success: (loginResponse) {
+        SecureStorage.getInstance()
+            .write(key: "mytoken", value: loginResponse.userData.token ?? "");
         emit(LoginState.success(loginResponse));
       },
       failure: (error) {

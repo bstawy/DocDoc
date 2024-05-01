@@ -126,6 +126,7 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
           verticalSpace(16.h),
           PasswordValidations(
+            isPasswordEmpty: _passwordController.text.isEmpty,
             hasLowerCase: hasLowerCase,
             hasUpperCase: hasUpperCase,
             hasSpecialCharacters: hasSpecialCharacter,

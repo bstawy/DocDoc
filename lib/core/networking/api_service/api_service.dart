@@ -5,6 +5,8 @@ import '../../../features/auth/login/data/models/login_request_body.dart';
 import '../../../features/auth/login/data/models/login_response.dart';
 import '../../../features/auth/register/data/models/register_request_body.dart';
 import '../../../features/auth/register/data/models/register_response.dart';
+import '../../../features/pages/home/data/models/all_doctors_response_model.dart';
+import '../../../features/pages/home/data/models/doctor_speciality_response_model.dart';
 import '../api_constants.dart';
 
 part 'api_service.g.dart';
@@ -22,4 +24,10 @@ abstract class ApiService {
   Future<RegisterResponse> register(
     @Body() RegisterRequestBody registerRequestBody,
   );
+
+  @GET(EndPoints.doctorSpecialityEndPoint)
+  Future<DoctorSpecialityResponseModel> getDoctorSpecialityData();
+
+  @GET(EndPoints.allDoctorEndPoint)
+  Future<AllDoctorsResponseModel> getAllDoctors();
 }
