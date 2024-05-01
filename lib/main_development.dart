@@ -28,9 +28,6 @@ void main() {
   Future.wait([
     getIt<HiveManager>().init(),
   ]).then((_) {
-    runApp(DocDocApp(
-      isDevFlavor: true,
-      appRouter: AppRouter(),
-    ));
+    runApp(DocDocApp(appRouter: AppRouter()));
   });
 }

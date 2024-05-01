@@ -13,8 +13,5 @@ import 'doc_doc_app.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   initGetIt();
-  runApp(DocDocApp(
-    isDevFlavor: false,
-    appRouter: AppRouter(),
-  ));
+  runApp(DocDocApp(appRouter: AppRouter()));
 }
