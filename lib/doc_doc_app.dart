@@ -16,7 +16,6 @@ class DocDocApp extends StatelessWidget {
     required this.appRouter,
   });
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
