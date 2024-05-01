@@ -6,5 +6,6 @@ class EndPoints {
   static const String loginEndPoint = "auth/login";
   static const String registerEndPoint = "auth/register";
   static const String doctorSpecialityEndPoint = "home/index";
+  static const String allSpecialitiesEndPoint = "specialization/index";
   static const String allDoctorEndPoint = "doctor/index";
 }

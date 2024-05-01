@@ -14,5 +14,5 @@ AllDoctorsResponseModel _$AllDoctorsResponseModelFromJson(
           .map((e) => DoctorModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       status: json['status'] as bool,
-      code: json['code'] as int,
+      code: (json['code'] as num).toInt(),
     );

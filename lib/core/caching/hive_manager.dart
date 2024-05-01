@@ -32,6 +32,7 @@ class HiveManager {
   }
 
   Future<void> _openHiveBoxes() async {
+    await Hive.openBox<DoctorSpecialityModel>(HiveBoxKeys.specialities);
     await Hive.openBox<DoctorSpecialityModel>(HiveBoxKeys.doctorSpeciality);
     await Hive.openBox<DoctorModel>(HiveBoxKeys.allDoctors);
   }

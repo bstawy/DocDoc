@@ -49,6 +49,6 @@ class GovernrateModelAdapter extends TypeAdapter<GovernrateModel> {
 
 GovernrateModel _$GovernrateModelFromJson(Map<String, dynamic> json) =>
     GovernrateModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
     );
