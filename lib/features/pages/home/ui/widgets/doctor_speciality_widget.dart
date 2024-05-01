@@ -59,11 +59,12 @@ class DoctorSpeciality extends StatelessWidget {
     );
   }
 
-  SizedBox buildDoctorSpecialitySuccessWidget(
+  Widget buildDoctorSpecialitySuccessWidget(
       List<DoctorSpecialityModel> specialities) {
     return SizedBox(
-      height: 130.h,
+      height: 120.h,
       child: ListView.builder(
+        padding: EdgeInsets.zero,
         scrollDirection: Axis.horizontal,
         itemCount: 3,
         itemBuilder: (context, index) {

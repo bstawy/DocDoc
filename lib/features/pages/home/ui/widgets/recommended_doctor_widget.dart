@@ -38,7 +38,6 @@ class RecommendedDoctor extends StatelessWidget {
         BlocBuilder<HomeCubit, HomeState>(
           bloc: context.read<HomeCubit>()..getAllDoctorsData(),
           buildWhen: (previous, current) {
-            // Add doctorListLoading and doctorListSuccess to buildWhen
             if (current is DoctorListLoading || current is DoctorListSuccess) {
               return true;
             }
@@ -53,7 +52,7 @@ class RecommendedDoctor extends StatelessWidget {
                     return buildRecommendedDoctorSuccessWidget(doctors);
                   },
                 ) ??
-                const SizedBox(); // Add null check and return a default widget if state is null
+                const SizedBox();
           },
         ).setHorizontalPadding(8.w),
         verticalSpace(16.h),
@@ -62,14 +61,10 @@ class RecommendedDoctor extends StatelessWidget {
   }
 
   Widget buildRecommendedDoctorSuccessWidget(List<DoctorModel> doctors) {
-    return SizedBox(
-      height: 250.h,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return DoctorWidget(doctor: doctors[index]);
-        },
+    return Column(
+      children: List.generate(
+        3,
+        (index) => DoctorWidget(doctor: doctors[index]),
       ),
     );
   }
