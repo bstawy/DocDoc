@@ -9,7 +9,7 @@
       "args": ["--flavor", "Development", "--target", "lib/main_development.dart" ]
     },
     {
-      "name": "DocDoc Prod",
+      "name": "DocDoc",
       "request": "launch",
       "type": "dart",
       "program": "lib/main_production.dart",
