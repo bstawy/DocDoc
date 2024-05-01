@@ -80,6 +80,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           verticalSpace(16.h),
           PasswordValidations(
+            isPasswordEmpty: _passwordController.text.isEmpty,
             hasLowerCase: hasLowerCase,
             hasUpperCase: hasUpperCase,
             hasSpecialCharacters: hasSpecialCharacter,

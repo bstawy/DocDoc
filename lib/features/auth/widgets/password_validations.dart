@@ -6,6 +6,7 @@ import '../../../core/config/theme/texts/text_styles.dart';
 import '../../../core/helpers/extensions/extensions.dart';
 
 class PasswordValidations extends StatelessWidget {
+  final bool isPasswordEmpty;
   final bool hasLowerCase;
   final bool hasUpperCase;
   final bool hasSpecialCharacters;
@@ -14,6 +15,7 @@ class PasswordValidations extends StatelessWidget {
 
   const PasswordValidations({
     super.key,
+    required this.isPasswordEmpty,
     required this.hasLowerCase,
     required this.hasUpperCase,
     required this.hasSpecialCharacters,
@@ -47,7 +49,11 @@ class PasswordValidations extends StatelessWidget {
           height: 10,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
-            color: hasValidated ? Colors.green : ColorsManager.red,
+            color: isPasswordEmpty
+                ? ColorsManager.lightGrey
+                : hasValidated
+                    ? Colors.green
+                    : ColorsManager.red,
           ),
           child: Icon(
             Icons.check,
@@ -60,7 +66,6 @@ class PasswordValidations extends StatelessWidget {
           text,
           style: TextStyles.font12DarkBlueMedium.copyWith(
             fontWeight: FontWeightHelper.regular,
-            color: hasValidated ? Colors.green : ColorsManager.lightGrey,
           ),
         )
       ],
