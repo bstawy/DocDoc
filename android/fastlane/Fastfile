@@ -1,8 +1,6 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-# TODO: Secure App ID and CLI_TOKEN
-
 default_platform(:android)
 
 platform :android do
