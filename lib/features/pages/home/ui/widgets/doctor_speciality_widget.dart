@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/shimmer_loading_effect/circular_shimmer_effect.dart';
@@ -27,7 +28,7 @@ class DoctorSpeciality extends StatelessWidget {
             const Spacer(),
             TextButton(
               onPressed: () {
-                // TODO: see all doctor speciality
+                context.pushNamed(Routes.specialitiesScreen);
               },
               child: Text(
                 "See all",
