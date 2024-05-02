@@ -25,9 +25,17 @@ abstract class ApiService {
     @Body() RegisterRequestBody registerRequestBody,
   );
 
+  @GET(EndPoints.allSpecialitiesEndPoint)
+  Future<DoctorSpecialityResponseModel> getAllSpecialities();
+
   @GET(EndPoints.doctorSpecialityEndPoint)
   Future<DoctorSpecialityResponseModel> getDoctorSpecialityData();
 
   @GET(EndPoints.allDoctorEndPoint)
   Future<AllDoctorsResponseModel> getAllDoctors();
+
+  @GET(EndPoints.searchDoctorEndPoint)
+  Future<AllDoctorsResponseModel> searchDoctor(
+    @Query('name') String doctorName,
+  );
 }

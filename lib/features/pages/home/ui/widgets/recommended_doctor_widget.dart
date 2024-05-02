@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
+import '../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
 import '../../data/models/doctor_model.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
@@ -25,7 +27,7 @@ class RecommendedDoctor extends StatelessWidget {
             const Spacer(),
             TextButton(
               onPressed: () {
-                // TODO: see all doctors
+                context.pushNamed(Routes.doctorsScreen);
               },
               child: Text(
                 "See all",
@@ -33,12 +35,11 @@ class RecommendedDoctor extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        ).setHorizontalPadding(16.w),
         verticalSpace(8.h),
         BlocBuilder<HomeCubit, HomeState>(
           bloc: context.read<HomeCubit>()..getAllDoctorsData(),
           buildWhen: (previous, current) {
-            // Add doctorListLoading and doctorListSuccess to buildWhen
             if (current is DoctorListLoading || current is DoctorListSuccess) {
               return true;
             }
@@ -46,14 +47,14 @@ class RecommendedDoctor extends StatelessWidget {
           },
           builder: (context, state) {
             return state.whenOrNull(
-                  doctorListLoading: () => const CircularProgressIndicator(),
+                  doctorListLoading: () => buildLoadingWidget(),
                   doctorListSuccess: (data) {
                     final List<DoctorModel> doctors = data;
 
-                    return buildRecommendedDoctorSuccessWidget(doctors);
+                    return buildSuccessWidget(doctors);
                   },
                 ) ??
-                const SizedBox(); // Add null check and return a default widget if state is null
+                const SizedBox();
           },
         ).setHorizontalPadding(8.w),
         verticalSpace(16.h),
@@ -61,16 +62,39 @@ class RecommendedDoctor extends StatelessWidget {
     );
   }
 
-  Widget buildRecommendedDoctorSuccessWidget(List<DoctorModel> doctors) {
-    return SizedBox(
-      height: 250.h,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return DoctorWidget(doctor: doctors[index]);
-        },
+  Widget buildLoadingWidget() {
+    return Column(
+      children: List.generate(
+        3,
+        (index) => Row(
+          children: [
+            const RectShimmerEffect(
+              width: 110,
+              height: 110,
+            ),
+            horizontalSpace(16.w),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const RectShimmerEffect(width: 90, height: 10),
+                verticalSpace(16.h),
+                const RectShimmerEffect(width: 90, height: 10),
+                verticalSpace(16.h),
+                const RectShimmerEffect(width: 90, height: 10),
+              ],
+            ),
+          ],
+        ).setOnlyPadding(0, 20.h, 0, 0),
       ),
     );
+  }
+
+  Widget buildSuccessWidget(List<DoctorModel> doctors) {
+    return Column(
+      children: List.generate(
+        3,
+        (index) => DoctorWidget(doctor: doctors[index]),
+      ),
+    ).setOnlyPadding(0, 16.h, 0, 0);
   }
 }

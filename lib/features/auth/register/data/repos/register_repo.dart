@@ -15,19 +15,6 @@ class RegisterRepo {
       final response = await _apiService.register(registerRequestBody);
       return ApiResult.success(response);
     } catch (error) {
-      // TODO: handle error more efficiently
-      // Error returned in UI is "Unprocessable Entity"
-      /*
-        DioExceptionType.badResponse
-                {
-                     message: "Unprocessable Entity",
-                     data: {
-                         email: [The email has already been taken.]
-                    }
-                     status: false,
-                     code: 422
-                }
-      */
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }

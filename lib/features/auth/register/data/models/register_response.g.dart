@@ -13,7 +13,7 @@ RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) =>
           ? null
           : UserData.fromJson(json['data'] as Map<String, dynamic>),
       status: json['status'] as bool?,
-      code: json['code'] as int?,
+      code: (json['code'] as num?)?.toInt(),
     );
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(

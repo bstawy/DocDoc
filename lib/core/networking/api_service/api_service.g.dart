@@ -78,6 +78,33 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<DoctorSpecialityResponseModel> getAllSpecialities() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DoctorSpecialityResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'specialization/index',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DoctorSpecialityResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<DoctorSpecialityResponseModel> getDoctorSpecialityData() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -119,6 +146,33 @@ class _ApiService implements ApiService {
             .compose(
               _dio.options,
               'doctor/index',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = AllDoctorsResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AllDoctorsResponseModel> searchDoctor(String doctorName) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'name': doctorName};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AllDoctorsResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'doctor/doctor-search',
               queryParameters: queryParameters,
               data: _data,
             )

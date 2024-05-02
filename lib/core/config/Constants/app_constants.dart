@@ -8,6 +8,7 @@ class AppConstants {
 }
 
 class HiveBoxKeys {
+  static const String specialities = "specialities_box";
   static const String doctorSpeciality = "doctor_speciality_box";
   static const String allDoctors = "all_doctors_box";
 }

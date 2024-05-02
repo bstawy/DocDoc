@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/config/theme/colors/light_color_scheme.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/widgets/custom_material_button.dart';
 
 class NearbyDoctor extends StatelessWidget {
@@ -55,7 +56,7 @@ class NearbyDoctor extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 0,
+            right: 20.w,
             bottom: 0,
             child: SizedBox(
               height: 200.h,
@@ -68,6 +69,6 @@ class NearbyDoctor extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ).setHorizontalPadding(16.w);
   }
 }
