@@ -18,11 +18,18 @@ class SpecialitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
         centerTitle: true,
         title: Text(
           'Doctor Specialities',
           style: TextStyles.font18DarkBlueBold,
         ),
+        elevation: 0,
       ),
       body: BlocBuilder<SpecialitiesCubit, SpecialitiesState>(
         bloc: context.read<SpecialitiesCubit>()..getSpecialities(),
@@ -34,50 +41,64 @@ class SpecialitiesScreen extends StatelessWidget {
               ) ??
               const SizedBox();
         },
-      ).setOnlyPadding(32.h, 0, 32.w, 32.w),
+      ).setHorizontalPadding(32.h),
     );
   }
 
   Widget _buildLoadingWidget() {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 16.w,
-        mainAxisSpacing: 16.h,
-        mainAxisExtent: 120.h,
-      ),
-      itemCount: 6,
-      padding: EdgeInsets.zero,
-      scrollDirection: Axis.vertical,
-      itemBuilder: (context, index) {
-        return SizedBox(
-          width: 112.w,
-          child: Column(
-            children: [
-              const CircularShimmerEffect(),
-              verticalSpace(12.h),
-              const RectShimmerEffect(width: 30, height: 10),
-            ],
+    return Column(
+      children: [
+        verticalSpace(32.h),
+        Expanded(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 16.w,
+              mainAxisSpacing: 16.h,
+              mainAxisExtent: 120.h,
+            ),
+            itemCount: 6,
+            padding: EdgeInsets.zero,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              return SizedBox(
+                width: 112.w,
+                child: Column(
+                  children: [
+                    const CircularShimmerEffect(),
+                    verticalSpace(12.h),
+                    const RectShimmerEffect(width: 30, height: 10),
+                  ],
+                ),
+              );
+            },
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 
   Widget _buildSuccessWidget(List<DoctorSpecialityModel> data) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 16.w,
-        mainAxisSpacing: 16.h,
-        mainAxisExtent: 120.h,
-      ),
-      itemCount: data.length,
-      padding: EdgeInsets.zero,
-      scrollDirection: Axis.vertical,
-      itemBuilder: (context, index) {
-        return SpecialistWidget(title: data[index].name);
-      },
+    return Column(
+      children: [
+        verticalSpace(32.h),
+        Expanded(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 16.w,
+              mainAxisSpacing: 16.h,
+              mainAxisExtent: 120.h,
+            ),
+            itemCount: data.length,
+            padding: EdgeInsets.zero,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              return SpecialistWidget(title: data[index].name);
+            },
+          ),
+        ),
+      ],
     );
   }
 }
