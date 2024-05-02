@@ -15,21 +15,22 @@ class LayoutScreen extends StatelessWidget {
     return BlocBuilder<LayoutCubit, LayoutState>(
       bloc: context.read<LayoutCubit>(),
       builder: (context, state) {
-        return SafeArea(
-          child: Scaffold(
-            body: state.whenOrNull(
-              initial: () {
-                return layoutCubit.pages[0];
-              },
-              success: (index) {
-                return layoutCubit.pages[index];
-              },
-            ),
-            floatingActionButton: const FloatingActionButtonWidget(),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.miniCenterDocked,
-            bottomNavigationBar: const BottomNavBarWidget(),
+        return Scaffold(
+          body: SafeArea(
+            child: state.whenOrNull(
+                  initial: () {
+                    return layoutCubit.pages[0];
+                  },
+                  success: (index) {
+                    return layoutCubit.pages[index];
+                  },
+                ) ??
+                const SizedBox(),
           ),
+          floatingActionButton: const FloatingActionButtonWidget(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.miniCenterDocked,
+          bottomNavigationBar: const BottomNavBarWidget(),
         );
       },
     );
