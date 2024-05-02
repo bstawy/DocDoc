@@ -33,4 +33,9 @@ abstract class ApiService {
 
   @GET(EndPoints.allDoctorEndPoint)
   Future<AllDoctorsResponseModel> getAllDoctors();
+
+  @GET(EndPoints.searchDoctorEndPoint)
+  Future<AllDoctorsResponseModel> searchDoctor(
+    @Query('name') String doctorName,
+  );
 }
