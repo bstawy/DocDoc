@@ -58,7 +58,7 @@ class DoctorSpeciality extends StatelessWidget {
           },
         ),
       ],
-    );
+    ).setHorizontalPadding(16.w);
   }
 
   Widget buildLoadingWidget() {
