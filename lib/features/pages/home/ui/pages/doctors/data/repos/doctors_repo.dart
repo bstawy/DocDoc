@@ -32,4 +32,14 @@ class DoctorsRepo {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
+
+  Future<ApiResult<List<DoctorModel>>> searchDoctor(String doctorName) async {
+    try {
+      final response = await _apiService.searchDoctor(doctorName);
+
+      return ApiResult.success(response.doctors);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
 }
