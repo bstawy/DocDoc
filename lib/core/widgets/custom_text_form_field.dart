@@ -19,6 +19,23 @@ class CustomTextFormField extends StatefulWidget {
       disabledBorder,
       errorBorder,
       focusedErrorBorder;
+  final Color? borderColor,
+      enabledBorderColor,
+      focusedBorderColor,
+      errorBorderColor,
+      focusedErrorBorderColor;
+  final double? borderWidth,
+      enabledBorderWidth,
+      focusedBorderWidth,
+      disabledBorderWidth,
+      errorBorderWidth,
+      focusedErrorBorderWidth;
+  final double? borderRadius,
+      enabledBorderRadius,
+      focusedBorderRadius,
+      disabledBorderRadius,
+      errorBorderRadius,
+      focusedErrorBorderRadius;
   final num? scrollPaddingValue;
   final EdgeInsetsGeometry? contentPadding;
   final TextInputType? keyboardType;
@@ -38,18 +55,35 @@ class CustomTextFormField extends StatefulWidget {
     this.action,
     this.autovalidateMode,
     this.border,
+    this.borderColor,
+    this.borderWidth,
+    this.borderRadius,
     this.controller,
     this.disabledBackgroundColor,
     this.disabledBorder,
+    this.disabledBorderWidth,
+    this.disabledBorderRadius,
     this.enabled,
     this.enabledBorder,
+    this.enabledBorderColor,
+    this.enabledBorderWidth,
+    this.enabledBorderRadius,
     this.errorBorder,
+    this.errorBorderColor,
+    this.errorBorderWidth,
+    this.errorBorderRadius,
     this.errorMaxLines,
     this.errorStyle,
     this.backgroundColor,
     this.focusNode,
     this.focusedBorder,
+    this.focusedBorderColor,
+    this.focusedBorderWidth,
+    this.focusedBorderRadius,
     this.focusedErrorBorder,
+    this.focusedErrorBorderColor,
+    this.focusedErrorBorderWidth,
+    this.focusedErrorBorderRadius,
     this.hintStyle,
     this.icon,
     this.initialTextValue,
@@ -152,6 +186,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             : widget.backgroundColor ?? ColorsManager.lightestGrey,
         filled: widget.isFilled ?? true,
         prefixIcon: widget.prefixIcon,
+        prefixIconColor: ColorsManager.lightGrey,
         suffixIcon: widget.isPassword ?? false
             ? GestureDetector(
                 onTap: () {
@@ -168,35 +203,38 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
         border: widget.border ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
-              borderSide: const BorderSide(
-                color: ColorsManager.lighterGrey,
-                width: 1.3,
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 16.r),
+              borderSide: BorderSide(
+                color: widget.borderColor ?? ColorsManager.lighterGrey,
+                width: widget.borderWidth ?? 1.3,
               ),
             ),
         enabledBorder: widget.enabledBorder ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
-              borderSide: const BorderSide(
-                color: ColorsManager.lighterGrey,
-                width: 1.3,
+              borderRadius:
+                  BorderRadius.circular(widget.enabledBorderRadius ?? 16.r),
+              borderSide: BorderSide(
+                color: widget.enabledBorderColor ?? ColorsManager.lighterGrey,
+                width: widget.enabledBorderWidth ?? 1.3,
               ),
             ),
         focusedBorder: widget.focusedBorder ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
-              borderSide: const BorderSide(
-                color: ColorsManager.mainBlue,
-                width: 1.3,
+              borderRadius:
+                  BorderRadius.circular(widget.focusedBorderRadius ?? 16.r),
+              borderSide: BorderSide(
+                color: widget.focusedBorderColor ?? ColorsManager.mainBlue,
+                width: widget.focusedBorderWidth ?? 1.3,
               ),
             ),
         disabledBorder: widget.disabledBorder ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius:
+                  BorderRadius.circular(widget.disabledBorderRadius ?? 16.r),
               borderSide: BorderSide(
                 color:
                     widget.disabledBackgroundColor ?? const Color(0xFFE6E6E6),
-                width: 1.3,
+                width: widget.disabledBorderWidth ?? 1.3,
               ),
             ),
         errorStyle:
@@ -204,18 +242,20 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         errorMaxLines: widget.errorMaxLines ?? 4,
         errorBorder: widget.errorBorder ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
-              borderSide: const BorderSide(
-                color: ColorsManager.red,
-                width: 1.3,
+              borderRadius:
+                  BorderRadius.circular(widget.errorBorderRadius ?? 16.r),
+              borderSide: BorderSide(
+                color: widget.errorBorderColor ?? ColorsManager.red,
+                width: widget.errorBorderWidth ?? 1.3,
               ),
             ),
         focusedErrorBorder: widget.focusedErrorBorder ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.r),
-              borderSide: const BorderSide(
-                color: ColorsManager.red,
-                width: 1.3,
+              borderRadius: BorderRadius.circular(
+                  widget.focusedErrorBorderRadius ?? 16.r),
+              borderSide: BorderSide(
+                color: widget.focusedErrorBorderColor ?? ColorsManager.red,
+                width: widget.focusedErrorBorderWidth ?? 1.3,
               ),
             ),
       ),
