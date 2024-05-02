@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/config/theme/colors/light_color_scheme.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../core/helpers/custom_snackbar.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/validators.dart';
 import '../../../../../core/widgets/custom_material_button.dart';
@@ -12,7 +14,7 @@ import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../widgets/password_validations.dart';
 import '../../data/models/login_request_body.dart';
 import '../../logic/login_cubit.dart';
-import 'login_bloc_listener.dart';
+import '../../logic/login_state.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -31,6 +33,8 @@ class _LoginFormState extends State<LoginForm> {
   bool hasSpecialCharacter = false;
   bool hasNumber = false;
   bool hasMinLength = false;
+
+  bool logging = false;
 
   @override
   void initState() {
@@ -59,7 +63,6 @@ class _LoginFormState extends State<LoginForm> {
       key: loginFormKey,
       child: Column(
         children: [
-          const LoginBlocListener(),
           CustomTextFormField(
             controller: _emailController,
             validator: (value) {
@@ -100,11 +103,50 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           verticalSpace(24.h),
-          CustomMaterialButton(
-            onClicked: () {
-              validateAndLogin(context);
+          BlocConsumer<LoginCubit, LoginState>(
+            bloc: context.read<LoginCubit>(),
+            buildWhen: (previous, current) {
+              if (current is Success) return false;
+
+              return true;
             },
-            title: "Login",
+            listenWhen: (previous, current) {
+              if (current is Success || current is Failure) return true;
+
+              return false;
+            },
+            listener: (context, state) {
+              state.whenOrNull(
+                success: (loginResponse) {
+                  logging = false;
+                  context.pushNamedAndRemoveUntil(Routes.layoutScreen,
+                      predicate: ModalRoute.withName(Routes.splashScreen));
+                },
+                failure: (errorMsg) {
+                  logging = false;
+                  CustomSnackBar.showErrorMessage(context, errorMsg);
+                },
+              );
+            },
+            builder: (context, state) {
+              state.whenOrNull(
+                loading: () {
+                  logging = true;
+                },
+              );
+              return CustomMaterialButton(
+                onClicked: () {
+                  validateAndLogin(context);
+                },
+                enabled: !logging,
+                title: "Login",
+                child: logging
+                    ? const CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : null,
+              );
+            },
           ),
         ],
       ).setHorizontalPadding(24.w),

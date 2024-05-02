@@ -4,17 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../config/theme/texts/text_styles.dart';
 
 class CustomMaterialButton extends StatelessWidget {
-  final String title;
+  final String? title;
   final double? height, width, elevation, borderRadius;
   final EdgeInsetsGeometry? padding;
   final Color? backgroundColor;
   final TextStyle? titleStyle;
+  final Widget? child;
+  final bool enabled;
   final VoidCallback onClicked;
 
   const CustomMaterialButton({
     super.key,
     required this.onClicked,
-    required this.title,
+    this.title,
     this.height,
     this.width,
     this.padding,
@@ -22,6 +24,8 @@ class CustomMaterialButton extends StatelessWidget {
     this.backgroundColor,
     this.elevation,
     this.titleStyle,
+    this.child,
+    this.enabled = true,
   });
 
   @override
@@ -30,7 +34,9 @@ class CustomMaterialButton extends StatelessWidget {
 
     return MaterialButton(
       onPressed: () {
-        onClicked();
+        if (enabled) {
+          onClicked();
+        }
       },
       height: height ?? 56.h,
       minWidth: width ?? double.maxFinite,
@@ -40,10 +46,11 @@ class CustomMaterialButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius ?? 16.r),
       ),
-      child: Text(
-        title,
-        style: titleStyle ?? TextStyles.font16WhiteSemiBold,
-      ),
+      child: child ??
+          Text(
+            title ?? "Continue",
+            style: titleStyle ?? TextStyles.font16WhiteSemiBold,
+          ),
     );
   }
 }
