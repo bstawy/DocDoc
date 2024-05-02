@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../../../core/helpers/extensions/extensions.dart';
+import '../../../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
+import '../../../../data/models/doctor_model.dart';
+import '../../../widgets/doctor_widget.dart';
+import '../logic/doctors_cubit.dart';
+import '../logic/doctors_state.dart';
+import 'widgets/search_bar_widget.dart';
+
+class DoctorsScreen extends StatelessWidget {
+  const DoctorsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+        centerTitle: true,
+        title: Text(
+          'All Doctors',
+          style: TextStyles.font18DarkBlueBold,
+        ),
+        elevation: 0,
+      ),
+      body: BlocBuilder<DoctorsCubit, DoctorsState>(
+        bloc: context.read<DoctorsCubit>()..getAllDoctors(),
+        builder: (context, state) {
+          return state.whenOrNull(
+                doctorsListLoading: () => _buildLoadingWidget(),
+                doctorsListSuccess: (data) => _buildSuccessWidget(data),
+              ) ??
+              const SizedBox();
+        },
+      ),
+    );
+  }
+
+  Widget _buildLoadingWidget() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          verticalSpace(16.h),
+          const SearchBarWidget().setHorizontalPadding(16.h),
+          verticalSpace(24.h),
+          Column(
+            children: List.generate(
+              3,
+              (index) => Row(
+                children: [
+                  const RectShimmerEffect(
+                    width: 110,
+                    height: 110,
+                  ),
+                  horizontalSpace(16.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const RectShimmerEffect(width: 90, height: 10),
+                      verticalSpace(16.h),
+                      const RectShimmerEffect(width: 90, height: 10),
+                      verticalSpace(16.h),
+                      const RectShimmerEffect(width: 90, height: 10),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ).setHorizontalPadding(16.h),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSuccessWidget(List<DoctorModel> doctors) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          verticalSpace(16.h),
+          const SearchBarWidget().setHorizontalPadding(16.h),
+          verticalSpace(24.h),
+          Column(
+            children: List.generate(
+              doctors.length,
+              (index) => DoctorWidget(
+                doctor: doctors[index],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
