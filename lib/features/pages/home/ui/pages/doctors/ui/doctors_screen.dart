@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../../../core/config/theme/texts/font_weight_helper.dart';
 import '../../../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
@@ -72,7 +74,7 @@ class DoctorsScreen extends StatelessWidget {
                     ],
                   ),
                 ],
-              ),
+              ).setOnlyPadding(0, 16.h, 0, 0),
             ),
           ).setHorizontalPadding(16.h),
         ],
@@ -87,16 +89,39 @@ class DoctorsScreen extends StatelessWidget {
           verticalSpace(16.h),
           const SearchBarWidget().setHorizontalPadding(16.h),
           verticalSpace(24.h),
-          Column(
-            children: List.generate(
-              doctors.length,
-              (index) => DoctorWidget(
-                doctor: doctors[index],
-              ),
-            ),
-          ),
+          doctors.isNotEmpty
+              ? Column(
+                  children: List.generate(
+                    doctors.length,
+                    (index) => DoctorWidget(
+                      doctor: doctors[index],
+                    ),
+                  ),
+                )
+              : _buildEmptyWidget(),
         ],
       ),
     );
+  }
+
+  Widget _buildEmptyWidget() {
+    return Column(
+      children: [
+        verticalSpace(150.h),
+        SvgPicture.asset(
+          "assets/images/doctors_illustration.svg",
+          width: 150.w,
+          height: 150.h,
+        ),
+        verticalSpace(40.h),
+        Text(
+          'No Doctors Found',
+          style: TextStyles.font18DarkBlueBold.copyWith(
+            fontSize: 16.sp,
+            fontWeight: FontWeightHelper.medium,
+          ),
+        ),
+      ],
+    ).setHorizontalPadding(32.w);
   }
 }
