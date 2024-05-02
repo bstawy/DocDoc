@@ -17,7 +17,7 @@ class DoctorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.h),
+      margin: EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
       padding: EdgeInsets.all(8.h),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
@@ -74,6 +74,6 @@ class DoctorWidget extends StatelessWidget {
           ),
         ],
       ),
-    ).setOnlyPadding(0, 16.h, 0, 0);
+    );
   }
 }
