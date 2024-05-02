@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/helpers/custom_snackbar.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/validators.dart';
 import '../../../../../core/widgets/custom_material_button.dart';
@@ -9,7 +10,7 @@ import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../widgets/password_validations.dart';
 import '../../data/models/register_request_body.dart';
 import '../../logic/register_cubit.dart';
-import 'register_bloc_listener.dart';
+import '../../logic/register_state.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -32,6 +33,8 @@ class _RegisterFormState extends State<RegisterForm> {
   bool hasNumber = false;
   bool hasMinLength = false;
   bool enablePasswordConfirmation = false;
+
+  bool registering = false;
 
   @override
   void initState() {
@@ -68,7 +71,7 @@ class _RegisterFormState extends State<RegisterForm> {
       key: registerFormKey,
       child: Column(
         children: [
-          const RegisterBlocListener(),
+          //const RegisterBlocListener(),
           CustomTextFormField(
             controller: _usernameController,
             validator: (value) {
@@ -134,11 +137,51 @@ class _RegisterFormState extends State<RegisterForm> {
             hasMinLength: hasMinLength,
           ),
           verticalSpace(24.h),
-          CustomMaterialButton(
-            onClicked: () {
-              validateAndRegister(context);
+          BlocConsumer<RegisterCubit, RegisterState>(
+            bloc: context.read<RegisterCubit>(),
+            buildWhen: (previous, current) {
+              if (current is Success || current is Failure) return false;
+
+              return true;
             },
-            title: "Register",
+            listenWhen: (previous, current) {
+              if (current is Success || current is Failure) return true;
+
+              return false;
+            },
+            listener: (context, state) {
+              state.whenOrNull(
+                success: (loginResponse) {
+                  registering = false;
+                  CustomSnackBar.showSuccessMessage(
+                      context, "Account created successfully");
+                  context.pop();
+                },
+                failure: (errorMsg) {
+                  registering = false;
+                  CustomSnackBar.showErrorMessage(context, errorMsg);
+                },
+              );
+            },
+            builder: (context, state) {
+              state.whenOrNull(
+                loading: () {
+                  registering = true;
+                },
+              );
+              return CustomMaterialButton(
+                onClicked: () {
+                  validateAndRegister(context);
+                },
+                enabled: !registering,
+                title: "Register",
+                child: registering
+                    ? const CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : null,
+              );
+            },
           ),
         ],
       ).setHorizontalPadding(24.w),
