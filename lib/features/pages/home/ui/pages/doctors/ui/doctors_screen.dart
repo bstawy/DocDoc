@@ -107,7 +107,7 @@ class DoctorsScreen extends StatelessWidget {
   Widget _buildEmptyWidget() {
     return Column(
       children: [
-        verticalSpace(150.h),
+        verticalSpace(75.h),
         SvgPicture.asset(
           "assets/images/doctors_illustration.svg",
           width: 150.w,
