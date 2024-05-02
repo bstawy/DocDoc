@@ -8,6 +8,7 @@ import '../../../../../../../../core/config/theme/colors/light_color_scheme.dart
 import '../../../../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../../../../core/widgets/custom_text_form_field.dart';
 import '../../logic/doctors_cubit.dart';
+import 'sort_by_bottom_sheet_widget.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({super.key});
@@ -61,7 +62,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         horizontalSpace(8.w),
         IconButton(
           onPressed: () {
-            // TODO: open sort by bottom sheet
+            _openModalBottomSheet(context);
           },
           iconSize: 24.r,
           padding: EdgeInsets.zero,
@@ -71,6 +72,15 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           ),
         ),
       ],
+    );
+  }
+
+  void _openModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return const SortByBottomSheetWidget();
+      },
     );
   }
 
