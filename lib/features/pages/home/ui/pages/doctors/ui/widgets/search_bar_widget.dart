@@ -27,9 +27,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     }
 
     _debounceTimer = Timer(const Duration(milliseconds: 300), () {
-      if (query != lastQuery) {
+      if (query.isNotEmpty && query != lastQuery) {
         lastQuery = query;
         context.read<DoctorsCubit>().searchDoctor(query);
+      }
+      if (_searchController.text.isEmpty) {
+        context.read<DoctorsCubit>().getAllDoctors();
       }
     });
   }
