@@ -28,6 +28,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
-    ).setHorizontalPadding(16.w);
+    );
   }
 }
