@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/caching/hive_manager.dart';
 import 'core/config/routing/app_router.dart';
@@ -12,16 +13,17 @@ import 'doc_doc_app.dart';
 /// Use command  "flutter build apk --flavor Development -t lib/main_development.dart"
 /// to build APK in DEVELOPMENT mode
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Color(0xFF4CAF50),
       systemNavigationBarColor: Color(0xFF4CAF50),
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
+
+  await ScreenUtil.ensureScreenSize();
 
   initGetIt();
 

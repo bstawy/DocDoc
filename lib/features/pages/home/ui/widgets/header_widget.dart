@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/config/theme/colors/light_color_scheme.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../core/helpers/extensions/extensions.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key});
@@ -41,6 +42,6 @@ class Header extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ).setHorizontalPadding(16.w);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
@@ -26,7 +27,7 @@ class RecommendedDoctor extends StatelessWidget {
             const Spacer(),
             TextButton(
               onPressed: () {
-                // TODO: see all doctors
+                context.pushNamed(Routes.doctorsScreen);
               },
               child: Text(
                 "See all",
@@ -34,7 +35,7 @@ class RecommendedDoctor extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        ).setHorizontalPadding(16.w),
         verticalSpace(8.h),
         BlocBuilder<HomeCubit, HomeState>(
           bloc: context.read<HomeCubit>()..getAllDoctorsData(),
@@ -83,7 +84,7 @@ class RecommendedDoctor extends StatelessWidget {
               ],
             ),
           ],
-        ).setOnlyPadding(0, 16.h, 0, 0),
+        ).setOnlyPadding(0, 20.h, 0, 0),
       ),
     );
   }
@@ -94,6 +95,6 @@ class RecommendedDoctor extends StatelessWidget {
         3,
         (index) => DoctorWidget(doctor: doctors[index]),
       ),
-    );
+    ).setOnlyPadding(0, 16.h, 0, 0);
   }
 }
