@@ -51,7 +51,9 @@ class DoctorsScreen extends StatelessWidget {
       child: Column(
         children: [
           verticalSpace(16.h),
-          const SearchBarWidget().setHorizontalPadding(16.h),
+          const SearchBarWidget(
+            doctors: [],
+          ).setHorizontalPadding(16.h),
           verticalSpace(24.h),
           Column(
             children: List.generate(
@@ -87,7 +89,7 @@ class DoctorsScreen extends StatelessWidget {
       child: Column(
         children: [
           verticalSpace(16.h),
-          const SearchBarWidget().setHorizontalPadding(16.h),
+          SearchBarWidget(doctors: doctors).setHorizontalPadding(16.h),
           verticalSpace(24.h),
           doctors.isNotEmpty
               ? Column(

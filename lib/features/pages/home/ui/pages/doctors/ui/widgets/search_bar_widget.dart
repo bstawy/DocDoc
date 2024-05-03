@@ -7,17 +7,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../../core/config/theme/colors/light_color_scheme.dart';
 import '../../../../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../data/models/doctor_model.dart';
 import '../../logic/doctors_cubit.dart';
 import 'sort_by_bottom_sheet_widget.dart';
 
 class SearchBarWidget extends StatefulWidget {
-  const SearchBarWidget({super.key});
+  final List<DoctorModel> doctors;
+  const SearchBarWidget({super.key, required this.doctors});
 
   @override
   State<SearchBarWidget> createState() => _SearchBarWidgetState();
 }
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
+  // TODO: separate search bar from filter icon
   final _searchController = TextEditingController();
   Timer? _debounceTimer;
   String lastQuery = "";
@@ -62,7 +65,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         horizontalSpace(8.w),
         IconButton(
           onPressed: () {
-            _openModalBottomSheet(context);
+            _openModalBottomSheet(context, context.read<DoctorsCubit>());
           },
           iconSize: 24.r,
           padding: EdgeInsets.zero,
@@ -75,11 +78,14 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     );
   }
 
-  void _openModalBottomSheet(BuildContext context) {
+  void _openModalBottomSheet(BuildContext context, DoctorsCubit doctorsCubit) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return const SortByBottomSheetWidget();
+        return BlocProvider.value(
+          value: doctorsCubit,
+          child: SortByBottomSheetWidget(doctors: widget.doctors),
+        );
       },
     );
   }

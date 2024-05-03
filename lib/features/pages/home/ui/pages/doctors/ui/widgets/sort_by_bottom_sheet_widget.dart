@@ -1,17 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../../../../core/widgets/custom_material_button.dart';
+import '../../../../../data/models/doctor_model.dart';
+import '../../logic/doctors_cubit.dart';
+import 'sort_by_item_widget.dart';
 
-class SortByBottomSheetWidget extends StatelessWidget {
-  const SortByBottomSheetWidget({super.key});
+class SortByBottomSheetWidget extends StatefulWidget {
+  final List<DoctorModel> doctors;
+
+  const SortByBottomSheetWidget({
+    super.key,
+    required this.doctors,
+  });
+
+  @override
+  State<SortByBottomSheetWidget> createState() =>
+      _SortByBottomSheetWidgetState();
+}
+
+class _SortByBottomSheetWidgetState extends State<SortByBottomSheetWidget> {
+  final List<(String, SortBySpecialization)> specialities = [
+    ('Cardiology', SortBySpecialization.cardiology),
+    ('Dermatology', SortBySpecialization.dermatology),
+    ('Neurology', SortBySpecialization.neurology),
+    ('Orthopedics', SortBySpecialization.orthopedics),
+    ('Pediatrics', SortBySpecialization.pediatrics),
+    ('Gynecology', SortBySpecialization.gynecology),
+    ('Ophthalmology', SortBySpecialization.ophthalmology),
+    ('Urology', SortBySpecialization.urology),
+    ('Gastroenterology', SortBySpecialization.gastroenterology),
+    ('Psychiatry', SortBySpecialization.psychiatry),
+  ];
+
+  final List<(String, SortByDegree)> degrees = [
+    ("Consultant", SortByDegree.consultant),
+    ("Specialist", SortByDegree.specialist),
+    ("Professor", SortByDegree.professor),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.6.sh,
       width: 1.sw,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -53,43 +86,19 @@ class SortByBottomSheetWidget extends StatelessWidget {
             ),
           ),
           verticalSpace(32.h),
-          _buildSortByItem('Name'),
+          SortByItemWidget(title: 'Speciality', items: specialities),
           verticalSpace(32.h),
-          _buildSortByItem('Specialization'),
+          SortByItemWidget(title: 'Degree', items: degrees),
           verticalSpace(40.h),
           CustomMaterialButton(
             onClicked: () {
-              // TODO: Implement sort by
+              context.read<DoctorsCubit>().sortDoctors(widget.doctors);
               context.pop();
             },
             title: "Done",
-          ).setHorizontalAndVerticalPadding(24.w, 16.h),
+          ).setHorizontalPadding(24.w),
         ],
       ),
     );
-  }
-
-  Widget _buildSortByItem(String title) {
-    // TODO: Implement sort by item UI
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: TextStyles.font16DarkBlueMedium),
-        verticalSpace(24.h),
-        Row(
-          children: [
-            Text(
-              title,
-              style: TextStyles.font14DarkBlueMedium,
-            ),
-            Icon(
-              Icons.check_circle,
-              color: Colors.blue,
-              size: 24.r,
-            ),
-          ],
-        ),
-      ],
-    ).setOnlyPadding(0, 0, 0, 24.w);
   }
 }
