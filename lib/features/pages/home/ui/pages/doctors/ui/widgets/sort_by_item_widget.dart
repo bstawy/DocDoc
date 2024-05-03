@@ -62,35 +62,15 @@ class _SortByItemWidgetState extends State<SortByItemWidget> {
                 onSelectionChanged: updateSelectedSegments,
                 showSelectedIcon: false,
                 emptySelectionAllowed: false,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith((states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return ColorsManager.mainBlue;
-                    }
-                    return ColorsManager.surface;
-                  }),
-                  foregroundColor: MaterialStateProperty.resolveWith((states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return ColorsManager.white;
-                    }
-                    return ColorsManager.lightGrey;
-                  }),
-                  textStyle: MaterialStateProperty.resolveWith(
-                    (states) => TextStyles.font14DarkBlueMedium,
+                style: SegmentedButton.styleFrom(
+                  selectedBackgroundColor:
+                      ColorsManager.mainBlue.withOpacity(0.25),
+                  textStyle: TextStyles.font14DarkBlueMedium,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.w,
                   ),
-                  padding: MaterialStateProperty.resolveWith(
-                    (states) => EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 8.h,
-                    ),
-                  ),
-                  shape: MaterialStateProperty.resolveWith(
-                    (states) => RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.r),
-                      side: const BorderSide(
-                        color: ColorsManager.red,
-                      ),
-                    ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.r),
                   ),
                 ),
               ),

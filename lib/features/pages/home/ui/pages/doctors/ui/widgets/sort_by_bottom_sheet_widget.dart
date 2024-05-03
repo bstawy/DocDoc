@@ -24,6 +24,7 @@ class SortByBottomSheetWidget extends StatefulWidget {
 
 class _SortByBottomSheetWidgetState extends State<SortByBottomSheetWidget> {
   final List<(String, SortBySpecialization)> specialities = [
+    ('All', SortBySpecialization.all),
     ('Cardiology', SortBySpecialization.cardiology),
     ('Dermatology', SortBySpecialization.dermatology),
     ('Neurology', SortBySpecialization.neurology),
@@ -37,6 +38,7 @@ class _SortByBottomSheetWidgetState extends State<SortByBottomSheetWidget> {
   ];
 
   final List<(String, SortByDegree)> degrees = [
+    ('All', SortByDegree.all),
     ("Consultant", SortByDegree.consultant),
     ("Specialist", SortByDegree.specialist),
     ("Professor", SortByDegree.professor),

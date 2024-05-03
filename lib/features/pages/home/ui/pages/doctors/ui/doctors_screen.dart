@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../../../core/config/theme/colors/light_color_scheme.dart';
 import '../../../../../../../core/config/theme/texts/font_weight_helper.dart';
 import '../../../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../../../core/helpers/extensions/extensions.dart';
@@ -26,21 +27,24 @@ class DoctorsScreen extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        centerTitle: true,
-        title: Text(
+        title: const Text(
           'All Doctors',
-          style: TextStyles.font18DarkBlueBold,
         ),
-        elevation: 0,
       ),
       body: BlocBuilder<DoctorsCubit, DoctorsState>(
         bloc: context.read<DoctorsCubit>()..getAllDoctors(),
         builder: (context, state) {
-          return state.whenOrNull(
-                doctorsListLoading: () => _buildLoadingWidget(),
-                doctorsListSuccess: (data) => _buildSuccessWidget(data),
-              ) ??
-              const SizedBox();
+          return RefreshIndicator(
+            color: ColorsManager.mainBlue,
+            onRefresh: () async {
+              context.read<DoctorsCubit>().getAllDoctors();
+            },
+            child: state.whenOrNull(
+                  doctorsListLoading: () => _buildLoadingWidget(),
+                  doctorsListSuccess: (data) => _buildSuccessWidget(data),
+                ) ??
+                const SizedBox(),
+          );
         },
       ),
     );
@@ -48,6 +52,7 @@ class DoctorsScreen extends StatelessWidget {
 
   Widget _buildLoadingWidget() {
     return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         children: [
           verticalSpace(16.h),
@@ -86,6 +91,7 @@ class DoctorsScreen extends StatelessWidget {
 
   Widget _buildSuccessWidget(List<DoctorModel> doctors) {
     return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         children: [
           verticalSpace(16.h),

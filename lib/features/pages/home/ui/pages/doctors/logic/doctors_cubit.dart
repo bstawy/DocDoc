@@ -50,6 +50,11 @@ class DoctorsCubit extends Cubit<DoctorsState> {
     emit(const DoctorsState.doctorsListLoading());
     List<DoctorModel> sortedDoctors = [];
 
+    if (sortBySpecialization == SortBySpecialization.all &&
+        sortByDegree == SortByDegree.all) {
+      getAllDoctors();
+    }
+
     if (sortBySpecialization != null) {
       sortedDoctors = doctors
           .where((doctor) =>
@@ -78,6 +83,7 @@ class DoctorsCubit extends Cubit<DoctorsState> {
 }
 
 enum SortBySpecialization {
+  all(0),
   cardiology(1),
   dermatology(2),
   neurology(3),
@@ -95,6 +101,7 @@ enum SortBySpecialization {
 }
 
 enum SortByDegree {
+  all("All"),
   consultant("Consultant"),
   specialist("Specialist"),
   professor("Professor");
