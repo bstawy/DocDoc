@@ -56,3 +56,9 @@ CityModel _$CityModelFromJson(Map<String, dynamic> json) => CityModel(
       governrate:
           GovernrateModel.fromJson(json['governrate'] as Map<String, dynamic>),
     );
+
+Map<String, dynamic> _$CityModelToJson(CityModel instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'governrate': instance.governrate,
+    };

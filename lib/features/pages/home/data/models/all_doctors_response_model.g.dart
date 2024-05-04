@@ -16,3 +16,12 @@ AllDoctorsResponseModel _$AllDoctorsResponseModelFromJson(
       status: json['status'] as bool,
       code: (json['code'] as num).toInt(),
     );
+
+Map<String, dynamic> _$AllDoctorsResponseModelToJson(
+        AllDoctorsResponseModel instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.doctors,
+      'status': instance.status,
+      'code': instance.code,
+    };

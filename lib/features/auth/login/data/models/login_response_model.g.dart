@@ -1,27 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'doctor_speciality_response_model.dart';
+part of 'login_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-DoctorSpecialityResponseModel _$DoctorSpecialityResponseModelFromJson(
-        Map<String, dynamic> json) =>
-    DoctorSpecialityResponseModel(
+LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
+    LoginResponseModel(
       message: json['message'] as String,
-      homeData: (json['data'] as List<dynamic>)
-          .map((e) => DoctorSpecialityModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      userData: UserDataModel.fromJson(json['data'] as Map<String, dynamic>),
       status: json['status'] as bool,
       code: (json['code'] as num).toInt(),
     );
 
-Map<String, dynamic> _$DoctorSpecialityResponseModelToJson(
-        DoctorSpecialityResponseModel instance) =>
+Map<String, dynamic> _$LoginResponseModelToJson(LoginResponseModel instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'data': instance.homeData,
+      'data': instance.userData,
       'status': instance.status,
       'code': instance.code,
     };

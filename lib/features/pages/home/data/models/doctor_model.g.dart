@@ -100,3 +100,21 @@ DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => DoctorModel(
       startTime: json['start_time'] as String,
       endTime: json['end_time'] as String,
     );
+
+Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'email': instance.email,
+      'phone': instance.phone,
+      'photo': instance.photoUrl,
+      'gender': instance.gender,
+      'address': instance.address,
+      'description': instance.description,
+      'degree': instance.degree,
+      'specialization': instance.specialization,
+      'city': instance.city,
+      'appoint_price': instance.price,
+      'start_time': instance.startTime,
+      'end_time': instance.endTime,
+    };

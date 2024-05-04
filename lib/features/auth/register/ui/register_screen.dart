@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/helpers/extensions/extensions.dart';
@@ -20,20 +21,20 @@ class RegisterScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              verticalSpace(32.h),
+              Gap(32.h),
               const WelcomeHeader(
                 title: "Create Account",
                 description:
                     "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!",
               ),
-              verticalSpace(32.h),
+              Gap(32.h),
               BlocProvider(
                 create: (context) => getIt<RegisterCubit>(),
                 child: const RegisterForm(),
               ),
-              verticalSpace(32.h),
+              Gap(32.h),
               const TermsAndConditionsText(),
-              verticalSpace(24.h),
+              Gap(24.h),
               const AlreadyHaveAnAccount(),
             ],
           ).setVerticalPadding(32.h),

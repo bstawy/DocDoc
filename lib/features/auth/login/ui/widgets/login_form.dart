@@ -12,10 +12,10 @@ import '../../../../../core/widgets/custom_material_button.dart';
 import '../../../../../core/widgets/custom_text_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../widgets/password_validations.dart';
-import '../../data/models/login_request_body.dart';
-import '../../data/models/login_response.dart';
+import '../../data/models/login_request_body_model.dart';
+import '../../data/models/login_response_model.dart';
 import '../../logic/login_cubit.dart';
-import '../../logic/login_state.dart';
+import '../../logic/login_states.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -107,7 +107,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           verticalSpace(24.h),
-          BlocConsumer<LoginCubit, LoginState>(
+          BlocConsumer<LoginCubit, LoginStates>(
             bloc: context.read<LoginCubit>(),
             buildWhen: (previous, current) {
               if (current is Success) return false;
@@ -122,7 +122,7 @@ class _LoginFormState extends State<LoginForm> {
             listener: (context, state) {
               state.whenOrNull(
                 success: (loginResponse) {
-                  final LoginResponse response = loginResponse;
+                  final LoginResponseModel response = loginResponse;
                   logging = false;
                   context.pushNamedAndRemoveUntil(
                     Routes.layoutScreen,
@@ -196,7 +196,7 @@ class _LoginFormState extends State<LoginForm> {
   void validateAndLogin(BuildContext context) {
     if (loginFormKey.currentState!.validate()) {
       context.read<LoginCubit>().login(
-            LoginRequestBody(
+            LoginRequestBodyModel(
               email: _emailController.text,
               password: _passwordController.text,
             ),
