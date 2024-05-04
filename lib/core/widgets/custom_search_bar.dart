@@ -7,7 +7,6 @@ import '../config/theme/colors/light_color_scheme.dart';
 import 'custom_text_form_field.dart';
 
 class CustomSearchBar extends StatefulWidget {
-  final List<dynamic>? items;
   final TextEditingController? controller;
   final String? hint;
   final Widget? prefixIcon;
@@ -18,7 +17,6 @@ class CustomSearchBar extends StatefulWidget {
 
   const CustomSearchBar({
     super.key,
-    this.items,
     this.controller,
     this.hint,
     this.prefixIcon,

@@ -42,7 +42,7 @@ class DoctorsScreen extends StatelessWidget {
             child: state.whenOrNull(
                   doctorsListLoading: () => _buildLoadingWidget(),
                   doctorsListSuccess: (data) =>
-                      _buildSuccessWidget(context.read<DoctorsCubit>(), data),
+                      _buildSuccessWidget(context, data),
                 ) ??
                 const SizedBox(),
           );
@@ -57,9 +57,7 @@ class DoctorsScreen extends StatelessWidget {
       child: Column(
         children: [
           verticalSpace(16.h),
-          const SearchBarWidget(
-            doctors: [],
-          ).setHorizontalPadding(16.h),
+          const SearchBarWidget(doctors: []).setHorizontalPadding(16.h),
           verticalSpace(24.h),
           Column(
             children: List.generate(
@@ -90,14 +88,21 @@ class DoctorsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccessWidget(
-      DoctorsCubit doctorsCubit, List<DoctorModel> doctors) {
+  Widget _buildSuccessWidget(BuildContext context, List<DoctorModel> doctors) {
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         children: [
           verticalSpace(16.h),
-          SearchBarWidget(doctors: doctors).setHorizontalPadding(16.h),
+          SearchBarWidget(
+            doctors: doctors,
+            onQueryChanged: (value) {
+              context.read<DoctorsCubit>().searchDoctor(value);
+            },
+            onEmptyQuery: () {
+              context.read<DoctorsCubit>().getAllDoctors();
+            },
+          ).setHorizontalPadding(16.h),
           verticalSpace(24.h),
           doctors.isNotEmpty
               ? Column(
