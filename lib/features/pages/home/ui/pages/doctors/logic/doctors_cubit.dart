@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../../core/config/Constants/app_constants.dart';
 import '../../../../data/models/doctor_model.dart';
 import '../data/repos/doctors_repo.dart';
 import 'doctors_state.dart';
@@ -80,33 +81,4 @@ class DoctorsCubit extends Cubit<DoctorsState> {
       emit(DoctorsState.doctorsListSuccess(doctors));
     }
   }
-}
-
-enum SortBySpecialization {
-  all(0),
-  cardiology(1),
-  dermatology(2),
-  neurology(3),
-  orthopedics(4),
-  pediatrics(5),
-  gynecology(6),
-  ophthalmology(7),
-  urology(8),
-  gastroenterology(9),
-  psychiatry(10);
-
-  final int value;
-
-  const SortBySpecialization(this.value);
-}
-
-enum SortByDegree {
-  all("All"),
-  consultant("Consultant"),
-  specialist("Specialist"),
-  professor("Professor");
-
-  final String value;
-
-  const SortByDegree(this.value);
 }
