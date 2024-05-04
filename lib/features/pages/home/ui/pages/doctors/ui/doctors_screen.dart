@@ -41,7 +41,8 @@ class DoctorsScreen extends StatelessWidget {
             },
             child: state.whenOrNull(
                   doctorsListLoading: () => _buildLoadingWidget(),
-                  doctorsListSuccess: (data) => _buildSuccessWidget(data),
+                  doctorsListSuccess: (data) =>
+                      _buildSuccessWidget(context.read<DoctorsCubit>(), data),
                 ) ??
                 const SizedBox(),
           );
@@ -89,7 +90,8 @@ class DoctorsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccessWidget(List<DoctorModel> doctors) {
+  Widget _buildSuccessWidget(
+      DoctorsCubit doctorsCubit, List<DoctorModel> doctors) {
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
