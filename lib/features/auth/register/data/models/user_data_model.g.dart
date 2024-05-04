@@ -11,9 +11,3 @@ UserDataModel _$UserDataModelFromJson(Map<String, dynamic> json) =>
       token: json['token'] as String?,
       userName: json['username'] as String?,
     );
-
-Map<String, dynamic> _$UserDataModelToJson(UserDataModel instance) =>
-    <String, dynamic>{
-      'token': instance.token,
-      'username': instance.userName,
-    };

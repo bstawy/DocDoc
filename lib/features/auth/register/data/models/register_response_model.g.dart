@@ -16,12 +16,3 @@ RegisterResponseModel _$RegisterResponseModelFromJson(
       status: json['status'] as bool?,
       code: (json['code'] as num?)?.toInt(),
     );
-
-Map<String, dynamic> _$RegisterResponseModelToJson(
-        RegisterResponseModel instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'data': instance.userData,
-      'status': instance.status,
-      'code': instance.code,
-    };

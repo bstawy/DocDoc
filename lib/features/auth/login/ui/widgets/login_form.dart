@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/config/theme/colors/colors_manager.dart';
@@ -13,7 +14,6 @@ import '../../../../../core/widgets/custom_text_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../widgets/password_validations.dart';
 import '../../data/models/login_request_body_model.dart';
-import '../../data/models/login_response_model.dart';
 import '../../logic/login_cubit.dart';
 import '../../logic/login_states.dart';
 
@@ -71,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
             },
             hint: "Email",
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           CustomTextFormField(
             controller: _passwordController,
             hint: "Password",
@@ -82,7 +82,7 @@ class _LoginFormState extends State<LoginForm> {
               return Validators.validatePassword(value);
             },
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           PasswordValidations(
             isPasswordEmpty: _passwordController.text.isEmpty,
             hasLowerCase: hasLowerCase,
@@ -91,7 +91,7 @@ class _LoginFormState extends State<LoginForm> {
             hasNumber: hasNumber,
             hasMinLength: hasMinLength,
           ),
-          verticalSpace(8.h),
+          Gap(8.h),
           Align(
             alignment: Alignment.centerRight,
             child: CustomTextButton(
@@ -106,7 +106,7 @@ class _LoginFormState extends State<LoginForm> {
               text: "Forgot password?",
             ),
           ),
-          verticalSpace(24.h),
+          Gap(24.h),
           BlocConsumer<LoginCubit, LoginStates>(
             bloc: context.read<LoginCubit>(),
             buildWhen: (previous, current) {
@@ -122,12 +122,10 @@ class _LoginFormState extends State<LoginForm> {
             listener: (context, state) {
               state.whenOrNull(
                 success: (loginResponse) {
-                  final LoginResponseModel response = loginResponse;
                   logging = false;
                   context.pushNamedAndRemoveUntil(
                     Routes.layoutScreen,
                     predicate: ModalRoute.withName(Routes.splashScreen),
-                    arguments: response.userData.userName,
                   );
                 },
                 failure: (errorMsg) {

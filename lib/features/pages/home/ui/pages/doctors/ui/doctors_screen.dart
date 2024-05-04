@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../../../core/config/theme/colors/colors_manager.dart';
 import '../../../../../../../core/config/theme/texts/font_weight_helper.dart';
@@ -11,8 +12,9 @@ import '../../../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_ef
 import '../../../../data/models/doctor_model.dart';
 import '../../../widgets/doctor_widget.dart';
 import '../logic/doctors_cubit.dart';
-import '../logic/doctors_state.dart';
-import 'widgets/search_bar_widget.dart';
+import '../logic/doctors_states.dart';
+import '../../../../../widgets/search_bar_widget.dart';
+import 'widgets/sort_by_bottom_sheet_widget.dart';
 
 class DoctorsScreen extends StatelessWidget {
   const DoctorsScreen({super.key});
@@ -27,11 +29,9 @@ class DoctorsScreen extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        title: const Text(
-          'All Doctors',
-        ),
+        title: const Text('All Doctors'),
       ),
-      body: BlocBuilder<DoctorsCubit, DoctorsState>(
+      body: BlocBuilder<DoctorsCubit, DoctorsStates>(
         bloc: context.read<DoctorsCubit>()..getAllDoctors(),
         builder: (context, state) {
           return RefreshIndicator(
@@ -56,9 +56,9 @@ class DoctorsScreen extends StatelessWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         children: [
-          verticalSpace(16.h),
+          Gap(16.h),
           const SearchBarWidget(doctors: []).setHorizontalPadding(16.h),
-          verticalSpace(24.h),
+          Gap(24.h),
           Column(
             children: List.generate(
               3,
@@ -68,14 +68,14 @@ class DoctorsScreen extends StatelessWidget {
                     width: 110,
                     height: 110,
                   ),
-                  horizontalSpace(16.w),
+                  Gap(16.w),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const RectShimmerEffect(width: 90, height: 10),
-                      verticalSpace(16.h),
+                      Gap(16.h),
                       const RectShimmerEffect(width: 90, height: 10),
-                      verticalSpace(16.h),
+                      Gap(16.h),
                       const RectShimmerEffect(width: 90, height: 10),
                     ],
                   ),
@@ -93,7 +93,7 @@ class DoctorsScreen extends StatelessWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
         children: [
-          verticalSpace(16.h),
+          Gap(16.h),
           SearchBarWidget(
             doctors: doctors,
             onQueryChanged: (value) {
@@ -102,8 +102,12 @@ class DoctorsScreen extends StatelessWidget {
             onEmptyQuery: () {
               context.read<DoctorsCubit>().getAllDoctors();
             },
+            onFilterTap: () {
+              _openModalBottomSheet(
+                  context, context.read<DoctorsCubit>(), doctors);
+            },
           ).setHorizontalPadding(16.h),
-          verticalSpace(24.h),
+          Gap(24.h),
           doctors.isNotEmpty
               ? Column(
                   children: List.generate(
@@ -122,13 +126,13 @@ class DoctorsScreen extends StatelessWidget {
   Widget _buildEmptyWidget() {
     return Column(
       children: [
-        verticalSpace(75.h),
+        Gap(75.h),
         SvgPicture.asset(
           "assets/images/doctors_illustration.svg",
           width: 150.w,
           height: 150.h,
         ),
-        verticalSpace(40.h),
+        Gap(40.h),
         Text(
           'No Doctors Found',
           style: TextStyles.font18DarkBlueBold.copyWith(
@@ -138,5 +142,21 @@ class DoctorsScreen extends StatelessWidget {
         ),
       ],
     ).setHorizontalPadding(32.w);
+  }
+
+  void _openModalBottomSheet(
+    BuildContext context,
+    DoctorsCubit doctorsCubit,
+    List<DoctorModel> doctors,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return BlocProvider.value(
+          value: doctorsCubit,
+          child: SortByBottomSheetWidget(doctors: doctors),
+        );
+      },
+    );
   }
 }

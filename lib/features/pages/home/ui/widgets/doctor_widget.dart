@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../core/config/theme/colors/colors_manager.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
-import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../data/models/doctor_model.dart';
 
 class DoctorWidget extends StatelessWidget {
@@ -47,7 +47,7 @@ class DoctorWidget extends StatelessWidget {
               ),
             ),
           ),
-          horizontalSpace(16.w),
+          Gap(16.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -55,17 +55,17 @@ class DoctorWidget extends StatelessWidget {
                 doctor.name,
                 style: TextStyles.font14DarkBlueMedium,
               ),
-              verticalSpace(4.h),
+              Gap(4.h),
               Text(
                 doctor.specialization.name,
                 style: TextStyles.font12DarkBlueMedium,
               ),
-              verticalSpace(4.h),
+              Gap(4.h),
               Text(
                 doctor.degree,
                 style: TextStyles.font12DarkBlueMedium,
               ),
-              verticalSpace(4.h),
+              Gap(4.h),
               Text(
                 "${doctor.price} EGP",
                 style: TextStyles.font12DarkBlueMedium,

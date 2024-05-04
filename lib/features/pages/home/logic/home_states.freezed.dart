@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_state.dart';
+part of 'home_states.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$HomeState {
+mixin _$HomeStates {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -85,15 +85,16 @@ mixin _$HomeState {
 }
 
 /// @nodoc
-abstract class $HomeStateCopyWith<$Res> {
-  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
-      _$HomeStateCopyWithImpl<$Res, HomeState>;
+abstract class $HomeStatesCopyWith<$Res> {
+  factory $HomeStatesCopyWith(
+          HomeStates value, $Res Function(HomeStates) then) =
+      _$HomeStatesCopyWithImpl<$Res, HomeStates>;
 }
 
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
-    implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._value, this._then);
+class _$HomeStatesCopyWithImpl<$Res, $Val extends HomeStates>
+    implements $HomeStatesCopyWith<$Res> {
+  _$HomeStatesCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -110,7 +111,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$HomeStatesCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -124,7 +125,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'HomeState.initial()';
+    return 'HomeStates.initial()';
   }
 
   @override
@@ -227,7 +228,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements HomeState {
+abstract class _Initial implements HomeStates {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -241,7 +242,7 @@ abstract class _$$DoctorSpecialityLoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$DoctorSpecialityLoadingImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$DoctorSpecialityLoadingImpl>
+    extends _$HomeStatesCopyWithImpl<$Res, _$DoctorSpecialityLoadingImpl>
     implements _$$DoctorSpecialityLoadingImplCopyWith<$Res> {
   __$$DoctorSpecialityLoadingImplCopyWithImpl(
       _$DoctorSpecialityLoadingImpl _value,
@@ -256,7 +257,7 @@ class _$DoctorSpecialityLoadingImpl implements DoctorSpecialityLoading {
 
   @override
   String toString() {
-    return 'HomeState.doctorSpecialityLoading()';
+    return 'HomeStates.doctorSpecialityLoading()';
   }
 
   @override
@@ -360,7 +361,7 @@ class _$DoctorSpecialityLoadingImpl implements DoctorSpecialityLoading {
   }
 }
 
-abstract class DoctorSpecialityLoading implements HomeState {
+abstract class DoctorSpecialityLoading implements HomeStates {
   const factory DoctorSpecialityLoading() = _$DoctorSpecialityLoadingImpl;
 }
 
@@ -373,7 +374,7 @@ abstract class _$$DoctorListLoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$DoctorListLoadingImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$DoctorListLoadingImpl>
+    extends _$HomeStatesCopyWithImpl<$Res, _$DoctorListLoadingImpl>
     implements _$$DoctorListLoadingImplCopyWith<$Res> {
   __$$DoctorListLoadingImplCopyWithImpl(_$DoctorListLoadingImpl _value,
       $Res Function(_$DoctorListLoadingImpl) _then)
@@ -387,7 +388,7 @@ class _$DoctorListLoadingImpl implements DoctorListLoading {
 
   @override
   String toString() {
-    return 'HomeState.doctorListLoading()';
+    return 'HomeStates.doctorListLoading()';
   }
 
   @override
@@ -490,7 +491,7 @@ class _$DoctorListLoadingImpl implements DoctorListLoading {
   }
 }
 
-abstract class DoctorListLoading implements HomeState {
+abstract class DoctorListLoading implements HomeStates {
   const factory DoctorListLoading() = _$DoctorListLoadingImpl;
 }
 
@@ -506,7 +507,7 @@ abstract class _$$DoctorSpecialitySuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$DoctorSpecialitySuccessImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$DoctorSpecialitySuccessImpl>
+    extends _$HomeStatesCopyWithImpl<$Res, _$DoctorSpecialitySuccessImpl>
     implements _$$DoctorSpecialitySuccessImplCopyWith<$Res> {
   __$$DoctorSpecialitySuccessImplCopyWithImpl(
       _$DoctorSpecialitySuccessImpl _value,
@@ -543,7 +544,7 @@ class _$DoctorSpecialitySuccessImpl implements DoctorSpecialitySuccess {
 
   @override
   String toString() {
-    return 'HomeState.doctorSpecialitySuccess(data: $data)';
+    return 'HomeStates.doctorSpecialitySuccess(data: $data)';
   }
 
   @override
@@ -656,7 +657,7 @@ class _$DoctorSpecialitySuccessImpl implements DoctorSpecialitySuccess {
   }
 }
 
-abstract class DoctorSpecialitySuccess implements HomeState {
+abstract class DoctorSpecialitySuccess implements HomeStates {
   const factory DoctorSpecialitySuccess(
       final List<DoctorSpecialityModel> data) = _$DoctorSpecialitySuccessImpl;
 
@@ -677,7 +678,7 @@ abstract class _$$DoctorListSuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$DoctorListSuccessImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$DoctorListSuccessImpl>
+    extends _$HomeStatesCopyWithImpl<$Res, _$DoctorListSuccessImpl>
     implements _$$DoctorListSuccessImplCopyWith<$Res> {
   __$$DoctorListSuccessImplCopyWithImpl(_$DoctorListSuccessImpl _value,
       $Res Function(_$DoctorListSuccessImpl) _then)
@@ -712,7 +713,7 @@ class _$DoctorListSuccessImpl implements DoctorListSuccess {
 
   @override
   String toString() {
-    return 'HomeState.doctorListSuccess(data: $data)';
+    return 'HomeStates.doctorListSuccess(data: $data)';
   }
 
   @override
@@ -825,7 +826,7 @@ class _$DoctorListSuccessImpl implements DoctorListSuccess {
   }
 }
 
-abstract class DoctorListSuccess implements HomeState {
+abstract class DoctorListSuccess implements HomeStates {
   const factory DoctorListSuccess(final List<DoctorModel> data) =
       _$DoctorListSuccessImpl;
 
@@ -846,7 +847,7 @@ abstract class _$$FailureImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FailureImplCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$FailureImpl>
+    extends _$HomeStatesCopyWithImpl<$Res, _$FailureImpl>
     implements _$$FailureImplCopyWith<$Res> {
   __$$FailureImplCopyWithImpl(
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
@@ -876,7 +877,7 @@ class _$FailureImpl implements Failure {
 
   @override
   String toString() {
-    return 'HomeState.failure(error: $error)';
+    return 'HomeStates.failure(error: $error)';
   }
 
   @override
@@ -987,7 +988,7 @@ class _$FailureImpl implements Failure {
   }
 }
 
-abstract class Failure implements HomeState {
+abstract class Failure implements HomeStates {
   const factory Failure({required final String error}) = _$FailureImpl;
 
   String get error;

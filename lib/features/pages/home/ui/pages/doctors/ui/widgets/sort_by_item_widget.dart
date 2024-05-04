@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../../../../core/config/Constants/app_constants.dart';
 import '../../../../../../../../core/config/theme/colors/colors_manager.dart';
@@ -11,11 +12,13 @@ import '../../logic/doctors_cubit.dart';
 class SortByItemWidget extends StatefulWidget {
   final String title;
   final List<(String, dynamic)> items;
+  final Function() sort;
 
   const SortByItemWidget({
     super.key,
     required this.title,
     required this.items,
+    required this.sort,
   });
 
   @override
@@ -29,11 +32,8 @@ class _SortByItemWidgetState extends State<SortByItemWidget> {
   void initState() {
     super.initState();
     _selectedSegment = {widget.items[0].$2};
-    if (widget.title == "Speciality") {
-      context.read<DoctorsCubit>().sortBySpecialization = widget.items[0].$2;
-    } else {
-      context.read<DoctorsCubit>().sortByDegree = widget.items[0].$2;
-    }
+
+    widget.sort;
   }
 
   @override
@@ -45,12 +45,12 @@ class _SortByItemWidgetState extends State<SortByItemWidget> {
           widget.title,
           style: TextStyles.font16DarkBlueMedium,
         ).setHorizontalPadding(24.w),
-        verticalSpace(16.h),
+        Gap(16.h),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              horizontalSpace(24.w),
+              Gap(24.w),
               SegmentedButton<dynamic>(
                 segments: List.generate(
                   widget.items.length,
@@ -75,7 +75,7 @@ class _SortByItemWidgetState extends State<SortByItemWidget> {
                   ),
                 ),
               ),
-              horizontalSpace(24.w),
+              Gap(24.w),
             ],
           ),
         ),

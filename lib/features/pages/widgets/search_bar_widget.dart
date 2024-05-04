@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
-import '../../../../../../../../core/helpers/extensions/extensions.dart';
-import '../../../../../../../../core/widgets/custom_search_bar.dart';
-import '../../../../../data/models/doctor_model.dart';
-import '../../logic/doctors_cubit.dart';
-import 'sort_by_bottom_sheet_widget.dart';
+import '../../../core/widgets/custom_search_bar.dart';
+import '../home/data/models/doctor_model.dart';
 
 class SearchBarWidget extends StatelessWidget {
   final List<DoctorModel> doctors;
   final Function(String)? onQueryChanged;
   final Function()? onEmptyQuery;
+  final Function()? onFilterTap;
 
   const SearchBarWidget({
     super.key,
     required this.doctors,
     this.onQueryChanged,
     this.onEmptyQuery,
+    this.onFilterTap,
   });
 
   @override
@@ -30,11 +29,9 @@ class SearchBarWidget extends StatelessWidget {
             onEmptyQuery: onEmptyQuery ?? () {},
           ),
         ),
-        horizontalSpace(8.w),
+        Gap(8.w),
         IconButton(
-          onPressed: () {
-            _openModalBottomSheet(context, context.read<DoctorsCubit>());
-          },
+          onPressed: onFilterTap,
           iconSize: 24.r,
           padding: EdgeInsets.zero,
           icon: Icon(
@@ -43,18 +40,6 @@ class SearchBarWidget extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  void _openModalBottomSheet(BuildContext context, DoctorsCubit doctorsCubit) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return BlocProvider.value(
-          value: doctorsCubit,
-          child: SortByBottomSheetWidget(doctors: doctors),
-        );
-      },
     );
   }
 }

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'layout_state.dart';
+part of 'layout_states.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$LayoutState<T> {
+mixin _$LayoutStates<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -57,16 +57,16 @@ mixin _$LayoutState<T> {
 }
 
 /// @nodoc
-abstract class $LayoutStateCopyWith<T, $Res> {
-  factory $LayoutStateCopyWith(
-          LayoutState<T> value, $Res Function(LayoutState<T>) then) =
-      _$LayoutStateCopyWithImpl<T, $Res, LayoutState<T>>;
+abstract class $LayoutStatesCopyWith<T, $Res> {
+  factory $LayoutStatesCopyWith(
+          LayoutStates<T> value, $Res Function(LayoutStates<T>) then) =
+      _$LayoutStatesCopyWithImpl<T, $Res, LayoutStates<T>>;
 }
 
 /// @nodoc
-class _$LayoutStateCopyWithImpl<T, $Res, $Val extends LayoutState<T>>
-    implements $LayoutStateCopyWith<T, $Res> {
-  _$LayoutStateCopyWithImpl(this._value, this._then);
+class _$LayoutStatesCopyWithImpl<T, $Res, $Val extends LayoutStates<T>>
+    implements $LayoutStatesCopyWith<T, $Res> {
+  _$LayoutStatesCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -83,7 +83,7 @@ abstract class _$$InitialImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<T, $Res>
-    extends _$LayoutStateCopyWithImpl<T, $Res, _$InitialImpl<T>>
+    extends _$LayoutStatesCopyWithImpl<T, $Res, _$InitialImpl<T>>
     implements _$$InitialImplCopyWith<T, $Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
@@ -97,7 +97,7 @@ class _$InitialImpl<T> implements _Initial<T> {
 
   @override
   String toString() {
-    return 'LayoutState<$T>.initial()';
+    return 'LayoutStates<$T>.initial()';
   }
 
   @override
@@ -172,7 +172,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   }
 }
 
-abstract class _Initial<T> implements LayoutState<T> {
+abstract class _Initial<T> implements LayoutStates<T> {
   const factory _Initial() = _$InitialImpl<T>;
 }
 
@@ -187,7 +187,7 @@ abstract class _$$SuccessImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<T, $Res>
-    extends _$LayoutStateCopyWithImpl<T, $Res, _$SuccessImpl<T>>
+    extends _$LayoutStatesCopyWithImpl<T, $Res, _$SuccessImpl<T>>
     implements _$$SuccessImplCopyWith<T, $Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl<T> _value, $Res Function(_$SuccessImpl<T>) _then)
@@ -217,7 +217,7 @@ class _$SuccessImpl<T> implements Success<T> {
 
   @override
   String toString() {
-    return 'LayoutState<$T>.success(data: $data)';
+    return 'LayoutStates<$T>.success(data: $data)';
   }
 
   @override
@@ -301,7 +301,7 @@ class _$SuccessImpl<T> implements Success<T> {
   }
 }
 
-abstract class Success<T> implements LayoutState<T> {
+abstract class Success<T> implements LayoutStates<T> {
   const factory Success(final T data) = _$SuccessImpl<T>;
 
   T get data;

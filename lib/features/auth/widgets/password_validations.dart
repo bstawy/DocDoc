@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/config/theme/colors/colors_manager.dart';
 import '../../../core/config/theme/texts/font_weight_helper.dart';
 import '../../../core/config/theme/texts/text_styles.dart';
-import '../../../core/helpers/extensions/extensions.dart';
 
 class PasswordValidations extends StatelessWidget {
   final bool isPasswordEmpty;
@@ -28,14 +28,14 @@ class PasswordValidations extends StatelessWidget {
     return Column(
       children: [
         buildValidationRow('At least 1 lowercase letter', hasLowerCase),
-        verticalSpace(2),
+        const Gap(2),
         buildValidationRow('At least 1 uppercase letter', hasUpperCase),
-        verticalSpace(2),
+        const Gap(2),
         buildValidationRow(
             'At least 1 special character', hasSpecialCharacters),
-        verticalSpace(2),
+        const Gap(2),
         buildValidationRow('At least 1 number', hasNumber),
-        verticalSpace(2),
+        const Gap(2),
         buildValidationRow('At least 8 characters long', hasMinLength),
       ],
     );
@@ -61,7 +61,7 @@ class PasswordValidations extends StatelessWidget {
             size: 8,
           ),
         ),
-        horizontalSpace(6),
+        const Gap(6),
         Text(
           text,
           style: TextStyles.font12DarkBlueMedium.copyWith(

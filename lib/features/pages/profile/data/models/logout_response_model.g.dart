@@ -13,12 +13,3 @@ LogoutResponseModel _$LogoutResponseModelFromJson(Map<String, dynamic> json) =>
       status: json['status'] as bool,
       code: (json['code'] as num).toInt(),
     );
-
-Map<String, dynamic> _$LogoutResponseModelToJson(
-        LogoutResponseModel instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'data': instance.userData,
-      'status': instance.status,
-      'code': instance.code,
-    };

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../core/config/theme/colors/colors_manager.dart';
 import 'bottom_nav_bar_icon.dart';
@@ -42,7 +43,7 @@ class BottomNavBarWidget extends StatelessWidget {
                 index: 1,
               ),
             ),
-            SizedBox(width: 65.w),
+            Gap(65.w),
             const Expanded(
               child: BottomNavIconWidget(
                 selectedIconPath: 'assets/icons/nav_bar_calender_icon.svg',

@@ -52,9 +52,3 @@ GovernrateModel _$GovernrateModelFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
     );
-
-Map<String, dynamic> _$GovernrateModelToJson(GovernrateModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };

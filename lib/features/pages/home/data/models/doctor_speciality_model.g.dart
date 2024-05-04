@@ -59,11 +59,3 @@ DoctorSpecialityModel _$DoctorSpecialityModelFromJson(
           .map((e) => DoctorModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
-
-Map<String, dynamic> _$DoctorSpecialityModelToJson(
-        DoctorSpecialityModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'doctors': instance.doctors,
-    };

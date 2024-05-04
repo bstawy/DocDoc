@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
-import '../../../../core/helpers/extensions/extensions.dart';
 import 'widgets/doctor_speciality_widget.dart';
 import 'widgets/header_widget.dart';
 import 'widgets/nearby_doctor_widget.dart';
@@ -17,20 +17,14 @@ class HomeScreen extends StatelessWidget {
       children: [
         const Header(),
         Expanded(
-          child: CustomScrollView(
+          child: ListView(
             scrollDirection: Axis.vertical,
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    const NearbyDoctor(),
-                    verticalSpace(24.h),
-                    const DoctorSpeciality(),
-                    verticalSpace(24.h),
-                    const RecommendedDoctor(),
-                  ],
-                ),
-              ),
+            children: [
+              const NearbyDoctor(),
+              Gap(24.h),
+              const DoctorSpeciality(),
+              Gap(24.h),
+              const RecommendedDoctor(),
             ],
           ),
         ),

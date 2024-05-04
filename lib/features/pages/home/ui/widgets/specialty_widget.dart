@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:marquee/marquee.dart';
 
 import '../../../../../core/config/theme/colors/colors_manager.dart';
@@ -49,7 +50,7 @@ class SpecialistWidget extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
           ),
-          verticalSpace(12.h),
+          Gap(12.h),
           SizedBox(
             height: 25.h,
             child: AutoSizeText(
