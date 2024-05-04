@@ -1,14 +1,41 @@
-import 'package:flutter/material.dart';
+enum Token {
+  userToken("mytoken");
 
-import '../../../doc_doc_app.dart';
+  final String value;
 
-class AppConstants {
-  static var theme = Theme.of(navigatorKey.currentState!.context);
-  static var mediaQuery = MediaQuery.of(navigatorKey.currentState!.context);
+  const Token(this.value);
 }
 
 class HiveBoxKeys {
   static const String specialities = "specialities_box";
-  static const String doctorSpeciality = "doctor_speciality_box";
   static const String allDoctors = "all_doctors_box";
+}
+
+enum SortBySpecialization {
+  all(0),
+  cardiology(1),
+  dermatology(2),
+  neurology(3),
+  orthopedics(4),
+  pediatrics(5),
+  gynecology(6),
+  ophthalmology(7),
+  urology(8),
+  gastroenterology(9),
+  psychiatry(10);
+
+  final int value;
+
+  const SortBySpecialization(this.value);
+}
+
+enum SortByDegree {
+  all("All"),
+  consultant("Consultant"),
+  specialist("Specialist"),
+  professor("Professor");
+
+  final String value;
+
+  const SortByDegree(this.value);
 }
