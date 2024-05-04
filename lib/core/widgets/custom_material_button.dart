@@ -11,6 +11,7 @@ class CustomMaterialButton extends StatelessWidget {
   final TextStyle? titleStyle;
   final Widget? child;
   final bool enabled;
+  final bool loading;
   final VoidCallback onClicked;
 
   const CustomMaterialButton({
@@ -26,6 +27,7 @@ class CustomMaterialButton extends StatelessWidget {
     this.titleStyle,
     this.child,
     this.enabled = true,
+    this.loading = false,
   });
 
   @override
@@ -34,7 +36,7 @@ class CustomMaterialButton extends StatelessWidget {
 
     return MaterialButton(
       onPressed: () {
-        if (enabled) {
+        if (enabled && !loading) {
           onClicked();
         }
       },
@@ -42,7 +44,9 @@ class CustomMaterialButton extends StatelessWidget {
       minWidth: width ?? double.maxFinite,
       elevation: elevation,
       padding: padding,
-      color: backgroundColor ?? theme.colorScheme.primary,
+      color: loading
+          ? (backgroundColor ?? theme.colorScheme.primary).withOpacity(0.5)
+          : (backgroundColor ?? theme.colorScheme.primary),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius ?? 16.r),
       ),
