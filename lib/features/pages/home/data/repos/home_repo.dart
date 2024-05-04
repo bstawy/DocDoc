@@ -17,20 +17,8 @@ class HomeRepo {
   Future<ApiResult<List<DoctorSpecialityModel>>>
       getDoctorSpecialityData() async {
     try {
-      List<DoctorSpecialityModel> cachedData = _hiveManager
-          .retrieveData<DoctorSpecialityModel>(HiveBoxKeys.doctorSpeciality);
-
-      if (cachedData.isNotEmpty && cachedData.length == 10) {
-        debugPrint("Specialist data retrieved from cache");
-        return ApiResult.success(cachedData);
-      }
-
       final response = await _apiService.getDoctorSpecialityData();
 
-      _hiveManager.cacheData<DoctorSpecialityModel>(
-        boxKey: HiveBoxKeys.doctorSpeciality,
-        dataList: response.homeData,
-      );
       debugPrint("Specialist data retrieved from api");
 
       return ApiResult.success(response.homeData);

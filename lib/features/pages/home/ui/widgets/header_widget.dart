@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/config/theme/colors/light_color_scheme.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
+import '../../../../layout/logic/layout_cubit.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key});
@@ -17,7 +19,7 @@ class Header extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi Omar!',
+              "Hi ${context.read<LayoutCubit>().name ?? "user"}!",
               textAlign: TextAlign.start,
               style: TextStyles.font18DarkBlueBold,
             ),

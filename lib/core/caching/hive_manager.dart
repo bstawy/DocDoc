@@ -33,7 +33,6 @@ class HiveManager {
 
   Future<void> _openHiveBoxes() async {
     await Hive.openBox<DoctorSpecialityModel>(HiveBoxKeys.specialities);
-    await Hive.openBox<DoctorSpecialityModel>(HiveBoxKeys.doctorSpeciality);
     await Hive.openBox<DoctorModel>(HiveBoxKeys.allDoctors);
   }
 
@@ -50,7 +49,16 @@ class HiveManager {
 
   List<T> retrieveData<T>(String boxKey) {
     var box = Hive.box<T>(boxKey);
-
     return box.values.toList();
+  }
+
+  void clearData<T>(String boxKey) {
+    var box = Hive.box<T>(boxKey);
+    box.clear();
+  }
+
+  void clearAllData() {
+    Hive.box<DoctorSpecialityModel>(HiveBoxKeys.specialities).clear();
+    Hive.box<DoctorModel>(HiveBoxKeys.allDoctors).clear();
   }
 }

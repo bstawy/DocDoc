@@ -12,6 +12,10 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LayoutCubit layoutCubit = context.read<LayoutCubit>();
+    final String? userName =
+        ModalRoute.of(context)!.settings.arguments as String?;
+    layoutCubit.name = userName;
+
     return BlocBuilder<LayoutCubit, LayoutState>(
       bloc: context.read<LayoutCubit>(),
       builder: (context, state) {

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'token_interceptor.dart';
@@ -28,51 +29,14 @@ class DioFactory {
     freeDio?.interceptors.addAll(
       [
         TokenInterceptor(),
-        PrettyDioLogger(
-          requestBody: true,
-          requestHeader: true,
-          responseHeader: true,
-        ),
+        !kReleaseMode
+            ? PrettyDioLogger(
+                requestBody: true,
+                requestHeader: true,
+                responseHeader: true,
+              )
+            : const Interceptor(),
       ],
     );
   }
-
-  // static Dio? tokenDio;
-
-  // static Dio getTokenDio() {
-  //   Duration timeOut = const Duration(seconds: 30);
-
-  //   if (tokenDio == null) {
-  //     tokenDio = Dio();
-  //     tokenDio!
-  //       ..options.connectTimeout = timeOut
-  //       ..options.receiveTimeout = timeOut;
-  //     addTokenDioInterceptors();
-  //     return tokenDio!;
-  //   } else {
-  //     return tokenDio!;
-  //   }
-  // }
-
-  // static void addTokenDioInterceptors() {
-  //   tokenDio?.interceptors.addAll(
-  //     [
-  //       PrettyDioLogger(
-  //         requestBody: true,
-  //         requestHeader: true,
-  //         responseHeader: true,
-  //       ),
-  //       InterceptorsWrapper(
-  //         onRequest: (options, handler) async {
-  //           String? mytoken =
-  //               await SecureStorage.getInstance().read(key: "mytoken");
-  //           options.headers['Authorization'] = "Bearer${mytoken!}";
-  //         },
-  //         onError: (DioException e, handler) {
-  //           log(e.message!);
-  //         },
-  //       ),
-  //     ],
-  //   );
-  // }
 }

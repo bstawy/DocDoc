@@ -28,7 +28,7 @@ class BottomNavIconWidget extends StatelessWidget {
         return IconButton(
           onPressed: () {
             if (layoutCubit.currentPageIndex != index) {
-              layoutCubit.changeLayoutState(index);
+              layoutCubit.changePage(index);
             }
           },
           icon: index < 4
