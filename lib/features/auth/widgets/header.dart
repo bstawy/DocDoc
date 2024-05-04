@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../../core/config/theme/texts/text_styles.dart';
 import '../../../core/helpers/extensions/extensions.dart';
@@ -23,7 +24,7 @@ class WelcomeHeader extends StatelessWidget {
           title,
           style: TextStyles.font24BlueBold,
         ),
-        verticalSpace(8.h),
+        Gap(8.h),
         Text(
           description,
           style: TextStyles.font14GreyRegular,

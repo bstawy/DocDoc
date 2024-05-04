@@ -21,15 +21,15 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<RegisterResponse> register(
-      RegisterRequestBody registerRequestBody) async {
+  Future<RegisterResponseModel> register(
+      RegisterRequestBodyModel registerRequestBody) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(registerRequestBody.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<RegisterResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -45,19 +45,20 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = RegisterResponse.fromJson(_result.data!);
+    final value = RegisterResponseModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<LoginResponse> login(LoginRequestBody loginRequestBody) async {
+  Future<LoginResponseModel> login(
+      LoginRequestBodyModel loginRequestBody) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(loginRequestBody.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -73,7 +74,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = LoginResponse.fromJson(_result.data!);
+    final value = LoginResponseModel.fromJson(_result.data!);
     return value;
   }
 

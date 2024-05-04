@@ -1,42 +1,42 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/repos/home_repo.dart';
-import 'home_state.dart';
+import 'home_states.dart';
 
-class HomeCubit extends Cubit<HomeState> {
+class HomeCubit extends Cubit<HomeStates> {
   final HomeRepo _homeRepo;
 
-  HomeCubit(this._homeRepo) : super(const HomeState.initial());
+  HomeCubit(this._homeRepo) : super(const HomeStates.initial());
 
   void getDoctorSpecialityData() async {
-    emit(const HomeState.doctorSpecialityLoading());
+    emit(const HomeStates.doctorSpecialityLoading());
 
     final response = await _homeRepo.getDoctorSpecialityData();
 
     response.when(
       success: (response) {
-        emit(HomeState.doctorSpecialitySuccess(response));
+        emit(HomeStates.doctorSpecialitySuccess(response));
       },
       failure: (error) {
         emit(
-          HomeState.failure(error: error.apiErrorModel.message ?? ""),
+          HomeStates.failure(error: error.apiErrorModel.message ?? ""),
         );
       },
     );
   }
 
   void getAllDoctorsData() async {
-    emit(const HomeState.doctorListLoading());
+    emit(const HomeStates.doctorListLoading());
 
     final response = await _homeRepo.getAllDoctorsData();
 
     response.when(
       success: (response) {
-        emit(HomeState.doctorListSuccess(response));
+        emit(HomeStates.doctorListSuccess(response));
       },
       failure: (error) {
         emit(
-          HomeState.failure(error: error.apiErrorModel.message ?? ""),
+          HomeStates.failure(error: error.apiErrorModel.message ?? ""),
         );
       },
     );

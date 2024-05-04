@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import '../../core/config/routing/routes.dart';
 import '../../core/config/theme/texts/text_styles.dart';
@@ -19,16 +20,16 @@ class OnBoardingScreen extends StatelessWidget {
           child: Column(
             children: [
               const HeaderLogoAndName(),
-              verticalSpace(40.h),
+              Gap(40.h),
               const DoctorImageAndText(),
               Column(
                 children: [
                   Text(
-                    "Manage and schedule all of your medical appointments easily with Docdoc to get a new experience.",
+                    "Manage and schedule all of your medical appointments easily with DocDoc to get a new experience.",
                     textAlign: TextAlign.center,
                     style: TextStyles.font12GreyRegular,
                   ),
-                  verticalSpace(32.h),
+                  Gap(32.h),
                   CustomMaterialButton(
                     onClicked: () {
                       context.pushNamed(Routes.loginScreen);

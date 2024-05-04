@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
-import '../../../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../../../core/helpers/shimmer_loading_effect/circular_shimmer_effect.dart';
 import '../../../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
 import '../../../../data/models/doctor_speciality_model.dart';
 import '../../../widgets/specialty_widget.dart';
 import '../logic/specialities_cubit.dart';
-import '../logic/specialities_state.dart';
+import '../logic/specialities_states.dart';
 
 class SpecialitiesScreen extends StatelessWidget {
   const SpecialitiesScreen({super.key});
@@ -24,14 +24,9 @@ class SpecialitiesScreen extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        centerTitle: true,
-        title: Text(
-          'Doctor Specialities',
-          style: TextStyles.font18DarkBlueBold,
-        ),
-        elevation: 0,
+        title: const Text('Doctor Specialities'),
       ),
-      body: BlocBuilder<SpecialitiesCubit, SpecialitiesState>(
+      body: BlocBuilder<SpecialitiesCubit, SpecialitiesStates>(
         bloc: context.read<SpecialitiesCubit>()..getSpecialities(),
         builder: (context, state) {
           return state.whenOrNull(
@@ -48,7 +43,7 @@ class SpecialitiesScreen extends StatelessWidget {
   Widget _buildLoadingWidget() {
     return Column(
       children: [
-        verticalSpace(32.h),
+        Gap(32.h),
         Expanded(
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -66,7 +61,7 @@ class SpecialitiesScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const CircularShimmerEffect(),
-                    verticalSpace(12.h),
+                    Gap(12.h),
                     const RectShimmerEffect(width: 30, height: 10),
                   ],
                 ),
@@ -81,7 +76,7 @@ class SpecialitiesScreen extends StatelessWidget {
   Widget _buildSuccessWidget(List<DoctorSpecialityModel> data) {
     return Column(
       children: [
-        verticalSpace(32.h),
+        Gap(32.h),
         Expanded(
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

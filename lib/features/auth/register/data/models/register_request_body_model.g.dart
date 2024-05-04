@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'register_request_body.dart';
+part of 'register_request_body_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Map<String, dynamic> _$RegisterRequestBodyToJson(
-        RegisterRequestBody instance) =>
+Map<String, dynamic> _$RegisterRequestBodyModelToJson(
+        RegisterRequestBodyModel instance) =>
     <String, dynamic>{
       'name': instance.name,
       'email': instance.email,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../logic/layout_cubit.dart';
-import '../logic/layout_state.dart';
+import '../logic/layout_states.dart';
 import 'widgets/bottom_nav_bar.dart';
 import 'widgets/floating_action_button.dart';
 
@@ -12,11 +12,8 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LayoutCubit layoutCubit = context.read<LayoutCubit>();
-    final String? userName =
-        ModalRoute.of(context)!.settings.arguments as String?;
-    layoutCubit.name = userName;
 
-    return BlocBuilder<LayoutCubit, LayoutState>(
+    return BlocBuilder<LayoutCubit, LayoutStates>(
       bloc: context.read<LayoutCubit>(),
       builder: (context, state) {
         return Scaffold(

@@ -1,9 +1,10 @@
-import 'package:docdoc/core/config/theme/texts/text_styles.dart';
-import 'package:docdoc/core/helpers/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
-import '../../../../../core/config/theme/colors/light_color_scheme.dart';
+import '../../../../../core/config/theme/colors/colors_manager.dart';
+import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../core/helpers/extensions/extensions.dart';
 
 class MessageWidget extends StatelessWidget {
   const MessageWidget({super.key});
@@ -33,7 +34,7 @@ class MessageWidget extends StatelessWidget {
                     "General Doctor",
                     style: TextStyles.font12GreyRegular,
                   ),
-                  verticalSpace(8.h),
+                  Gap(8.h),
                   Text(
                     "Fine, I'll do a check. Does the patient have a history of certain diseases?",
                     style: TextStyles.font12GreyRegular,
@@ -41,14 +42,14 @@ class MessageWidget extends StatelessWidget {
                 ],
               ),
             ),
-            horizontalSpace(16.w),
+            Gap(16.w),
             Column(
               children: [
                 Text(
                   "7:15 AM",
                   style: TextStyles.font12GreyRegular,
                 ),
-                verticalSpace(32.h),
+                Gap(32.h),
                 Container(
                   width: 20.r,
                   height: 20.r,
@@ -68,12 +69,12 @@ class MessageWidget extends StatelessWidget {
             ),
           ],
         ).setHorizontalPadding(16.w),
-        verticalSpace(16.h),
+        Gap(16.h),
         const Divider(
           color: ColorsManager.lightGrey,
           thickness: 0.5,
         ).setHorizontalPadding(16.w),
-        verticalSpace(16.h),
+        Gap(16.h),
       ],
     );
   }

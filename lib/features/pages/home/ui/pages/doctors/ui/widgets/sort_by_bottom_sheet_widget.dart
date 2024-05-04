@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
+import '../../../../../../../../core/config/Constants/app_constants.dart';
 import '../../../../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../../../../core/widgets/custom_material_button.dart';
@@ -10,6 +12,7 @@ import '../../logic/doctors_cubit.dart';
 import 'sort_by_item_widget.dart';
 
 class SortByBottomSheetWidget extends StatefulWidget {
+  // TODO: make it generic
   final List<DoctorModel> doctors;
 
   const SortByBottomSheetWidget({
@@ -64,7 +67,7 @@ class _SortByBottomSheetWidgetState extends State<SortByBottomSheetWidget> {
       ),
       child: Column(
         children: [
-          verticalSpace(16.h),
+          Gap(16.h),
           Container(
             width: 0.2.sw,
             height: 4.h,
@@ -73,12 +76,12 @@ class _SortByBottomSheetWidgetState extends State<SortByBottomSheetWidget> {
               borderRadius: BorderRadius.circular(10.r),
             ),
           ),
-          verticalSpace(24.h),
+          Gap(24.h),
           Text(
             'Sort By',
             style: TextStyles.font18DarkBlueBold,
           ),
-          verticalSpace(24.h),
+          Gap(24.h),
           Container(
             width: 0.7.sw,
             height: 2.h,
@@ -87,11 +90,24 @@ class _SortByBottomSheetWidgetState extends State<SortByBottomSheetWidget> {
               borderRadius: BorderRadius.circular(10.r),
             ),
           ),
-          verticalSpace(32.h),
-          SortByItemWidget(title: 'Speciality', items: specialities),
-          verticalSpace(32.h),
-          SortByItemWidget(title: 'Degree', items: degrees),
-          verticalSpace(40.h),
+          Gap(32.h),
+          SortByItemWidget(
+            title: 'Speciality',
+            items: specialities,
+            sort: () {
+              context.read<DoctorsCubit>().sortBySpecialization =
+                  specialities[0].$2;
+            },
+          ),
+          Gap(32.h),
+          SortByItemWidget(
+            title: 'Degree',
+            items: degrees,
+            sort: () {
+              context.read<DoctorsCubit>().sortByDegree = degrees[0].$2;
+            },
+          ),
+          Gap(40.h),
           CustomMaterialButton(
             onClicked: () {
               context.read<DoctorsCubit>().sortDoctors(widget.doctors);

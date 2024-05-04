@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../config/theme/colors/colors_manager.dart';
 import '../config/theme/texts/text_styles.dart';
 
 class CustomMaterialButton extends StatelessWidget {
@@ -11,6 +12,7 @@ class CustomMaterialButton extends StatelessWidget {
   final TextStyle? titleStyle;
   final Widget? child;
   final bool enabled;
+  final bool loading;
   final VoidCallback onClicked;
 
   const CustomMaterialButton({
@@ -26,15 +28,14 @@ class CustomMaterialButton extends StatelessWidget {
     this.titleStyle,
     this.child,
     this.enabled = true,
+    this.loading = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return MaterialButton(
       onPressed: () {
-        if (enabled) {
+        if (enabled && !loading) {
           onClicked();
         }
       },
@@ -42,15 +43,20 @@ class CustomMaterialButton extends StatelessWidget {
       minWidth: width ?? double.maxFinite,
       elevation: elevation,
       padding: padding,
-      color: backgroundColor ?? theme.colorScheme.primary,
+      color: loading
+          ? (backgroundColor ?? ColorsManager.mainBlue).withOpacity(0.5)
+          : (backgroundColor ?? ColorsManager.mainBlue),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius ?? 16.r),
       ),
-      child: child ??
-          Text(
-            title ?? "Continue",
-            style: titleStyle ?? TextStyles.font16WhiteSemiBold,
-          ),
+      child: loading
+          ? const CircularProgressIndicator(
+              color: Colors.white,
+            )
+          : Text(
+              title ?? "Continue",
+              style: titleStyle ?? TextStyles.font16WhiteSemiBold,
+            ),
     );
   }
 }

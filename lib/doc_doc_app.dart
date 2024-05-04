@@ -6,8 +6,6 @@ import 'core/config/routing/app_router.dart';
 import 'core/config/routing/routes.dart';
 import 'core/config/theme/theme_data/app_theme.dart';
 
-GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 class DocDocApp extends StatelessWidget {
   final AppRouter appRouter;
 
@@ -27,7 +25,6 @@ class DocDocApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,
         theme: AppTheme.lightThemeData,
-        navigatorKey: navigatorKey,
         onGenerateRoute: appRouter.generateRoute,
         initialRoute: Routes.splashScreen,
         builder: BotToastInit(),

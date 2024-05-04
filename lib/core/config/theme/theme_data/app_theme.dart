@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../colors/colors_manager.dart';
 import '../colors/light_color_scheme.dart';
 import '../texts/font_weight_helper.dart';
 
@@ -18,14 +19,6 @@ class AppTheme {
         fontWeight: FontWeightHelper.bold,
         color: ColorsManager.darkBlue,
       ),
-    ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      selectedItemColor: ColorsManager.mainBlue,
-      unselectedItemColor: ColorsManager.darkBlue,
     ),
   );
 }

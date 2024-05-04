@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'register_request_body.g.dart';
+part 'register_request_body_model.g.dart';
 
 @JsonSerializable()
-class RegisterRequestBody {
+class RegisterRequestBodyModel {
   final String name;
   final String email;
   final String phone;
@@ -12,7 +12,7 @@ class RegisterRequestBody {
   final String passwordConfirmation;
   final int gender;
 
-  RegisterRequestBody({
+  RegisterRequestBodyModel({
     required this.name,
     required this.email,
     required this.phone,
@@ -21,5 +21,5 @@ class RegisterRequestBody {
     this.gender = 0,
   });
 
-  Map<String, dynamic> toJson() => _$RegisterRequestBodyToJson(this);
+  Map<String, dynamic> toJson() => _$RegisterRequestBodyModelToJson(this);
 }
