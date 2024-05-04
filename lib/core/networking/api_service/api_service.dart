@@ -7,6 +7,7 @@ import '../../../features/auth/register/data/models/register_request_body.dart';
 import '../../../features/auth/register/data/models/register_response.dart';
 import '../../../features/pages/home/data/models/all_doctors_response_model.dart';
 import '../../../features/pages/home/data/models/doctor_speciality_response_model.dart';
+import '../../../features/pages/profile/data/models/logout_response_model.dart';
 import '../api_constants.dart';
 
 part 'api_service.g.dart';
@@ -15,15 +16,18 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
+  @POST(EndPoints.registerEndPoint)
+  Future<RegisterResponse> register(
+    @Body() RegisterRequestBody registerRequestBody,
+  );
+
   @POST(EndPoints.loginEndPoint)
   Future<LoginResponse> login(
     @Body() LoginRequestBody loginRequestBody,
   );
 
-  @POST(EndPoints.registerEndPoint)
-  Future<RegisterResponse> register(
-    @Body() RegisterRequestBody registerRequestBody,
-  );
+  @POST(EndPoints.logoutEndPoint)
+  Future<LogoutResponseModel> logout();
 
   @GET(EndPoints.allSpecialitiesEndPoint)
   Future<DoctorSpecialityResponseModel> getAllSpecialities();

@@ -21,6 +21,35 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
+  Future<RegisterResponse> register(
+      RegisterRequestBody registerRequestBody) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(registerRequestBody.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'auth/register',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = RegisterResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<LoginResponse> login(LoginRequestBody loginRequestBody) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -49,22 +78,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<RegisterResponse> register(
-      RegisterRequestBody registerRequestBody) async {
+  Future<LogoutResponseModel> logout() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(registerRequestBody.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<RegisterResponse>(Options(
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<LogoutResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'auth/register',
+              'auth/logout',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -73,7 +100,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = RegisterResponse.fromJson(_result.data!);
+    final value = LogoutResponseModel.fromJson(_result.data!);
     return value;
   }
 
