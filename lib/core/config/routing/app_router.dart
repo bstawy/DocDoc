@@ -12,6 +12,7 @@ import '../../../features/pages/home/ui/pages/specialities/logic/specialities_cu
 import '../../../features/pages/home/ui/pages/specialities/ui/specialities_screen.dart';
 import '../../../features/splash/splash_screen.dart';
 import '../../di/dependency_injection.dart';
+import 'no_route_defined_widget.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -39,7 +40,7 @@ class AppRouter {
       case Routes.layoutScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => LayoutCubit(),
+            create: (_) => getIt<LayoutCubit>(),
             child: const LayoutScreen(),
           ),
         );
@@ -65,25 +66,5 @@ class AppRouter {
           builder: (_) => NoRouteDefinedWidget(settings: settings),
         );
     }
-  }
-}
-
-class NoRouteDefinedWidget extends StatelessWidget {
-  final RouteSettings settings;
-  const NoRouteDefinedWidget({super.key, required this.settings});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          "No Route Defined for ${settings.name}",
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
   }
 }
