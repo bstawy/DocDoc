@@ -1,3 +1,4 @@
+import 'package:docdoc/features/auth/login/data/models/login_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -118,9 +119,13 @@ class _LoginFormState extends State<LoginForm> {
             listener: (context, state) {
               state.whenOrNull(
                 success: (loginResponse) {
+                  final LoginResponse response = loginResponse;
                   logging = false;
-                  context.pushNamedAndRemoveUntil(Routes.layoutScreen,
-                      predicate: ModalRoute.withName(Routes.splashScreen));
+                  context.pushNamedAndRemoveUntil(
+                    Routes.layoutScreen,
+                    predicate: ModalRoute.withName(Routes.splashScreen),
+                    arguments: response.userData.userName,
+                  );
                 },
                 failure: (errorMsg) {
                   logging = false;
