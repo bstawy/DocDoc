@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/config/theme/colors/light_color_scheme.dart';
+import '../../../../core/config/theme/colors/colors_manager.dart';
 import '../../logic/layout_cubit.dart';
-import '../../logic/layout_state.dart';
+import '../../logic/layout_states.dart';
 
 class BottomNavIconWidget extends StatelessWidget {
   final String selectedIconPath;
@@ -23,12 +23,12 @@ class BottomNavIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final LayoutCubit layoutCubit = context.read<LayoutCubit>();
 
-    return BlocBuilder<LayoutCubit, LayoutState>(
+    return BlocBuilder<LayoutCubit, LayoutStates>(
       builder: (context, state) {
         return IconButton(
           onPressed: () {
             if (layoutCubit.currentPageIndex != index) {
-              layoutCubit.changeLayoutState(index);
+              layoutCubit.changePage(index);
             }
           },
           icon: index < 4

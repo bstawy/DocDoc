@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
-import '../../../../../core/config/theme/colors/light_color_scheme.dart';
+import '../../../../../core/config/routing/routes.dart';
+import '../../../../../core/config/theme/colors/colors_manager.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../core/helpers/custom_snackbar.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/validators.dart';
 import '../../../../../core/widgets/custom_material_button.dart';
 import '../../../../../core/widgets/custom_text_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../widgets/password_validations.dart';
-import '../../data/models/login_request_body.dart';
+import '../../data/models/login_request_body_model.dart';
 import '../../logic/login_cubit.dart';
-import 'login_bloc_listener.dart';
+import '../../logic/login_states.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -31,6 +34,8 @@ class _LoginFormState extends State<LoginForm> {
   bool hasSpecialCharacter = false;
   bool hasNumber = false;
   bool hasMinLength = false;
+
+  bool logging = false;
 
   @override
   void initState() {
@@ -59,7 +64,6 @@ class _LoginFormState extends State<LoginForm> {
       key: loginFormKey,
       child: Column(
         children: [
-          const LoginBlocListener(),
           CustomTextFormField(
             controller: _emailController,
             validator: (value) {
@@ -67,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
             },
             hint: "Email",
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           CustomTextFormField(
             controller: _passwordController,
             hint: "Password",
@@ -78,7 +82,7 @@ class _LoginFormState extends State<LoginForm> {
               return Validators.validatePassword(value);
             },
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           PasswordValidations(
             isPasswordEmpty: _passwordController.text.isEmpty,
             hasLowerCase: hasLowerCase,
@@ -87,24 +91,64 @@ class _LoginFormState extends State<LoginForm> {
             hasNumber: hasNumber,
             hasMinLength: hasMinLength,
           ),
-          verticalSpace(8.h),
+          Gap(8.h),
           Align(
             alignment: Alignment.centerRight,
             child: CustomTextButton(
               onPressed: () {
-                // TODO: navigate to forgot password screen
+                CustomSnackBar.showErrorMessage(
+                  context,
+                  "Reset password is not available yet.",
+                );
               },
               horizontalPadding: 4.w,
               verticalPadding: 4.h,
               text: "Forgot password?",
             ),
           ),
-          verticalSpace(24.h),
-          CustomMaterialButton(
-            onClicked: () {
-              validateAndLogin(context);
+          Gap(24.h),
+          BlocConsumer<LoginCubit, LoginStates>(
+            bloc: context.read<LoginCubit>(),
+            buildWhen: (previous, current) {
+              if (current is Success) return false;
+
+              return true;
             },
-            title: "Login",
+            listenWhen: (previous, current) {
+              if (current is Success || current is Failure) return true;
+
+              return false;
+            },
+            listener: (context, state) {
+              state.whenOrNull(
+                success: (loginResponse) {
+                  logging = false;
+                  context.pushNamedAndRemoveUntil(
+                    Routes.layoutScreen,
+                    predicate: ModalRoute.withName(Routes.splashScreen),
+                  );
+                },
+                failure: (errorMsg) {
+                  logging = false;
+                  CustomSnackBar.showErrorMessage(context, errorMsg);
+                },
+              );
+            },
+            builder: (context, state) {
+              state.whenOrNull(
+                loading: () {
+                  logging = true;
+                },
+              );
+              return CustomMaterialButton(
+                onClicked: () {
+                  validateAndLogin(context);
+                },
+                loading: logging,
+                enabled: !logging,
+                title: "Login",
+              );
+            },
           ),
         ],
       ).setHorizontalPadding(24.w),
@@ -116,9 +160,9 @@ class _LoginFormState extends State<LoginForm> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          icon: Icon(
+          icon: const Icon(
             Icons.error_rounded,
-            color: context.theme.colorScheme.error,
+            color: ColorsManager.red,
             size: 35,
           ),
           content: Text(
@@ -126,7 +170,7 @@ class _LoginFormState extends State<LoginForm> {
             textAlign: TextAlign.center,
             style: TextStyles.font14DarkBlueMedium,
           ),
-          backgroundColor: context.theme.colorScheme.background,
+          backgroundColor: ColorsManager.white,
           actionsAlignment: MainAxisAlignment.center,
           actions: [
             CustomMaterialButton(
@@ -150,7 +194,7 @@ class _LoginFormState extends State<LoginForm> {
   void validateAndLogin(BuildContext context) {
     if (loginFormKey.currentState!.validate()) {
       context.read<LoginCubit>().login(
-            LoginRequestBody(
+            LoginRequestBodyModel(
               email: _emailController.text,
               password: _passwordController.text,
             ),

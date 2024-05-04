@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../colors/light_color_scheme.dart';
+import '../colors/colors_manager.dart';
 import 'font_weight_helper.dart';
 
 class TextStyles {
@@ -33,6 +33,12 @@ class TextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.white,
+  );
+
+  static TextStyle font16DarkBlueMedium = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.darkBlue,
   );
 
   static TextStyle font14DarkBlueMedium = TextStyle(

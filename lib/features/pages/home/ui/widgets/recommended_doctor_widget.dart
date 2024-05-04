@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
-import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
 import '../../data/models/doctor_model.dart';
 import '../../logic/home_cubit.dart';
-import '../../logic/home_state.dart';
+import '../../logic/home_states.dart';
 import 'doctor_widget.dart';
+import 'section_header_widget.dart';
 
 class RecommendedDoctor extends StatelessWidget {
   const RecommendedDoctor({super.key});
@@ -17,26 +19,15 @@ class RecommendedDoctor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            Text(
-              "Recommended Doctor",
-              style: TextStyles.font18DarkBlueBold,
-            ),
-            const Spacer(),
-            TextButton(
-              onPressed: () {
-                // TODO: see all doctors
-              },
-              child: Text(
-                "See all",
-                style: TextStyles.font12BlueRegular,
-              ),
-            ),
-          ],
-        ),
-        verticalSpace(8.h),
-        BlocBuilder<HomeCubit, HomeState>(
+        SectionHeader(
+          title: "Recommended Doctors",
+          actionText: "See all",
+          onActionTap: () {
+            context.pushNamed(Routes.doctorsScreen);
+          },
+        ).setHorizontalPadding(16.w),
+        Gap(8.h),
+        BlocBuilder<HomeCubit, HomeStates>(
           bloc: context.read<HomeCubit>()..getAllDoctorsData(),
           buildWhen: (previous, current) {
             if (current is DoctorListLoading || current is DoctorListSuccess) {
@@ -56,7 +47,7 @@ class RecommendedDoctor extends StatelessWidget {
                 const SizedBox();
           },
         ).setHorizontalPadding(8.w),
-        verticalSpace(16.h),
+        Gap(16.h),
       ],
     );
   }
@@ -71,19 +62,19 @@ class RecommendedDoctor extends StatelessWidget {
               width: 110,
               height: 110,
             ),
-            horizontalSpace(16.w),
+            Gap(16.w),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const RectShimmerEffect(width: 90, height: 10),
-                verticalSpace(16.h),
+                Gap(16.h),
                 const RectShimmerEffect(width: 90, height: 10),
-                verticalSpace(16.h),
+                Gap(16.h),
                 const RectShimmerEffect(width: 90, height: 10),
               ],
             ),
           ],
-        ).setOnlyPadding(0, 16.h, 0, 0),
+        ).setOnlyPadding(0, 20.h, 0, 0),
       ),
     );
   }
@@ -94,6 +85,6 @@ class RecommendedDoctor extends StatelessWidget {
         3,
         (index) => DoctorWidget(doctor: doctors[index]),
       ),
-    );
+    ).setOnlyPadding(0, 16.h, 0, 0);
   }
 }

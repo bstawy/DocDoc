@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../core/caching/secure_storage_factory.dart';
+import '../../core/config/Constants/app_constants.dart';
 import '../../core/config/routing/routes.dart';
 import '../../core/helpers/extensions/extensions.dart';
 
@@ -26,12 +27,13 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     )..forward().then(
         (value) async {
-          String mytoken =
-              await SecureStorage.getInstance().read(key: "mytoken") ?? "";
+          String mytoken = await SecureStorage.getInstance()
+                  .read(key: Token.userToken.value) ??
+              "";
 
           if (mytoken.isNotEmpty) {
             if (mounted) {
-              Navigator.pushReplacementNamed(context, Routes.layoutScreen);
+              context.pushReplacementNamed(Routes.layoutScreen);
             }
           } else {
             if (mounted) {
@@ -43,12 +45,6 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -57,5 +53,11 @@ class _SplashScreenState extends State<SplashScreen>
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

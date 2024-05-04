@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-part 'colors.dart';
+import 'colors_manager.dart';
 
 ColorScheme getLightColorScheme() {
   return ColorScheme.fromSeed(

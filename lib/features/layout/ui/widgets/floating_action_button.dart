@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/helpers/extensions/extensions.dart';
+import '../../../../core/config/theme/colors/colors_manager.dart';
 import '../../logic/layout_cubit.dart';
 
 class FloatingActionButtonWidget extends StatelessWidget {
@@ -16,14 +16,14 @@ class FloatingActionButtonWidget extends StatelessWidget {
       height: 80.h,
       padding: EdgeInsets.all(4.r),
       decoration: BoxDecoration(
-        color: context.colorScheme.background,
+        color: ColorsManager.white,
         borderRadius: BorderRadius.circular(32.r),
       ),
       child: FloatingActionButton(
         onPressed: () {
-          context.read<LayoutCubit>().changeLayoutState(2);
+          context.read<LayoutCubit>().changePage(2);
         },
-        backgroundColor: context.colorScheme.primary,
+        backgroundColor: ColorsManager.mainBlue,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(28.r),
@@ -31,7 +31,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
         child: SvgPicture.asset(
           'assets/icons/nav_bar_search_icon.svg',
           colorFilter:
-              ColorFilter.mode(context.colorScheme.onPrimary, BlendMode.srcIn),
+              const ColorFilter.mode(ColorsManager.white, BlendMode.srcIn),
           width: 24.w,
           height: 24.h,
         ),

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
+import '../../../../../core/helpers/custom_snackbar.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/validators.dart';
 import '../../../../../core/widgets/custom_material_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../widgets/password_validations.dart';
-import '../../data/models/register_request_body.dart';
+import '../../data/models/register_request_body_model.dart';
 import '../../logic/register_cubit.dart';
-import 'register_bloc_listener.dart';
+import '../../logic/register_states.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -32,6 +34,8 @@ class _RegisterFormState extends State<RegisterForm> {
   bool hasNumber = false;
   bool hasMinLength = false;
   bool enablePasswordConfirmation = false;
+
+  bool registering = false;
 
   @override
   void initState() {
@@ -68,7 +72,6 @@ class _RegisterFormState extends State<RegisterForm> {
       key: registerFormKey,
       child: Column(
         children: [
-          const RegisterBlocListener(),
           CustomTextFormField(
             controller: _usernameController,
             validator: (value) {
@@ -79,7 +82,7 @@ class _RegisterFormState extends State<RegisterForm> {
             },
             hint: "username",
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           CustomTextFormField(
             controller: _emailController,
             validator: (value) {
@@ -87,7 +90,7 @@ class _RegisterFormState extends State<RegisterForm> {
             },
             hint: "Email",
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           CustomTextFormField(
             controller: _phoneController,
             validator: (value) {
@@ -99,7 +102,7 @@ class _RegisterFormState extends State<RegisterForm> {
             },
             hint: "Phone Number",
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           CustomTextFormField(
             controller: _passwordController,
             hint: "Password",
@@ -109,7 +112,7 @@ class _RegisterFormState extends State<RegisterForm> {
               return Validators.validatePassword(value);
             },
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           CustomTextFormField(
             controller: _passwordConfirmationController,
             hint: "Password Confirmation",
@@ -124,7 +127,7 @@ class _RegisterFormState extends State<RegisterForm> {
               return null;
             },
           ),
-          verticalSpace(16.h),
+          Gap(16.h),
           PasswordValidations(
             isPasswordEmpty: _passwordController.text.isEmpty,
             hasLowerCase: hasLowerCase,
@@ -133,12 +136,56 @@ class _RegisterFormState extends State<RegisterForm> {
             hasNumber: hasNumber,
             hasMinLength: hasMinLength,
           ),
-          verticalSpace(24.h),
-          CustomMaterialButton(
-            onClicked: () {
-              validateAndRegister(context);
+          Gap(24.h),
+          BlocConsumer<RegisterCubit, RegisterStates>(
+            bloc: context.read<RegisterCubit>(),
+            buildWhen: (previous, current) {
+              if (current is Success || current is Failure) return false;
+
+              return true;
             },
-            title: "Register",
+            listenWhen: (previous, current) {
+              if (current is Success || current is Failure) return true;
+
+              return false;
+            },
+            listener: (context, state) {
+              state.whenOrNull(
+                success: (loginResponse) {
+                  registering = false;
+
+                  CustomSnackBar.showSuccessMessage(
+                    context,
+                    "Account created successfully",
+                  );
+                  context.pop();
+                },
+                failure: (errorMsg) {
+                  registering = false;
+                  CustomSnackBar.showErrorMessage(context, errorMsg);
+                },
+              );
+            },
+            builder: (context, state) {
+              state.whenOrNull(
+                loading: () {
+                  registering = true;
+                },
+              );
+              return CustomMaterialButton(
+                onClicked: () {
+                  validateAndRegister(context);
+                },
+                loading: registering,
+                enabled: !registering,
+                title: "Register",
+                child: registering
+                    ? const CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : null,
+              );
+            },
           ),
         ],
       ).setHorizontalPadding(24.w),
@@ -148,7 +195,7 @@ class _RegisterFormState extends State<RegisterForm> {
   void validateAndRegister(BuildContext context) {
     if (registerFormKey.currentState!.validate()) {
       context.read<RegisterCubit>().register(
-            RegisterRequestBody(
+            RegisterRequestBodyModel(
               name: _usernameController.text,
               phone: _phoneController.text,
               email: _emailController.text,

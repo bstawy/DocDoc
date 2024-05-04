@@ -6,7 +6,13 @@ import '../../../features/auth/register/ui/register_screen.dart';
 import '../../../features/layout/logic/layout_cubit.dart';
 import '../../../features/layout/ui/layout_screen.dart';
 import '../../../features/on_boarding/on_boarding_screen.dart';
+import '../../../features/pages/home/ui/pages/doctors/logic/doctors_cubit.dart';
+import '../../../features/pages/home/ui/pages/doctors/ui/doctors_screen.dart';
+import '../../../features/pages/home/ui/pages/specialities/logic/specialities_cubit.dart';
+import '../../../features/pages/home/ui/pages/specialities/ui/specialities_screen.dart';
 import '../../../features/splash/splash_screen.dart';
+import '../../di/dependency_injection.dart';
+import 'no_route_defined_widget.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -39,30 +45,26 @@ class AppRouter {
           ),
         );
 
+      case Routes.specialitiesScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<SpecialitiesCubit>(),
+            child: const SpecialitiesScreen(),
+          ),
+        );
+
+      case Routes.doctorsScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<DoctorsCubit>(),
+            child: const DoctorsScreen(),
+          ),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => NoRouteDefinedWidget(settings: settings),
         );
     }
-  }
-}
-
-class NoRouteDefinedWidget extends StatelessWidget {
-  final RouteSettings settings;
-  const NoRouteDefinedWidget({super.key, required this.settings});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          "No Route Defined for ${settings.name}",
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
   }
 }

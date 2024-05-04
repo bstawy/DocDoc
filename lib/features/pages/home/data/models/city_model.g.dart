@@ -51,7 +51,7 @@ class CityModelAdapter extends TypeAdapter<CityModel> {
 // **************************************************************************
 
 CityModel _$CityModelFromJson(Map<String, dynamic> json) => CityModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       governrate:
           GovernrateModel.fromJson(json['governrate'] as Map<String, dynamic>),

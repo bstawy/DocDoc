@@ -49,6 +49,6 @@ class SpecializationModelAdapter extends TypeAdapter<SpecializationModel> {
 
 SpecializationModel _$SpecializationModelFromJson(Map<String, dynamic> json) =>
     SpecializationModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
     );
