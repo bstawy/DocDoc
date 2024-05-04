@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../config/theme/colors/light_color_scheme.dart';
+import '../config/theme/colors/colors_manager.dart';
 import 'custom_text_form_field.dart';
 
 class CustomSearchBar extends StatefulWidget {

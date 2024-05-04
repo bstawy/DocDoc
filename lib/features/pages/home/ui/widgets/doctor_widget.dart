@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/config/theme/colors/light_color_scheme.dart';
+import '../../../../../core/config/theme/colors/colors_manager.dart';
 import '../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../data/models/doctor_model.dart';

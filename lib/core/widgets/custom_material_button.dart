@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../config/theme/colors/colors_manager.dart';
 import '../config/theme/texts/text_styles.dart';
 
 class CustomMaterialButton extends StatelessWidget {
@@ -32,8 +33,6 @@ class CustomMaterialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return MaterialButton(
       onPressed: () {
         if (enabled && !loading) {
@@ -45,16 +44,19 @@ class CustomMaterialButton extends StatelessWidget {
       elevation: elevation,
       padding: padding,
       color: loading
-          ? (backgroundColor ?? theme.colorScheme.primary).withOpacity(0.5)
-          : (backgroundColor ?? theme.colorScheme.primary),
+          ? (backgroundColor ?? ColorsManager.mainBlue).withOpacity(0.5)
+          : (backgroundColor ?? ColorsManager.mainBlue),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius ?? 16.r),
       ),
-      child: child ??
-          Text(
-            title ?? "Continue",
-            style: titleStyle ?? TextStyles.font16WhiteSemiBold,
-          ),
+      child: loading
+          ? const CircularProgressIndicator(
+              color: Colors.white,
+            )
+          : Text(
+              title ?? "Continue",
+              style: titleStyle ?? TextStyles.font16WhiteSemiBold,
+            ),
     );
   }
 }

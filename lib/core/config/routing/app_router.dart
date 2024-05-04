@@ -40,7 +40,7 @@ class AppRouter {
       case Routes.layoutScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => getIt<LayoutCubit>(),
+            create: (_) => LayoutCubit(),
             child: const LayoutScreen(),
           ),
         );
