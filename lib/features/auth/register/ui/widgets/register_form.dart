@@ -173,6 +173,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 onClicked: () {
                   validateAndRegister(context);
                 },
+                loading: registering,
                 enabled: !registering,
                 title: "Register",
                 child: registering

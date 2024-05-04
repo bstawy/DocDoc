@@ -96,7 +96,10 @@ class _LoginFormState extends State<LoginForm> {
             alignment: Alignment.centerRight,
             child: CustomTextButton(
               onPressed: () {
-                // TODO: navigate to forgot password screen
+                CustomSnackBar.showErrorMessage(
+                  context,
+                  "Reset password is not available yet.",
+                );
               },
               horizontalPadding: 4.w,
               verticalPadding: 4.h,
@@ -143,6 +146,7 @@ class _LoginFormState extends State<LoginForm> {
                 onClicked: () {
                   validateAndLogin(context);
                 },
+                loading: logging,
                 enabled: !logging,
                 title: "Login",
                 child: logging
