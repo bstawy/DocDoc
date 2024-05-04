@@ -23,9 +23,11 @@ class LayoutCubit extends Cubit<LayoutState> {
     const AppointmentScreen(),
     const ProfileScreen(),
   ];
-  int currentPageIndex = 0;
 
-  void changeLayoutState(int newIndex) {
+  int currentPageIndex = 0;
+  String? name;
+
+  void changePage(int newIndex) {
     currentPageIndex = newIndex;
     emit(LayoutState.success(currentPageIndex));
   }

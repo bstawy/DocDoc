@@ -21,7 +21,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
       ),
       child: FloatingActionButton(
         onPressed: () {
-          context.read<LayoutCubit>().changeLayoutState(2);
+          context.read<LayoutCubit>().changePage(2);
         },
         backgroundColor: context.colorScheme.primary,
         elevation: 0,
