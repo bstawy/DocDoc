@@ -79,7 +79,7 @@ class SearchScreen extends StatelessWidget {
             title: "Recent Searches",
             actionText: "Clear all history",
             onActionTap: () {
-              context.read<SearchCubit>().clearSearchHistory();
+              context.read<SearchCubit>().clearAllSearchHistory();
             },
           ).setHorizontalPadding(16.h),
           // Gap(16.h),
@@ -95,9 +95,14 @@ class SearchScreen extends StatelessWidget {
                   searchHistory[index],
                   style: TextStyles.font14GreyRegular,
                 ),
-                trailing: const Icon(
-                  Icons.close,
-                  color: ColorsManager.grey,
+                trailing: IconButton(
+                  onPressed: () {
+                    context.read<SearchCubit>().clearHistoryItem(index);
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    color: ColorsManager.grey,
+                  ),
                 ),
               ),
             ),
