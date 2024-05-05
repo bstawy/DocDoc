@@ -99,6 +99,8 @@ class SearchScreen extends StatelessWidget {
                   onPressed: () {
                     context.read<SearchCubit>().clearHistoryItem(index);
                   },
+                  padding: EdgeInsets.zero,
+                  alignment: Alignment.centerRight,
                   icon: const Icon(
                     Icons.close,
                     color: ColorsManager.grey,
@@ -106,7 +108,7 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ).setHorizontalPadding(16.h),
+          ).setOnlyPadding(0, 0, 8.w, 16.w),
         ],
       ),
     );
