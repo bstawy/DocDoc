@@ -34,6 +34,7 @@ class HiveManager {
   Future<void> _openHiveBoxes() async {
     await Hive.openBox<DoctorSpecialityModel>(HiveBoxKeys.specialities);
     await Hive.openBox<DoctorModel>(HiveBoxKeys.allDoctors);
+    await Hive.openBox<String>(HiveBoxKeys.searchHistory);
   }
 
   void cacheData<T>(
@@ -53,12 +54,16 @@ class HiveManager {
   }
 
   void clearData<T>(String boxKey) {
-    var box = Hive.box<T>(boxKey);
-    box.clear();
+    Hive.box<T>(boxKey).clear();
+  }
+
+  void clearItem<T>({required String boxKey, required int index}) {
+    Hive.box<T>(boxKey).deleteAt(index);
   }
 
   void clearAllData() {
     Hive.box<DoctorSpecialityModel>(HiveBoxKeys.specialities).clear();
     Hive.box<DoctorModel>(HiveBoxKeys.allDoctors).clear();
+    Hive.box<String>(HiveBoxKeys.searchHistory).clear();
   }
 }

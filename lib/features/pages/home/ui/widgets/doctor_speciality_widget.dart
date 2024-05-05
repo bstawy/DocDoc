@@ -7,10 +7,10 @@ import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/shimmer_loading_effect/circular_shimmer_effect.dart';
 import '../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
+import '../../../widgets/section_header_widget.dart';
 import '../../data/models/doctor_speciality_model.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_states.dart';
-import 'section_header_widget.dart';
 import 'specialty_widget.dart';
 
 class DoctorSpeciality extends StatelessWidget {

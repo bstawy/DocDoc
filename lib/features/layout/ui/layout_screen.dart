@@ -17,6 +17,7 @@ class LayoutScreen extends StatelessWidget {
       bloc: context.read<LayoutCubit>(),
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: SafeArea(
             child: state.whenOrNull(
                   initial: () {
@@ -30,7 +31,7 @@ class LayoutScreen extends StatelessWidget {
           ),
           floatingActionButton: const FloatingActionButtonWidget(),
           floatingActionButtonLocation:
-              FloatingActionButtonLocation.miniCenterDocked,
+              FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: const BottomNavBarWidget(),
         );
       },
