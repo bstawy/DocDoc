@@ -9,6 +9,8 @@ import '../../../../../../../core/config/theme/texts/font_weight_helper.dart';
 import '../../../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
+import '../../../../../search/logic/search_cubit.dart';
+import '../../../../../search/logic/search_states.dart';
 import '../../../../../widgets/search_bar_widget.dart';
 import '../../../../data/models/doctor_model.dart';
 import '../../../widgets/doctor_widget.dart';
@@ -41,8 +43,22 @@ class DoctorsScreen extends StatelessWidget {
             },
             child: state.whenOrNull(
                   doctorsListLoading: () => _buildLoadingWidget(),
-                  doctorsListSuccess: (data) =>
-                      _buildSuccessWidget(context, data),
+                  doctorsListSuccess: (data) {
+                    BlocBuilder<SearchCubit, SearchStates>(
+                      bloc: context.read<SearchCubit>(),
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                              searchListLoading: () => _buildLoadingWidget(),
+                              searchListSuccess: (data) {
+                                return _buildSuccessWidget(context, data);
+                              },
+                              orElse: () => _buildSuccessWidget(context, data),
+                            ) ??
+                            const SizedBox();
+                      },
+                    );
+                    return null;
+                  },
                 ) ??
                 const SizedBox(),
           );
