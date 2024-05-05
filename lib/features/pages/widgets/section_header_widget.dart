@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/config/theme/texts/text_styles.dart';
+import '../../../core/config/theme/texts/text_styles.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
-  final String actionText;
-  final Function() onActionTap;
+  final String? actionText;
+  final Function()? onActionTap;
 
   const SectionHeader({
     super.key,
     required this.title,
-    required this.actionText,
-    required this.onActionTap,
+    this.actionText,
+    this.onActionTap,
   });
 
   @override
@@ -24,9 +24,9 @@ class SectionHeader extends StatelessWidget {
         ),
         const Spacer(),
         TextButton(
-          onPressed: onActionTap,
+          onPressed: onActionTap ?? () {},
           child: Text(
-            actionText,
+            actionText ?? "",
             style: TextStyles.font12BlueRegular,
           ),
         ),

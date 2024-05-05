@@ -6,11 +6,11 @@ import 'package:gap/gap.dart';
 import '../../../../../core/config/routing/routes.dart';
 import '../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
+import '../../../widgets/section_header_widget.dart';
 import '../../data/models/doctor_model.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_states.dart';
 import 'doctor_widget.dart';
-import 'section_header_widget.dart';
 
 class RecommendedDoctor extends StatelessWidget {
   const RecommendedDoctor({super.key});

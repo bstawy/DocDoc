@@ -3,17 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../../../core/widgets/custom_search_bar.dart';
-import '../home/data/models/doctor_model.dart';
 
 class SearchBarWidget extends StatelessWidget {
-  final List<DoctorModel> doctors;
   final Function(String)? onQueryChanged;
   final Function()? onEmptyQuery;
   final Function()? onFilterTap;
 
   const SearchBarWidget({
     super.key,
-    required this.doctors,
     this.onQueryChanged,
     this.onEmptyQuery,
     this.onFilterTap,
@@ -31,7 +28,7 @@ class SearchBarWidget extends StatelessWidget {
         ),
         Gap(8.w),
         IconButton(
-          onPressed: onFilterTap,
+          onPressed: onFilterTap ?? () {},
           iconSize: 24.r,
           padding: EdgeInsets.zero,
           icon: Icon(
