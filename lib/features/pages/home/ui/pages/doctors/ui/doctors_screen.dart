@@ -9,11 +9,13 @@ import '../../../../../../../core/config/theme/texts/font_weight_helper.dart';
 import '../../../../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../../../../core/helpers/extensions/extensions.dart';
 import '../../../../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
+import '../../../../../search/logic/search_cubit.dart';
+import '../../../../../search/logic/search_states.dart';
+import '../../../../../widgets/search_bar_widget.dart';
 import '../../../../data/models/doctor_model.dart';
 import '../../../widgets/doctor_widget.dart';
 import '../logic/doctors_cubit.dart';
 import '../logic/doctors_states.dart';
-import '../../../../../widgets/search_bar_widget.dart';
 import 'widgets/sort_by_bottom_sheet_widget.dart';
 
 class DoctorsScreen extends StatelessWidget {
@@ -41,10 +43,26 @@ class DoctorsScreen extends StatelessWidget {
             },
             child: state.whenOrNull(
                   doctorsListLoading: () => _buildLoadingWidget(),
-                  doctorsListSuccess: (data) =>
-                      _buildSuccessWidget(context, data),
+                  doctorsListSuccess: (doctorsData) {
+                    return BlocBuilder<SearchCubit, SearchStates>(
+                      bloc: context.read<SearchCubit>()..getInitialState(),
+                      builder: (context, state) {
+                        debugPrint('SearchCubit state: ${state.toString()}');
+
+                        return state.maybeWhen(
+                              searchListLoading: () => _buildLoadingWidget(),
+                              searchListSuccess: (searchData) {
+                                return _buildSuccessWidget(context, searchData);
+                              },
+                              orElse: () =>
+                                  _buildSuccessWidget(context, doctorsData),
+                            ) ??
+                            _buildSuccessWidget(context, doctorsData);
+                      },
+                    );
+                  },
                 ) ??
-                const SizedBox(),
+                Container(width: 100, height: 100, color: Colors.red),
           );
         },
       ),
@@ -57,7 +75,7 @@ class DoctorsScreen extends StatelessWidget {
       child: Column(
         children: [
           Gap(16.h),
-          const SearchBarWidget(doctors: []).setHorizontalPadding(16.h),
+          const SearchBarWidget().setHorizontalPadding(16.h),
           Gap(24.h),
           Column(
             children: List.generate(
@@ -95,9 +113,8 @@ class DoctorsScreen extends StatelessWidget {
         children: [
           Gap(16.h),
           SearchBarWidget(
-            doctors: doctors,
             onQueryChanged: (value) {
-              context.read<DoctorsCubit>().searchDoctor(value);
+              context.read<SearchCubit>().search(value);
             },
             onEmptyQuery: () {
               context.read<DoctorsCubit>().getAllDoctors();

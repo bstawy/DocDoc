@@ -29,22 +29,6 @@ class DoctorsCubit extends Cubit<DoctorsStates> {
     );
   }
 
-  Future<void> searchDoctor(String doctorName) async {
-    emit(const DoctorsStates.doctorsListLoading());
-
-    final result = await _doctorsRepo.searchDoctor(doctorName);
-
-    result.when(
-      success: (data) {
-        emit(DoctorsStates.doctorsListSuccess(data));
-      },
-      failure: (error) {
-        emit(DoctorsStates.failure(
-            error.apiErrorModel.message ?? "Error Occurred"));
-      },
-    );
-  }
-
   Future<void> sortDoctors(
     List<DoctorModel> doctors,
   ) async {

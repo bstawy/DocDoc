@@ -10,6 +10,7 @@ import '../../../features/pages/home/ui/pages/doctors/logic/doctors_cubit.dart';
 import '../../../features/pages/home/ui/pages/doctors/ui/doctors_screen.dart';
 import '../../../features/pages/home/ui/pages/specialities/logic/specialities_cubit.dart';
 import '../../../features/pages/home/ui/pages/specialities/ui/specialities_screen.dart';
+import '../../../features/pages/search/logic/search_cubit.dart';
 import '../../../features/splash/splash_screen.dart';
 import '../../di/dependency_injection.dart';
 import 'no_route_defined_widget.dart';
@@ -55,8 +56,15 @@ class AppRouter {
 
       case Routes.doctorsScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => getIt<DoctorsCubit>(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => getIt<DoctorsCubit>(),
+              ),
+              BlocProvider(
+                create: (_) => getIt<SearchCubit>(),
+              ),
+            ],
             child: const DoctorsScreen(),
           ),
         );
