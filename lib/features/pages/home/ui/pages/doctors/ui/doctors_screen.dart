@@ -43,24 +43,26 @@ class DoctorsScreen extends StatelessWidget {
             },
             child: state.whenOrNull(
                   doctorsListLoading: () => _buildLoadingWidget(),
-                  doctorsListSuccess: (data) {
-                    BlocBuilder<SearchCubit, SearchStates>(
-                      bloc: context.read<SearchCubit>(),
+                  doctorsListSuccess: (doctorsData) {
+                    return BlocBuilder<SearchCubit, SearchStates>(
+                      bloc: context.read<SearchCubit>()..getInitialState(),
                       builder: (context, state) {
+                        debugPrint('SearchCubit state: ${state.toString()}');
+
                         return state.maybeWhen(
                               searchListLoading: () => _buildLoadingWidget(),
-                              searchListSuccess: (data) {
-                                return _buildSuccessWidget(context, data);
+                              searchListSuccess: (searchData) {
+                                return _buildSuccessWidget(context, searchData);
                               },
-                              orElse: () => _buildSuccessWidget(context, data),
+                              orElse: () =>
+                                  _buildSuccessWidget(context, doctorsData),
                             ) ??
-                            const SizedBox();
+                            _buildSuccessWidget(context, doctorsData);
                       },
                     );
-                    return null;
                   },
                 ) ??
-                const SizedBox(),
+                Container(width: 100, height: 100, color: Colors.red),
           );
         },
       ),
@@ -112,7 +114,7 @@ class DoctorsScreen extends StatelessWidget {
           Gap(16.h),
           SearchBarWidget(
             onQueryChanged: (value) {
-              context.read<DoctorsCubit>().searchDoctor(value);
+              context.read<SearchCubit>().search(value);
             },
             onEmptyQuery: () {
               context.read<DoctorsCubit>().getAllDoctors();
