@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/caching/hive_manager.dart';
@@ -27,7 +26,7 @@ class SearchCubit extends Cubit<SearchStates> {
   void clearAllSearchHistory() {
     emit(const SearchStates.searchListLoading());
     _hiveManager.clearData<String>(HiveBoxKeys.searchHistory);
-    searchHistory = [];
+    getSearchHistory();
     emit(const SearchStates.initial());
   }
 
@@ -41,7 +40,6 @@ class SearchCubit extends Cubit<SearchStates> {
 
   void search(String doctorName) async {
     emit(const SearchStates.searchListLoading());
-    debugPrint("=============\nsearching doctorName: $doctorName");
     _hiveManager.cacheData(
         boxKey: HiveBoxKeys.searchHistory, dataItem: doctorName);
 

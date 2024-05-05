@@ -9,6 +9,7 @@ import '../../../../core/config/theme/texts/font_weight_helper.dart';
 import '../../../../core/config/theme/texts/text_styles.dart';
 import '../../../../core/helpers/extensions/extensions.dart';
 import '../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
+import '../../../layout/logic/layout_cubit.dart';
 import '../../home/data/models/doctor_model.dart';
 import '../../home/ui/widgets/doctor_widget.dart';
 import '../../widgets/custom_app_bar_widget.dart';
@@ -22,48 +23,51 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CustomAppBar(
-          title: "Search",
-        ),
-        Expanded(
-          child: ListView(
-            children: [
-              Gap(16.h),
-              SearchBarWidget(
-                onQueryChanged: (value) {
-                  context.read<SearchCubit>().search(value);
-                },
-                onEmptyQuery: () {
-                  context.read<SearchCubit>().getInitialState();
-                },
-                onFilterTap: () {},
-              ).setHorizontalPadding(16.h),
-              BlocBuilder<SearchCubit, SearchStates>(
-                bloc: context.read<SearchCubit>(),
-                builder: (context, state) {
-                  return RefreshIndicator(
-                    color: ColorsManager.mainBlue,
-                    onRefresh: () async {
-                      if (state != const SearchStates.initial()) {
-                        context.read<SearchCubit>().getInitialState();
-                      }
-                    },
-                    child: state.whenOrNull(
-                          initial: () => _buildInitialWidget(context),
-                          searchListLoading: () => _buildLoadingWidget(),
-                          searchListSuccess: (data) =>
-                              _buildSuccessWidget(context, data),
-                        ) ??
-                        const SizedBox(),
-                  );
-                },
-              ),
-            ],
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        context.read<LayoutCubit>().changePage(0);
+      },
+      child: Column(
+        children: [
+          const CustomAppBar(
+            title: "Search",
           ),
-        ),
-      ],
+          Gap(16.h),
+          SearchBarWidget(
+            onQueryChanged: (value) {
+              context.read<SearchCubit>().search(value);
+            },
+            onEmptyQuery: () {
+              context.read<SearchCubit>().getInitialState();
+            },
+            onFilterTap: () {},
+          ).setHorizontalPadding(16.h),
+          BlocBuilder<SearchCubit, SearchStates>(
+            bloc: context.read<SearchCubit>(),
+            builder: (context, state) {
+              return RefreshIndicator(
+                color: ColorsManager.mainBlue,
+                onRefresh: () async {
+                  if (state != const SearchStates.initial()) {
+                    context.read<SearchCubit>().getInitialState();
+                  }
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: state.whenOrNull(
+                        initial: () => _buildInitialWidget(context),
+                        searchListLoading: () => _buildLoadingWidget(),
+                        searchListSuccess: (data) =>
+                            _buildSuccessWidget(context, data),
+                      ) ??
+                      const SizedBox(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -71,8 +75,9 @@ class SearchScreen extends StatelessWidget {
     context.read<SearchCubit>().getSearchHistory();
     List<String> searchHistory = context.read<SearchCubit>().searchHistory;
 
-    return SingleChildScrollView(
-      child: Column(
+    return SizedBox(
+      height: 0.7.sh,
+      child: ListView(
         children: [
           Gap(24.h),
           SectionHeader(
@@ -115,90 +120,99 @@ class SearchScreen extends StatelessWidget {
   }
 
   Widget _buildLoadingWidget() {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return SizedBox(
+      height: 0.7.sh,
+      child: ListView(
         children: [
-          Gap(32.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              3,
-              (index) => RectShimmerEffect(
-                width: 100.w,
-                height: 40.h,
-                borderRadius: 50.r,
-              ),
-            ),
-          ),
-          RectShimmerEffect(
-            width: 100.w,
-            height: 20.h,
-          ).setVerticalPadding(24.h),
           Column(
-            children: List.generate(
-              3,
-              (index) => Row(
-                children: [
-                  const RectShimmerEffect(
-                    width: 110,
-                    height: 110,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(32.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                  3,
+                  (index) => RectShimmerEffect(
+                    width: 100.w,
+                    height: 40.h,
+                    borderRadius: 50.r,
                   ),
-                  Gap(16.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+              ),
+              RectShimmerEffect(
+                width: 100.w,
+                height: 20.h,
+              ).setVerticalPadding(24.h),
+              Column(
+                children: List.generate(
+                  3,
+                  (index) => Row(
                     children: [
-                      const RectShimmerEffect(width: 90, height: 10),
-                      Gap(16.h),
-                      const RectShimmerEffect(width: 90, height: 10),
-                      Gap(16.h),
-                      const RectShimmerEffect(width: 90, height: 10),
+                      const RectShimmerEffect(
+                        width: 110,
+                        height: 110,
+                      ),
+                      Gap(16.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const RectShimmerEffect(width: 90, height: 10),
+                          Gap(16.h),
+                          const RectShimmerEffect(width: 90, height: 10),
+                          Gap(16.h),
+                          const RectShimmerEffect(width: 90, height: 10),
+                        ],
+                      ),
                     ],
-                  ),
-                ],
-              ).setOnlyPadding(0, 16.h, 0, 0),
-            ),
-          ),
+                  ).setOnlyPadding(0, 16.h, 0, 0),
+                ),
+              ),
+            ],
+          ).setHorizontalPadding(16.h),
         ],
-      ).setHorizontalPadding(16.h),
+      ),
     );
   }
 
   Widget _buildSuccessWidget(BuildContext context, List<DoctorModel> doctors) {
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      child: doctors.isNotEmpty
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Gap(32.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                    3,
-                    (index) => RectShimmerEffect(
-                      width: 100.w,
-                      height: 40.h,
-                      borderRadius: 50.r,
+    return SizedBox(
+      height: 0.733.sh,
+      child: ListView(
+        children: [
+          doctors.isNotEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gap(32.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                        3,
+                        (index) => RectShimmerEffect(
+                          width: 100.w,
+                          height: 40.h,
+                          borderRadius: 50.r,
+                        ),
+                      ),
+                    ).setHorizontalPadding(16.w),
+                    SectionHeader(
+                      title: "${doctors.length} founds",
+                    ).setHorizontalAndVerticalPadding(16.w, 16.h),
+                    Column(
+                      children: List.generate(
+                        doctors.length,
+                        (index) => DoctorWidget(
+                          doctor: doctors[index],
+                        ),
+                      ),
                     ),
-                  ),
-                ).setHorizontalPadding(16.w),
-                SectionHeader(
-                  title: "${doctors.length} founds",
-                ).setHorizontalAndVerticalPadding(16.w, 16.h),
-                Column(
-                  children: List.generate(
-                    doctors.length,
-                    (index) => DoctorWidget(
-                      doctor: doctors[index],
-                    ),
-                  ),
-                ),
-              ],
-            )
-          : _buildEmptyWidget(),
+                  ],
+                )
+              : _buildEmptyWidget(),
+        ],
+      ),
     );
   }
 
