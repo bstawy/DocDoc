@@ -57,6 +57,10 @@ class HiveManager {
     Hive.box<T>(boxKey).clear();
   }
 
+  void clearItem<T>({required String boxKey, required int index}) {
+    Hive.box<T>(boxKey).deleteAt(index);
+  }
+
   void clearAllData() {
     Hive.box<DoctorSpecialityModel>(HiveBoxKeys.specialities).clear();
     Hive.box<DoctorModel>(HiveBoxKeys.allDoctors).clear();
