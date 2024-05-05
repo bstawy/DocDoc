@@ -7,6 +7,7 @@ import '../../pages/home/logic/home_cubit.dart';
 import '../../pages/home/ui/home_screen.dart';
 import '../../pages/inbox/ui/inbox_screen.dart';
 import '../../pages/profile/ui/profile_screen.dart';
+import '../../pages/search/logic/search_cubit.dart';
 import '../../pages/search/ui/search_screen.dart';
 import 'layout_states.dart';
 
@@ -19,7 +20,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
       child: const HomeScreen(),
     ),
     const InboxScreen(),
-    const SearchScreen(),
+    BlocProvider(
+      create: (context) => getIt<SearchCubit>(),
+      child: const SearchScreen(),
+    ),
     const AppointmentScreen(),
     const ProfileScreen(),
   ];
