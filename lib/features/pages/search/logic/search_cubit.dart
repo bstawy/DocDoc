@@ -15,15 +15,27 @@ class SearchCubit extends Cubit<SearchStates> {
 
   List<String> searchHistory = [];
 
+  void getInitialState() {
+    emit(const SearchStates.initial());
+  }
+
   void getSearchHistory() {
     searchHistory =
         _hiveManager.retrieveData<String>(HiveBoxKeys.searchHistory);
   }
 
-  void clearSearchHistory() {
+  void clearAllSearchHistory() {
     emit(const SearchStates.searchListLoading());
     _hiveManager.clearData<String>(HiveBoxKeys.searchHistory);
     searchHistory = [];
+    emit(const SearchStates.initial());
+  }
+
+  void clearHistoryItem(int itemIndex) {
+    emit(const SearchStates.searchListLoading());
+    _hiveManager.clearItem<String>(
+        boxKey: HiveBoxKeys.searchHistory, index: itemIndex);
+    getSearchHistory();
     emit(const SearchStates.initial());
   }
 
@@ -44,9 +56,5 @@ class SearchCubit extends Cubit<SearchStates> {
             error.apiErrorModel.message ?? "Error Occurred"));
       },
     );
-  }
-
-  void getInitialState() {
-    emit(const SearchStates.initial());
   }
 }
