@@ -10,4 +10,5 @@ class EndPoints {
   static const String allSpecialitiesEndPoint = "specialization/index";
   static const String allDoctorEndPoint = "doctor/index";
   static const String searchDoctorEndPoint = "doctor/doctor-search";
+  static const String allAppointmentsEndPoint = "appointment/index";
 }

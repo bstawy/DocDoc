@@ -5,6 +5,7 @@ import '../../../features/auth/login/data/models/login_request_body_model.dart';
 import '../../../features/auth/login/data/models/login_response_model.dart';
 import '../../../features/auth/register/data/models/register_request_body_model.dart';
 import '../../../features/auth/register/data/models/register_response_model.dart';
+import '../../../features/pages/appointment/data/models/appointments_response_model.dart';
 import '../../../features/pages/home/data/models/all_doctors_response_model.dart';
 import '../../../features/pages/home/data/models/doctor_speciality_response_model.dart';
 import '../../../features/pages/profile/data/models/logout_response_model.dart';
@@ -42,4 +43,7 @@ abstract class ApiService {
   Future<AllDoctorsResponseModel> searchDoctor(
     @Query('name') String doctorName,
   );
+
+  @GET(EndPoints.allAppointmentsEndPoint)
+  Future<AppointmentsResponseModel> getAllAppointments();
 }
