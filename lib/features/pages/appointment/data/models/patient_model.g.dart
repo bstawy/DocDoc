@@ -63,12 +63,3 @@ PatientModel _$PatientModelFromJson(Map<String, dynamic> json) => PatientModel(
       phone: json['phone'] as String,
       gender: json['gender'] as String,
     );
-
-Map<String, dynamic> _$PatientModelToJson(PatientModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'email': instance.email,
-      'phone': instance.phone,
-      'gender': instance.gender,
-    };

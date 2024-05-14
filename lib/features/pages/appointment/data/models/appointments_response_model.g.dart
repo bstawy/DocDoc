@@ -16,12 +16,3 @@ AppointmentsResponseModel _$AppointmentsResponseModelFromJson(
       status: json['status'] as bool,
       code: (json['code'] as num).toInt(),
     );
-
-Map<String, dynamic> _$AppointmentsResponseModelToJson(
-        AppointmentsResponseModel instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'appointments': instance.appointments,
-      'status': instance.status,
-      'code': instance.code,
-    };
