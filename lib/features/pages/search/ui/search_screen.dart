@@ -177,7 +177,7 @@ class SearchScreen extends StatelessWidget {
 
   Widget _buildSuccessWidget(BuildContext context, List<DoctorModel> doctors) {
     return SizedBox(
-      height: 0.733.sh,
+      height: 0.72.sh,
       child: ListView(
         children: [
           doctors.isNotEmpty
