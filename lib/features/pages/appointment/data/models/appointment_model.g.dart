@@ -24,7 +24,7 @@ class AppointmentModelAdapter extends TypeAdapter<AppointmentModel> {
       endTime: fields[4] as String,
       status: fields[5] as String,
       notes: fields[6] as String,
-      price: fields[7] as String,
+      price: fields[7] as int,
     );
   }
 
@@ -74,5 +74,5 @@ AppointmentModel _$AppointmentModelFromJson(Map<String, dynamic> json) =>
       endTime: json['appointment_end_time'] as String,
       status: json['status'] as String,
       notes: json['notes'] as String,
-      price: json['appointment_price'] as String,
+      price: (json['appointment_price'] as num).toInt(),
     );

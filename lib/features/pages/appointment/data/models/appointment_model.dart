@@ -27,7 +27,7 @@ class AppointmentModel {
   final String notes;
   @HiveField(7)
   @JsonKey(name: 'appointment_price')
-  final String price;
+  final int price;
 
   AppointmentModel({
     required this.id,

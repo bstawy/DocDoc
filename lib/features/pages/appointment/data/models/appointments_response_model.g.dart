@@ -10,7 +10,7 @@ AppointmentsResponseModel _$AppointmentsResponseModelFromJson(
         Map<String, dynamic> json) =>
     AppointmentsResponseModel(
       message: json['message'] as String,
-      appointments: (json['appointments'] as List<dynamic>)
+      appointments: (json['data'] as List<dynamic>)
           .map((e) => AppointmentModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       status: json['status'] as bool,

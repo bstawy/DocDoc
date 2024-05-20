@@ -7,6 +7,7 @@ part 'appointments_response_model.g.dart';
 @JsonSerializable()
 class AppointmentsResponseModel {
   final String message;
+  @JsonKey(name: "data")
   final List<AppointmentModel> appointments;
   final bool status;
   final int code;
