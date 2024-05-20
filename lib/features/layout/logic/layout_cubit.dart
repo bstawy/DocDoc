@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/di/dependency_injection.dart';
+import '../../pages/appointment/logic/appointments_cubit.dart';
 import '../../pages/appointment/ui/appointment_screen.dart';
 import '../../pages/home/logic/home_cubit.dart';
 import '../../pages/home/ui/home_screen.dart';
@@ -20,11 +21,14 @@ class LayoutCubit extends Cubit<LayoutStates> {
       child: const HomeScreen(),
     ),
     const InboxScreen(),
-    BlocProvider(
+    BlocProvider<SearchCubit>(
       create: (context) => getIt<SearchCubit>(),
       child: const SearchScreen(),
     ),
-    const AppointmentScreen(),
+    BlocProvider<AppointmentsCubit>(
+      create: (context) => getIt<AppointmentsCubit>(),
+      child: const AppointmentScreen(),
+    ),
     const ProfileScreen(),
   ];
 
