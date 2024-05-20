@@ -13,7 +13,12 @@ class RegisterRepo {
       RegisterRequestBodyModel registerRequestBody) async {
     try {
       final response = await _apiService.register(registerRequestBody);
-      return ApiResult.success(response);
+
+      if (response.code == 200 && response.status == true) {
+        return ApiResult.success(response);
+      } else {
+        throw Exception(response);
+      }
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
     }
