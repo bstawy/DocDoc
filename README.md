@@ -1,25 +1,19 @@
 # DocDoc
-<!--
-E-Commerce Application is a comprehensive solution that offers a seamless shopping experience for users.
--->
-&nbsp;
-
 [![forthebadge](https://forthebadge.com/images/badges/made-with-flutter.svg)](https://flutter.dev/)
 
+![Product Overview](https://github.com/bstawy/DocDoc/assets/99258115/a87c82d3-9c58-4fbe-b8fc-23bb31dfec9e)
+
+&nbsp;
 
 ## Languages and Technologies
 
 ![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
-
-![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
-![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white)
-![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
 &nbsp;
 
@@ -71,9 +65,17 @@ E-Commerce Application is a comprehensive solution that offers a seamless shoppi
 🔵 Bloc/Cubit: Managed the app's state efficiently, ensuring smooth performance.
 
 &nbsp;
-<!--
+
 🏰 Hive database: Stored data locally to make the app's user experience seamless, even offline.
--->
+
+&nbsp;
+
+📱 Flutter Screen Util: Designed the app's layout to adapt well to different screen sizes.
+
+&nbsp;
+
+✨ Shimmer widget: Added a nice touch to loading screens, making transitions smoother.
+
 &nbsp;
 
 🌈 Flutter flavors: Adapted the app for various environments seamlessly.
@@ -83,16 +85,8 @@ E-Commerce Application is a comprehensive solution that offers a seamless shoppi
 🚀 CI/CD with Firebase App Distribution, Fastlane, and Github Actions: Streamlined the development process by automating workflows and deployments.
 
 &nbsp;
-
-📱 Flutter Screen Util: Designed the app's layout to adapt well to different screen sizes.
-
-&nbsp;
 <!--
 📶 Flutter Offline: Checked for network connectivity to handle offline scenarios gracefully.
-
-&nbsp;
-
-✨ Shimmer widget: Added a nice touch to loading screens, making transitions smoother.
 
 &nbsp;
 
