@@ -19,7 +19,6 @@ class AppointmentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<AppointmentModel> appointments = [];
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {

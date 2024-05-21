@@ -21,7 +21,6 @@ class UpcomingAppointmentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     DateFormat format = DateFormat("EEEE, MMMM d, yyyy h:mm a");
     DateTime parsedStartDate = format.parse(appointment.startTime);
-    DateTime parsedEndDate = format.parse(appointment.endTime);
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
