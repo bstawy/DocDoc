@@ -5,6 +5,8 @@ import '../../features/auth/login/data/repos/login_repo.dart';
 import '../../features/auth/login/logic/login_cubit.dart';
 import '../../features/auth/register/data/repos/register_repo.dart';
 import '../../features/auth/register/logic/register_cubit.dart';
+import '../../features/pages/appointment/data/repos/appointments_repo.dart';
+import '../../features/pages/appointment/logic/appointments_cubit.dart';
 import '../../features/pages/home/data/repos/home_repo.dart';
 import '../../features/pages/home/logic/home_cubit.dart';
 import '../../features/pages/home/ui/pages/doctors/data/repos/doctors_repo.dart';
@@ -49,4 +51,9 @@ Future<void> initGetIt() async {
 
   // Search
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt(), getIt()));
+
+  // Appointments
+  getIt.registerFactory<AppointmentsRepo>(
+      () => AppointmentsRepo(getIt(), getIt()));
+  getIt.registerFactory<AppointmentsCubit>(() => AppointmentsCubit(getIt()));
 }

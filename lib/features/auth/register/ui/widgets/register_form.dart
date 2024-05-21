@@ -140,7 +140,7 @@ class _RegisterFormState extends State<RegisterForm> {
           BlocConsumer<RegisterCubit, RegisterStates>(
             bloc: context.read<RegisterCubit>(),
             buildWhen: (previous, current) {
-              if (current is Success || current is Failure) return false;
+              if (current is Success) return false;
 
               return true;
             },

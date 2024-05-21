@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
               debugPrint("Error: $e");
             }
           },
-          title: 'LogOut',
+          title: 'Logout',
         ).setHorizontalPadding(40.w),
       ),
     );

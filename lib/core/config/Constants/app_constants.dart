@@ -10,6 +10,7 @@ class HiveBoxKeys {
   static const String specialities = "specialities_box";
   static const String allDoctors = "all_doctors_box";
   static const String searchHistory = "search_history_box";
+  static const String allAppointments = "all_appointments_box";
 }
 
 enum SortBySpecialization {

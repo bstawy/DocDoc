@@ -8,7 +8,8 @@ class CustomMaterialButton extends StatelessWidget {
   final String? title;
   final double? height, width, elevation, borderRadius;
   final EdgeInsetsGeometry? padding;
-  final Color? backgroundColor;
+  final Color? backgroundColor, borderColor;
+  final double? borderWidth;
   final TextStyle? titleStyle;
   final Widget? child;
   final bool enabled;
@@ -24,6 +25,8 @@ class CustomMaterialButton extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.backgroundColor,
+    this.borderColor,
+    this.borderWidth,
     this.elevation,
     this.titleStyle,
     this.child,
@@ -48,6 +51,10 @@ class CustomMaterialButton extends StatelessWidget {
           : (backgroundColor ?? ColorsManager.mainBlue),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius ?? 16.r),
+        side: BorderSide(
+          color: borderColor ?? Colors.transparent,
+          width: borderWidth ?? 1.w,
+        ),
       ),
       child: loading
           ? const CircularProgressIndicator(
