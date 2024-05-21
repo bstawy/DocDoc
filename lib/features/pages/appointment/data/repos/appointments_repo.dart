@@ -14,7 +14,9 @@ class AppointmentsRepo {
   Future<ApiResult<List<AppointmentModel>>> getAppointments() async {
     try {
       List<AppointmentModel> cachedAppointments = [];
-      _hiveManager.retrieveData<AppointmentModel>(HiveBoxKeys.allAppointments);
+
+      cachedAppointments = _hiveManager
+          .retrieveData<AppointmentModel>(HiveBoxKeys.allAppointments);
 
       if (cachedAppointments.isNotEmpty) {
         return ApiResult.success(cachedAppointments);
