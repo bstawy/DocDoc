@@ -1,3 +1,4 @@
+import 'package:docdoc/features/pages/appointment/ui/widgets/finished_appointment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,13 +12,14 @@ import '../../widgets/custom_app_bar_widget.dart';
 import '../data/models/appointment_model.dart';
 import '../logic/appointments_cubit.dart';
 import '../logic/appointments_states.dart';
-import 'widgets/appointment_widget.dart';
+import 'widgets/upcoming_appointment_widget.dart';
 
 class AppointmentScreen extends StatelessWidget {
   const AppointmentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<AppointmentModel> appointments = [];
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
@@ -48,57 +50,26 @@ class AppointmentScreen extends StatelessWidget {
                 Tab(text: "Cancelled"),
               ],
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  BlocBuilder<AppointmentsCubit, AppointmentsStates>(
-                    bloc: context.read<AppointmentsCubit>()..getAppointments(),
-                    builder: (context, state) {
-                      return state.whenOrNull(
-                            loading: () => const Center(
-                                child: CircularProgressIndicator()),
-                            success: (appointmentsData) =>
-                                _buildSuccess(appointmentsData),
-                          ) ??
-                          const SizedBox(
-                            child: Text("Error"),
-                          );
-                    },
-                  ),
-                  ListView(
-                    children: [
-                      Container(
-                        height: 350.h,
-                        color: Colors.green,
+            BlocBuilder<AppointmentsCubit, AppointmentsStates>(
+              bloc: context.read<AppointmentsCubit>()..getAppointments(),
+              builder: (context, state) {
+                return state.whenOrNull(
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      success: (appointmentsData) => Expanded(
+                        child: TabBarView(
+                          children: [
+                            _buildUpcomingAppointments(appointmentsData),
+                            _buildCompletedAppointments(appointmentsData),
+                            _buildCancelledAppointments(appointmentsData),
+                          ],
+                        ),
                       ),
-                      Container(
-                        height: 350.h,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                        height: 350.h,
-                        color: Colors.red,
-                      ),
-                    ],
-                  ),
-                  ListView(
-                    children: [
-                      Container(
-                        height: 350.h,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                        height: 350.h,
-                        color: Colors.red,
-                      ),
-                      Container(
-                        height: 350.h,
-                        color: Colors.green,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ) ??
+                    const SizedBox(
+                      child: Text("Error"),
+                    );
+              },
             ),
           ],
         ),
@@ -106,11 +77,34 @@ class AppointmentScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccess(List<AppointmentModel> appointments) {
+  Widget _buildUpcomingAppointments(List<AppointmentModel> appointments) {
     return ListView.builder(
       itemCount: appointments.length,
       itemBuilder: (context, index) {
-        return AppointmentWidget(
+        return UpcomingAppointmentWidget(
+          appointment: appointments[index],
+        );
+      },
+    );
+  }
+
+  Widget _buildCompletedAppointments(List<AppointmentModel> appointments) {
+    return ListView.builder(
+      itemCount: appointments.length,
+      itemBuilder: (context, index) {
+        return FinishedAppointmentWidget(
+          appointment: appointments[index],
+          isDone: true,
+        );
+      },
+    );
+  }
+
+  Widget _buildCancelledAppointments(List<AppointmentModel> appointments) {
+    return ListView.builder(
+      itemCount: appointments.length,
+      itemBuilder: (context, index) {
+        return FinishedAppointmentWidget(
           appointment: appointments[index],
         );
       },
