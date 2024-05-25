@@ -13,18 +13,18 @@ class AppointmentsRepo {
 
   Future<ApiResult<List<AppointmentModel>>> getAppointments() async {
     try {
-      List<AppointmentModel> cachedAppointments = [];
+      // List<AppointmentModel> cachedAppointments = [];
 
-      cachedAppointments = _hiveManager
-          .retrieveData<AppointmentModel>(HiveBoxKeys.allAppointments);
+      // cachedAppointments = _hiveManager
+      //     .retrieveData<AppointmentModel>(HiveBoxKeys.allAppointments);
 
-      if (cachedAppointments.isNotEmpty) {
-        return ApiResult.success(cachedAppointments);
-      }
+      // if (cachedAppointments.isNotEmpty) {
+      //   return ApiResult.success(cachedAppointments);
+      // }
 
       final response = await _apiService.getAllAppointments();
 
-      await _cacheAppointments(response.appointments);
+      // await _cacheAppointments(response.appointments);
       return ApiResult.success(response.appointments);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
