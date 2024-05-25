@@ -1,4 +1,3 @@
-import 'package:docdoc/features/pages/appointment/ui/widgets/finished_appointment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,11 +6,14 @@ import 'package:gap/gap.dart';
 import '../../../../core/config/theme/colors/colors_manager.dart';
 import '../../../../core/config/theme/texts/font_weight_helper.dart';
 import '../../../../core/config/theme/texts/text_styles.dart';
+import '../../../../core/helpers/extensions/extensions.dart';
+import '../../../../core/helpers/shimmer_loading_effect/rect_shimmer_effect.dart';
 import '../../../layout/logic/layout_cubit.dart';
 import '../../widgets/custom_app_bar_widget.dart';
 import '../data/models/appointment_model.dart';
 import '../logic/appointments_cubit.dart';
 import '../logic/appointments_states.dart';
+import 'widgets/finished_appointment_widget.dart';
 import 'widgets/upcoming_appointment_widget.dart';
 
 class AppointmentScreen extends StatelessWidget {
@@ -53,8 +55,7 @@ class AppointmentScreen extends StatelessWidget {
               bloc: context.read<AppointmentsCubit>()..getAppointments(),
               builder: (context, state) {
                 return state.whenOrNull(
-                      loading: () =>
-                          const Center(child: CircularProgressIndicator()),
+                      loading: () => _buildLoadingAppointments([]),
                       success: (appointmentsData) => Expanded(
                         child: TabBarView(
                           children: [
@@ -72,6 +73,40 @@ class AppointmentScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingAppointments(List<AppointmentModel> appointments) {
+    return SizedBox(
+      height: 0.7.sh,
+      child: ListView(
+        children: [
+          Column(
+            children: List.generate(
+              4,
+              (index) => Row(
+                children: [
+                  const RectShimmerEffect(
+                    width: 110,
+                    height: 110,
+                  ),
+                  Gap(16.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const RectShimmerEffect(width: 90, height: 10),
+                      Gap(16.h),
+                      const RectShimmerEffect(width: 90, height: 10),
+                      Gap(16.h),
+                      const RectShimmerEffect(width: 90, height: 10),
+                    ],
+                  ),
+                ],
+              ).setOnlyPadding(0, 16.h, 0, 0),
+            ),
+          ).setOnlyPadding(32.h, 0, 16.h, 16.h),
+        ],
       ),
     );
   }
