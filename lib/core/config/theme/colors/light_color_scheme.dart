@@ -10,10 +10,8 @@ ColorScheme getLightColorScheme() {
     primaryContainer: ColorsManager.mainBlue.withOpacity(0.05),
     secondary: ColorsManager.secondary,
     secondaryContainer: ColorsManager.secondaryContainer,
-    background: ColorsManager.white,
-    onBackground: ColorsManager.lighterGrey,
-    surface: ColorsManager.surface,
-    onSurface: ColorsManager.onSurface,
+    surface: ColorsManager.white,
+    onSurface: ColorsManager.lighterGrey,
     tertiary: ColorsManager.green,
     error: ColorsManager.red,
   );
