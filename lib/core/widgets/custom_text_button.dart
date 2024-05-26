@@ -9,6 +9,7 @@ class CustomTextButton extends StatelessWidget {
   final TextStyle? style;
   final double? width, height;
   final double? horizontalPadding, verticalPadding;
+  final Size? minimumSize;
   final VoidCallback onPressed;
   final double? borderRadius;
 
@@ -20,6 +21,7 @@ class CustomTextButton extends StatelessWidget {
     this.borderRadius,
     this.width,
     this.height,
+    this.minimumSize,
     this.horizontalPadding,
     this.verticalPadding,
   });
@@ -42,9 +44,7 @@ class CustomTextButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
           ),
         ),
-        minimumSize: WidgetStatePropertyAll(
-          Size(width ?? 60.w, height ?? 60.h),
-        ),
+        minimumSize: WidgetStatePropertyAll(minimumSize),
       ),
       child: Text(
         text,
