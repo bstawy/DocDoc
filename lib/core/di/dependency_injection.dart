@@ -13,6 +13,7 @@ import '../../features/pages/home/ui/pages/doctors/data/repos/doctors_repo.dart'
 import '../../features/pages/home/ui/pages/doctors/logic/doctors_cubit.dart';
 import '../../features/pages/home/ui/pages/specialities/data/repos/specialities_repo.dart';
 import '../../features/pages/home/ui/pages/specialities/logic/specialities_cubit.dart';
+import '../../features/pages/profile/data/repos/profile_repo.dart';
 import '../../features/pages/search/logic/search_cubit.dart';
 import '../caching/hive_manager.dart';
 import '../networking/api_service/api_service.dart';
@@ -53,7 +54,9 @@ Future<void> initGetIt() async {
   getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt(), getIt()));
 
   // Appointments
-  getIt.registerFactory<AppointmentsRepo>(
-      () => AppointmentsRepo(getIt(), getIt()));
+  getIt.registerFactory<AppointmentsRepo>(() => AppointmentsRepo(getIt()));
   getIt.registerFactory<AppointmentsCubit>(() => AppointmentsCubit(getIt()));
+
+  // Profile
+  getIt.registerFactory<ProfileRepo>(() => ProfileRepo(getIt()));
 }
