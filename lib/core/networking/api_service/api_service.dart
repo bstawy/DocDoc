@@ -9,6 +9,7 @@ import '../../../features/pages/appointment/data/models/appointments_response_mo
 import '../../../features/pages/home/data/models/all_doctors_response_model.dart';
 import '../../../features/pages/home/data/models/doctor_speciality_response_model.dart';
 import '../../../features/pages/profile/data/models/logout_response_model.dart';
+import '../../../features/pages/profile/data/models/user_profile_response_model.dart';
 import '../api_constants.dart';
 
 part 'api_service.g.dart';
@@ -46,4 +47,7 @@ abstract class ApiService {
 
   @GET(EndPoints.allAppointmentsEndPoint)
   Future<AppointmentsResponseModel> getAllAppointments();
+
+  @GET(EndPoints.userProfileDataEndPoint)
+  Future<UserProfileResponseModel> getUserProfileData();
 }

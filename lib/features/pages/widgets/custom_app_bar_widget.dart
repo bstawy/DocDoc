@@ -8,7 +8,9 @@ import '../../layout/logic/layout_cubit.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
+  final TextStyle? titleStyle;
   final Widget? leadingIcon;
+  final Color? leadingIconColor;
   final Widget? actionIcon;
   final Function()? onLeadingTap;
   final Function()? onActionTap;
@@ -16,7 +18,9 @@ class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
     required this.title,
+    this.titleStyle,
     this.leadingIcon,
+    this.leadingIconColor,
     this.actionIcon,
     this.onLeadingTap,
     this.onActionTap,
@@ -31,12 +35,16 @@ class CustomAppBar extends StatelessWidget {
               () {
                 context.read<LayoutCubit>().changePage(0);
               },
-          icon: leadingIcon ?? const Icon(Icons.arrow_back_ios),
+          icon: leadingIcon ??
+              Icon(
+                Icons.arrow_back_ios,
+                color: leadingIconColor ?? Colors.black,
+              ),
         ),
         const Spacer(),
         Text(
           title,
-          style: TextStyles.font18DarkBlueBold,
+          style: titleStyle ?? TextStyles.font18DarkBlueBold,
         ),
         const Spacer(),
         IconButton(

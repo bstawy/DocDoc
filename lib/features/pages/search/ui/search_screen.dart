@@ -87,7 +87,6 @@ class SearchScreen extends StatelessWidget {
               context.read<SearchCubit>().clearAllSearchHistory();
             },
           ).setHorizontalPadding(16.h),
-          // Gap(16.h),
           Column(
             children: List.generate(
               searchHistory.length,
@@ -129,15 +128,18 @@ class SearchScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(32.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(
-                  3,
-                  (index) => RectShimmerEffect(
-                    width: 100.w,
-                    height: 40.h,
-                    borderRadius: 50.r,
-                  ),
+              SizedBox(
+                height: 40.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return RectShimmerEffect(
+                      width: 90.w,
+                      height: 40.h,
+                      borderRadius: 50.r,
+                    ).setOnlyPadding(0, 0, 8.w, 0);
+                  },
                 ),
               ),
               RectShimmerEffect(
@@ -186,15 +188,18 @@ class SearchScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Gap(32.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(
-                        3,
-                        (index) => RectShimmerEffect(
-                          width: 100.w,
-                          height: 40.h,
-                          borderRadius: 50.r,
-                        ),
+                    SizedBox(
+                      height: 40.h,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return RectShimmerEffect(
+                            width: 90.w,
+                            height: 40.h,
+                            borderRadius: 50.r,
+                          ).setOnlyPadding(0, 0, 8.w, 0);
+                        },
                       ),
                     ).setHorizontalPadding(16.w),
                     SectionHeader(

@@ -50,7 +50,7 @@ class CustomSnackBar {
         margin: EdgeInsets.only(top: 24.h, left: 24.w, right: 24.w),
         padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 16.h),
         decoration: BoxDecoration(
-          color: theme.colorScheme.background,
+          color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(15.r),
           boxShadow: [
             BoxShadow(

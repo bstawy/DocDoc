@@ -7,9 +7,10 @@ import '../config/theme/texts/text_styles.dart';
 class CustomTextButton extends StatelessWidget {
   final String text;
   final TextStyle? style;
+  final double? width, height;
   final double? horizontalPadding, verticalPadding;
+  final Size? minimumSize;
   final VoidCallback onPressed;
-
   final double? borderRadius;
 
   const CustomTextButton({
@@ -18,6 +19,9 @@ class CustomTextButton extends StatelessWidget {
     required this.text,
     this.style,
     this.borderRadius,
+    this.width,
+    this.height,
+    this.minimumSize,
     this.horizontalPadding,
     this.verticalPadding,
   });
@@ -29,15 +33,18 @@ class CustomTextButton extends StatelessWidget {
         onPressed();
       },
       style: ButtonStyle(
-        padding: MaterialStatePropertyAll(EdgeInsets.symmetric(
-          horizontal: horizontalPadding ?? 0,
-          vertical: verticalPadding ?? 0,
-        )),
-        shape: MaterialStatePropertyAll(
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(
+            horizontal: horizontalPadding ?? 0,
+            vertical: verticalPadding ?? 0,
+          ),
+        ),
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
           ),
         ),
+        minimumSize: WidgetStatePropertyAll(minimumSize),
       ),
       child: Text(
         text,
