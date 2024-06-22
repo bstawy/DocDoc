@@ -1,4 +1,7 @@
 # DocDoc
+Manage and schedule all of your medical appointments easily with Docdoc to get a new experience.
+
+
 [![forthebadge](https://forthebadge.com/images/badges/made-with-flutter.svg)](https://flutter.dev/)
 
 ![Product Overview](https://github.com/bstawy/DocDoc/assets/99258115/a87c82d3-9c58-4fbe-b8fc-23bb31dfec9e)
